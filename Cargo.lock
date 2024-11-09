@@ -63,6 +63,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "79296716171880943b8470b5f8d03aa55eb2e645a4874bdbb28adb49162e012c"
 
 [[package]]
+name = "bungie-api"
+version = "0.1.0"
+dependencies = [
+ "bitflags",
+ "reqwest",
+ "serde",
+ "url",
+]
+
+[[package]]
 name = "bytes"
 version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -98,16 +108,6 @@ name = "core-foundation-sys"
 version = "0.8.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
-
-[[package]]
-name = "destiny-api"
-version = "0.1.0"
-dependencies = [
- "bitflags",
- "reqwest",
- "serde",
- "url",
-]
 
 [[package]]
 name = "displaydoc"
