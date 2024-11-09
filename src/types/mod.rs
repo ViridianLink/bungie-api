@@ -1,0 +1,200 @@
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
+
+pub mod common;
+pub mod definitions;
+pub mod destiny;
+pub mod exceptions;
+pub mod links;
+pub mod misc;
+pub mod response;
+
+pub enum TierType {
+    Unknown = 0,
+    Currency = 1,
+    Basic = 2,
+    Common = 3,
+    Rare = 4,
+    Superior = 5,
+    Exotic = 6,
+}
+
+impl<'de> Deserialize<'de> for TierType {
+    fn deserialize<D>(deserializer: D) -> Result<TierType, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let s = u8::deserialize(deserializer)?;
+        match s {
+            0 => Ok(TierType::Unknown),
+            1 => Ok(TierType::Currency),
+            2 => Ok(TierType::Basic),
+            3 => Ok(TierType::Common),
+            4 => Ok(TierType::Rare),
+            5 => Ok(TierType::Superior),
+            6 => Ok(TierType::Exotic),
+            _ => Err(serde::de::Error::custom(format!("unknown TierType: {}", s))),
+        }
+    }
+}
+
+impl Serialize for TierType {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        let s = match self {
+            TierType::Unknown => 0,
+            TierType::Currency => 1,
+            TierType::Basic => 2,
+            TierType::Common => 3,
+            TierType::Rare => 4,
+            TierType::Superior => 5,
+            TierType::Exotic => 6,
+        };
+        s.serialize(serializer)
+    }
+}
+
+pub enum ItemLocation {
+    Unknown = 0,
+    Inventory = 1,
+    Vault = 2,
+    Vendor = 3,
+    Postmaster = 4,
+}
+
+impl<'de> Deserialize<'de> for ItemLocation {
+    fn deserialize<D>(deserializer: D) -> Result<ItemLocation, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let s = u8::deserialize(deserializer)?;
+        match s {
+            0 => Ok(ItemLocation::Unknown),
+            1 => Ok(ItemLocation::Inventory),
+            2 => Ok(ItemLocation::Vault),
+            3 => Ok(ItemLocation::Vendor),
+            4 => Ok(ItemLocation::Postmaster),
+            _ => Err(serde::de::Error::custom(format!(
+                "unknown ItemLocation: {}",
+                s
+            ))),
+        }
+    }
+}
+
+impl Serialize for ItemLocation {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        let s = match self {
+            ItemLocation::Unknown => 0,
+            ItemLocation::Inventory => 1,
+            ItemLocation::Vault => 2,
+            ItemLocation::Vendor => 3,
+            ItemLocation::Postmaster => 4,
+        };
+        s.serialize(serializer)
+    }
+}
+
+pub enum ItemBindStatus {
+    NotBound = 0,
+    BoundToCharacter = 1,
+    BoundToAccount = 2,
+    BoundToGuild = 3,
+}
+
+impl<'de> Deserialize<'de> for ItemBindStatus {
+    fn deserialize<D>(deserializer: D) -> Result<ItemBindStatus, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let s = u8::deserialize(deserializer)?;
+        match s {
+            0 => Ok(ItemBindStatus::NotBound),
+            1 => Ok(ItemBindStatus::BoundToCharacter),
+            2 => Ok(ItemBindStatus::BoundToAccount),
+            3 => Ok(ItemBindStatus::BoundToGuild),
+            _ => Err(serde::de::Error::custom(format!(
+                "unknown ItemBindStatus: {}",
+                s
+            ))),
+        }
+    }
+}
+
+impl Serialize for ItemBindStatus {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        let s = match self {
+            ItemBindStatus::NotBound => 0,
+            ItemBindStatus::BoundToCharacter => 1,
+            ItemBindStatus::BoundToAccount => 2,
+            ItemBindStatus::BoundToGuild => 3,
+        };
+        s.serialize(serializer)
+    }
+}
+
+pub enum BungieMembershipType {
+    None = 0,
+    TigerXbox = 1,
+    TigerPsn = 2,
+    TigerSteam = 3,
+    TigerBlizzard = 4,
+    TigerStadia = 5,
+    TigerEgs = 6,
+    TigerDemon = 10,
+    BungieNext = 254,
+    All = -1,
+}
+
+impl<'de> Deserialize<'de> for BungieMembershipType {
+    fn deserialize<D>(deserializer: D) -> Result<BungieMembershipType, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let s = i32::deserialize(deserializer)?;
+        match s {
+            0 => Ok(BungieMembershipType::None),
+            1 => Ok(BungieMembershipType::TigerXbox),
+            2 => Ok(BungieMembershipType::TigerPsn),
+            3 => Ok(BungieMembershipType::TigerSteam),
+            4 => Ok(BungieMembershipType::TigerBlizzard),
+            5 => Ok(BungieMembershipType::TigerStadia),
+            6 => Ok(BungieMembershipType::TigerEgs),
+            10 => Ok(BungieMembershipType::TigerDemon),
+            254 => Ok(BungieMembershipType::BungieNext),
+            -1 => Ok(BungieMembershipType::All),
+            _ => Err(serde::de::Error::custom(format!(
+                "unknown BungieMembershipType: {}",
+                s
+            ))),
+        }
+    }
+}
+
+impl Serialize for BungieMembershipType {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        let s = match self {
+            BungieMembershipType::None => 0,
+            BungieMembershipType::TigerXbox => 1,
+            BungieMembershipType::TigerPsn => 2,
+            BungieMembershipType::TigerSteam => 3,
+            BungieMembershipType::TigerBlizzard => 4,
+            BungieMembershipType::TigerStadia => 5,
+            BungieMembershipType::TigerEgs => 6,
+            BungieMembershipType::TigerDemon => 10,
+            BungieMembershipType::BungieNext => 254,
+            BungieMembershipType::All => -1,
+        };
+        s.serialize(serializer)
+    }
+}
