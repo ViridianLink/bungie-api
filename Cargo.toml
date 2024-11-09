@@ -1,0 +1,10 @@
+[package]
+name = "destiny-api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bitflags = "*"
+reqwest = { version = "*", features = ["json"] }
+serde = { version = "*", features = ["derive"] }
+url = "*"
