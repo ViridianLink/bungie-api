@@ -7,9 +7,11 @@ use error::Result;
 
 pub mod types;
 
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+pub use bungie_client::BungieClient;
+
+// pub fn add(left: u64, right: u64) -> u64 {
+//     left + right
+// }
 
 // #[cfg(test)]
 // mod tests {
