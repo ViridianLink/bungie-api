@@ -5,6 +5,8 @@ use crate::types::destiny::{
     DestinySocketCategoryStyle, DestinySocketVisibility, SocketTypeActionType,
 };
 
+use super::DestinyItemSocketEntryPlugItemRandomizedDefinition;
+
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinySocketTypeDefinition {
@@ -55,6 +57,18 @@ pub struct DestinySocketCategoryDefinition {
     pub display_properties: DestinyDisplayPropertiesDefinition,
     pub ui_category_style: u32,
     pub category_style: DestinySocketCategoryStyle,
+    pub hash: u32,
+    pub index: i32,
+    pub redacted: bool,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DestinyPlugSetDefinition {
+    pub display_properties: Option<DestinyDisplayPropertiesDefinition>,
+    #[serde(default)]
+    pub reusable_plug_items: Vec<DestinyItemSocketEntryPlugItemRandomizedDefinition>,
+    pub is_fake_plug_set: bool,
     pub hash: u32,
     pub index: i32,
     pub redacted: bool,

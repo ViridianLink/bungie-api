@@ -10,7 +10,7 @@ pub mod types;
 pub use bungie_client::{BungieClient, BungieClientBuilder};
 pub use types::definitions::DestinyInventoryItemDefinition;
 pub use types::destiny::definitions::sockets::{
-    DestinySocketCategoryDefinition, DestinySocketTypeDefinition,
+    DestinyPlugSetDefinition, DestinySocketCategoryDefinition, DestinySocketTypeDefinition,
 };
 
 #[cfg(test)]
@@ -29,7 +29,7 @@ mod tests {
         let destiny_manifest = client.destiny_manifest().await.unwrap();
 
         let definitions = client
-            .destiny_socket_type_definition(&destiny_manifest, "en")
+            .destiny_plug_set_definition(&destiny_manifest, "en")
             .await
             .unwrap();
     }
