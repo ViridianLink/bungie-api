@@ -4,7 +4,13 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-bitflags = "*"
-reqwest = { version = "*", features = ["json"] }
-serde = { version = "*", features = ["derive"] }
-url = "*"
+bitflags = { version = "*", default-features = false }
+reqwest = { version = "*", default-features = false, features = [
+    "default-tls",
+    "json",
+] }
+serde = { version = "*", default_features = false, features = ["derive"] }
+url = { version = "*", default-features = false }
+
+[dev-dependencies]
+tokio = { version = "*", features = ["full"] }
