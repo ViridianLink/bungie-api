@@ -252,7 +252,7 @@ impl Serialize for SocketPlugSources {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum DamageType {
     None = 0,
     Kinetic = 1,
