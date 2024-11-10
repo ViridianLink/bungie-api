@@ -9,24 +9,28 @@ pub mod types;
 
 pub use bungie_client::{BungieClient, BungieClientBuilder};
 pub use types::definitions::DestinyInventoryItemDefinition;
-pub use types::destiny::definitions::sockets::DestinySocketCategoryDefinition;
+pub use types::destiny::definitions::sockets::{
+    DestinySocketCategoryDefinition, DestinySocketTypeDefinition,
+};
 
-// #[cfg(test)]
-// mod tests {
+#[cfg(test)]
+mod tests {
 
-//     use super::*;
+    use super::*;
 
-//     #[tokio::test]
-//     async fn run() {
-//         let client = bungie_client::BungieClientBuilder::new(BUNGIE_API_KEY)
-//             .build()
-//             .unwrap();
+    const BUNGIE_API_KEY: &str = "";
 
-//         let destiny_manifest = client.destiny_manifest().await.unwrap();
+    #[tokio::test]
+    async fn run() {
+        let client = bungie_client::BungieClientBuilder::new(BUNGIE_API_KEY)
+            .build()
+            .unwrap();
 
-//         let item_definition = client
-//             .destiny_inventory_item_definition(&destiny_manifest, "en")
-//             .await
-//             .unwrap();
-//     }
-// }
+        let destiny_manifest = client.destiny_manifest().await.unwrap();
+
+        let definitions = client
+            .destiny_socket_type_definition(&destiny_manifest, "en")
+            .await
+            .unwrap();
+    }
+}

@@ -705,6 +705,84 @@ impl Serialize for DestinyBreakerType {
 }
 
 #[derive(Debug)]
+pub enum SocketTypeActionType {
+    InsertPlug = 0,
+    InfuseItem = 1,
+    ReinitializeSocket = 2,
+}
+
+impl<'de> Deserialize<'de> for SocketTypeActionType {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let value = u32::deserialize(deserializer)?;
+        match value {
+            0 => Ok(SocketTypeActionType::InsertPlug),
+            1 => Ok(SocketTypeActionType::InfuseItem),
+            2 => Ok(SocketTypeActionType::ReinitializeSocket),
+            _ => Err(serde::de::Error::custom("Invalid value")),
+        }
+    }
+}
+
+impl Serialize for SocketTypeActionType {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let value = match self {
+            SocketTypeActionType::InsertPlug => 0,
+            SocketTypeActionType::InfuseItem => 1,
+            SocketTypeActionType::ReinitializeSocket => 2,
+        };
+        serializer.serialize_u32(value)
+    }
+}
+
+#[derive(Debug)]
+pub enum DestinySocketVisibility {
+    Visible = 0,
+    Hidden = 1,
+    HiddenWhenEmpty = 2,
+    HiddenIfNoPlugsAvailable = 3,
+}
+
+impl<'de> Deserialize<'de> for DestinySocketVisibility {
+    fn deserialize<D>(deserializer: D) -> Result<DestinySocketVisibility, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let s = u32::deserialize(deserializer)?;
+        match s {
+            0 => Ok(DestinySocketVisibility::Visible),
+            1 => Ok(DestinySocketVisibility::Hidden),
+            2 => Ok(DestinySocketVisibility::HiddenWhenEmpty),
+            3 => Ok(DestinySocketVisibility::HiddenIfNoPlugsAvailable),
+            _ => Err(serde::de::Error::custom(format!(
+                "unknown DestinySocketVisibility: {}",
+                s
+            ))),
+        }
+    }
+}
+
+impl Serialize for DestinySocketVisibility {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let s = match self {
+            DestinySocketVisibility::Visible => 0,
+            DestinySocketVisibility::Hidden => 1,
+            DestinySocketVisibility::HiddenWhenEmpty => 2,
+            DestinySocketVisibility::HiddenIfNoPlugsAvailable => 3,
+        };
+        s.serialize(serializer)
+    }
+}
+
+#[derive(Debug)]
 pub enum DestinySocketCategoryStyle {
     Unknown = 0,
     Reusable = 1,
