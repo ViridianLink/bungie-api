@@ -1,3 +1,5 @@
+pub mod definitions;
+
 use std::collections::HashMap;
 
 use bitflags::bitflags;
@@ -697,6 +699,60 @@ impl Serialize for DestinyBreakerType {
             DestinyBreakerType::ShieldPiercing => 1,
             DestinyBreakerType::Disruption => 2,
             DestinyBreakerType::Stagger => 3,
+        };
+        serializer.serialize_u32(value)
+    }
+}
+
+#[derive(Debug)]
+pub enum DestinySocketCategoryStyle {
+    Unknown = 0,
+    Reusable = 1,
+    Consumable = 2,
+    Unlockable = 3,
+    Intrinsic = 4,
+    EnergyMeter = 5,
+    LargePerk = 6,
+    Abilities = 7,
+    Supers = 8,
+}
+
+impl<'de> Deserialize<'de> for DestinySocketCategoryStyle {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let value = u32::deserialize(deserializer)?;
+        match value {
+            0 => Ok(DestinySocketCategoryStyle::Unknown),
+            1 => Ok(DestinySocketCategoryStyle::Reusable),
+            2 => Ok(DestinySocketCategoryStyle::Consumable),
+            3 => Ok(DestinySocketCategoryStyle::Unlockable),
+            4 => Ok(DestinySocketCategoryStyle::Intrinsic),
+            5 => Ok(DestinySocketCategoryStyle::EnergyMeter),
+            6 => Ok(DestinySocketCategoryStyle::LargePerk),
+            7 => Ok(DestinySocketCategoryStyle::Abilities),
+            8 => Ok(DestinySocketCategoryStyle::Supers),
+            _ => Err(serde::de::Error::custom("Invalid value")),
+        }
+    }
+}
+
+impl Serialize for DestinySocketCategoryStyle {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        let value = match self {
+            DestinySocketCategoryStyle::Unknown => 0,
+            DestinySocketCategoryStyle::Reusable => 1,
+            DestinySocketCategoryStyle::Consumable => 2,
+            DestinySocketCategoryStyle::Unlockable => 3,
+            DestinySocketCategoryStyle::Intrinsic => 4,
+            DestinySocketCategoryStyle::EnergyMeter => 5,
+            DestinySocketCategoryStyle::LargePerk => 6,
+            DestinySocketCategoryStyle::Abilities => 7,
+            DestinySocketCategoryStyle::Supers => 8,
         };
         serializer.serialize_u32(value)
     }
