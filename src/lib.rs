@@ -8,6 +8,7 @@ use error::Result;
 pub mod types;
 
 pub use bungie_client::{BungieClient, BungieClientBuilder};
+pub use types::definitions::DestinyInventoryItemDefinition;
 
 // #[cfg(test)]
 // mod tests {

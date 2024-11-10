@@ -19,7 +19,7 @@ use super::links::HyperlinkReference;
 use super::misc::DestinyColor;
 use super::{BungieMembershipType, TierType};
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyInventoryItemDefinition {
     pub display_properties: DestinyDisplayPropertiesDefinition,
@@ -101,14 +101,14 @@ pub struct DestinyInventoryItemDefinition {
     pub blacklisted: bool,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemTooltipNotification {
     pub display_string: String,
     pub display_style: String,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemActionBlockDefinition {
     pub verb_name: String,
@@ -131,7 +131,7 @@ pub struct DestinyItemActionBlockDefinition {
     pub use_on_acquire: bool,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemActionRequiredItemDefinition {
     pub count: i32,
@@ -139,7 +139,7 @@ pub struct DestinyItemActionRequiredItemDefinition {
     pub delete_on_action: bool,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyProgressionRewardDefinition {
     pub progression_mapping_hash: u32,
@@ -147,7 +147,7 @@ pub struct DestinyProgressionRewardDefinition {
     pub apply_throttles: bool,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemCraftingBlockDefinition {
     pub output_item_hash: u32,
@@ -157,14 +157,14 @@ pub struct DestinyItemCraftingBlockDefinition {
     pub bonus_plugs: Vec<DestinyItemCraftingBlockBonusPlugDefinition>,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemCraftingBlockBonusPlugDefinition {
     pub socket_type_hash: u32,
     pub plug_item_hash: u32,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemInventoryBlockDefinition {
     pub stack_unique_label: Option<String>,
@@ -183,7 +183,7 @@ pub struct DestinyItemInventoryBlockDefinition {
     pub recipe_item_hash: Option<u32>,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemSetBlockDefinition {
     pub item_list: Vec<DestinyItemSetBlockEntryDefinition>,
@@ -195,14 +195,14 @@ pub struct DestinyItemSetBlockDefinition {
     pub quest_step_summary: String,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemSetBlockEntryDefinition {
     pub tracking_value: i32,
     pub item_hash: u32,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemStatBlockDefinition {
     pub disable_primary_stat_display: bool,
@@ -212,7 +212,7 @@ pub struct DestinyItemStatBlockDefinition {
     pub primary_base_stat_hash: u32,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyInventoryItemStatDefinition {
     pub stat_hash: u32,
@@ -222,7 +222,7 @@ pub struct DestinyInventoryItemStatDefinition {
     pub display_maximum: Option<i32>,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyEquippingBlockDefinition {
     pub gearset_item_hash: Option<u32>,
@@ -236,7 +236,7 @@ pub struct DestinyEquippingBlockDefinition {
     pub display_strings: Vec<String>,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemTranslationBlockDefinition {
     pub weapon_pattern_identifier: Option<String>,
@@ -248,14 +248,14 @@ pub struct DestinyItemTranslationBlockDefinition {
     pub has_geometry: bool,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyGearArtArrangementReference {
     pub class_hash: u32,
     pub art_arrangement_hash: u32,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemPreviewBlockDefinition {
     pub screen_style: String,
@@ -266,7 +266,7 @@ pub struct DestinyItemPreviewBlockDefinition {
     pub derived_item_categories: Vec<DestinyDerivedItemCategoryDefinition>,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemQualityBlockDefinition {
     pub item_levels: Vec<i32>,
@@ -280,20 +280,20 @@ pub struct DestinyItemQualityBlockDefinition {
     pub display_version_watermark_icons: Vec<String>,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemVersionDefinition {
     pub power_cap_hash: u32,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemValueBlockDefinition {
     pub item_value: Vec<DestinyItemQuantity>,
     pub value_description: String,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemSourceBlockDefinition {
     pub source_hashes: Vec<u32>,
@@ -302,14 +302,14 @@ pub struct DestinyItemSourceBlockDefinition {
     pub vendor_sources: Vec<DestinyItemVendorSourceReference>,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemVendorSourceReference {
     pub vendor_hash: u32,
     pub vendor_item_indexes: Vec<i32>,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemObjectiveBlockDefinition {
     pub objective_hashes: Vec<u32>,
@@ -324,27 +324,27 @@ pub struct DestinyItemObjectiveBlockDefinition {
     pub display_as_stat_tracker: bool,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyObjectiveDisplayProperties {
     pub activity_hash: Option<u32>,
     pub display_on_item_preview_screen: bool,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemMetricBlockDefinition {
     pub available_metric_category_node_hashes: Vec<u32>,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemGearsetBlockDefinition {
     pub tracking_value_max: i32,
     pub item_list: Vec<u32>,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemSackBlockDefinition {
     pub detail_action: String,
@@ -359,7 +359,7 @@ pub struct DestinyItemSackBlockDefinition {
     pub open_on_acquire: bool,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemSocketBlockDefinition {
     pub detail: String,
@@ -368,7 +368,7 @@ pub struct DestinyItemSocketBlockDefinition {
     pub socket_categories: Vec<DestinyItemSocketCategoryDefinition>,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemSocketEntryDefinition {
     pub socket_type_hash: u32,
@@ -384,13 +384,13 @@ pub struct DestinyItemSocketEntryDefinition {
     pub default_visible: bool,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemSocketEntryPlugItemDefinition {
     pub plug_item_hash: u32,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemIntrinsicSocketEntryDefinition {
     pub plug_item_hash: u32,
@@ -398,20 +398,20 @@ pub struct DestinyItemIntrinsicSocketEntryDefinition {
     pub default_visible: bool,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemSocketCategoryDefinition {
     pub socket_category_hash: u32,
     pub socket_indexes: Vec<i32>,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemSummaryBlockDefinition {
     pub sort_priority: i32,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemTalentGridBlockDefinition {
     pub talent_grid_hash: u32,
@@ -421,7 +421,7 @@ pub struct DestinyItemTalentGridBlockDefinition {
     pub hud_icon: Option<String>,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemInvestmentStatDefinition {
     pub stat_type_hash: u32,
@@ -429,7 +429,7 @@ pub struct DestinyItemInvestmentStatDefinition {
     pub is_conditionally_active: bool,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemPerkEntryDefinition {
     pub requirement_display_string: String,

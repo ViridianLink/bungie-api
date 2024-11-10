@@ -8,6 +8,7 @@ pub mod links;
 pub mod misc;
 pub mod response;
 
+#[derive(Debug)]
 pub enum TierType {
     Unknown = 0,
     Currency = 1,
@@ -140,6 +141,7 @@ impl Serialize for ItemBindStatus {
     }
 }
 
+#[derive(Debug)]
 pub enum BungieMembershipType {
     None = 0,
     TigerXbox = 1,

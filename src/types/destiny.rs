@@ -30,6 +30,7 @@ pub struct ImagePyramidEntry {
 }
 
 bitflags! {
+    #[derive(Debug)]
     pub struct EquippingItemBlockAttributes: u8 {
         const EQUIP_ON_ACQUIRE = 1;
     }
@@ -54,6 +55,7 @@ impl Serialize for EquippingItemBlockAttributes {
     }
 }
 
+#[derive(Debug)]
 pub enum DestinyAmmunitionType {
     None = 0,
     Primary = 1,
@@ -95,14 +97,14 @@ impl Serialize for DestinyAmmunitionType {
     }
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DyeReference {
     pub channel_hash: u32,
     pub dye_hash: u32,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemQuantity {
     pub item_hash: u32,
@@ -112,6 +114,7 @@ pub struct DestinyItemQuantity {
 }
 
 bitflags! {
+    #[derive(Debug)]
     pub struct PlugUiStyles: u8 {
         const MASTERWORK = 1;
     }
@@ -136,6 +139,7 @@ impl Serialize for PlugUiStyles {
     }
 }
 
+#[derive(Debug)]
 pub enum PlugAvailabilityMode {
     Normal = 0,
     UnavailableIfSocketContainsMatchingPlugCategory = 1,
@@ -171,6 +175,7 @@ impl Serialize for PlugAvailabilityMode {
     }
 }
 
+#[derive(Debug)]
 pub enum DestinyEnergyType {
     Any = 0,
     Arc = 1,
@@ -219,6 +224,7 @@ impl Serialize for DestinyEnergyType {
 }
 
 bitflags! {
+    #[derive(Debug)]
     pub struct SocketPlugSources : u8 {
         const INVENTORY_SOURCED = 1;
         const REUSABLE_PLUG_ITEMS = 2;
@@ -246,6 +252,7 @@ impl Serialize for SocketPlugSources {
     }
 }
 
+#[derive(Debug)]
 pub enum DamageType {
     None = 0,
     Kinetic = 1,
@@ -296,6 +303,7 @@ impl Serialize for DamageType {
     }
 }
 
+#[derive(Debug)]
 pub enum ItemPerkVisibility {
     Visible = 0,
     Disabled = 1,
@@ -331,6 +339,7 @@ impl Serialize for ItemPerkVisibility {
     }
 }
 
+#[derive(Debug)]
 pub enum SpecialItemType {
     None = 0,
     SpecialCurrency = 1,
@@ -384,6 +393,7 @@ impl Serialize for SpecialItemType {
     }
 }
 
+#[derive(Debug)]
 pub enum DestinyItemType {
     None = 0,
     Currency = 1,
@@ -494,6 +504,7 @@ impl Serialize for DestinyItemType {
     }
 }
 
+#[derive(Debug)]
 pub enum DestinyItemSubType {
     None = 0,
     Crucible = 1,
@@ -613,6 +624,7 @@ impl Serialize for DestinyItemSubType {
     }
 }
 
+#[derive(Debug)]
 pub enum DestinyClass {
     Titan = 0,
     Hunter = 1,
@@ -651,6 +663,7 @@ impl Serialize for DestinyClass {
     }
 }
 
+#[derive(Debug)]
 pub enum DestinyBreakerType {
     None = 0,
     ShieldPiercing = 1,

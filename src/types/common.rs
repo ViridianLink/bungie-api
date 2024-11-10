@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyDisplayPropertiesDefinition {
     pub description: String,
@@ -12,7 +12,7 @@ pub struct DestinyDisplayPropertiesDefinition {
     pub has_icon: bool,
 }
 
-#[derive(Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct DestinyIconSequenceDefinition {
     pub frames: Vec<String>,
 }
