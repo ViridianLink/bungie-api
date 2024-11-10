@@ -9,6 +9,7 @@ pub mod types;
 
 pub use bungie_client::{BungieClient, BungieClientBuilder};
 pub use types::definitions::DestinyInventoryItemDefinition;
+pub use types::destiny::definitions::sockets::DestinySocketCategoryDefinition;
 
 // #[cfg(test)]
 // mod tests {
