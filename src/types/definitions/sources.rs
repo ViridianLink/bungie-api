@@ -3,7 +3,7 @@ use std::collections::HashMap;
 
 use super::DestinyInventoryItemStatDefinition;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemSourceDefinition {
     pub level: i32,

@@ -2,14 +2,14 @@ use serde::{Deserialize, Serialize};
 
 use crate::types::destiny::{DestinyEnergyType, PlugAvailabilityMode, PlugUiStyles};
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyDerivedItemCategoryDefinition {
     pub category_description: String,
     pub items: Vec<DestinyDerivedItemDefinition>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyDerivedItemDefinition {
     pub item_hash: u32,
@@ -20,7 +20,7 @@ pub struct DestinyDerivedItemDefinition {
     pub vendor_item_index: i32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyItemPlugDefinition {
     pub insertion_rules: Vec<DestinyPlugRuleDefinition>,
@@ -45,20 +45,20 @@ pub struct DestinyItemPlugDefinition {
     pub energy_cost: Option<DestinyEnergyCostEntry>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyPlugRuleDefinition {
     pub failure_message: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyParentItemOverride {
     pub additional_equip_requirements_display_strings: Vec<String>,
     pub pip_icon: Option<String>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyEnergyCapacityEntry {
     pub capacity_value: i32,
@@ -66,7 +66,7 @@ pub struct DestinyEnergyCapacityEntry {
     pub energy_type: DestinyEnergyType,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyEnergyCostEntry {
     pub energy_cost: i32,

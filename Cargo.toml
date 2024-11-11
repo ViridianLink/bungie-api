@@ -9,7 +9,7 @@ reqwest = { version = "*", default-features = false, features = [
     "default-tls",
     "json",
 ] }
-serde = { version = "*", default_features = false, features = ["derive"] }
+serde = { version = "*", default-features = false, features = ["derive"] }
 url = { version = "*", default-features = false }
 
 [dev-dependencies]
