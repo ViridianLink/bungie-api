@@ -2,6 +2,7 @@ mod bungie_client;
 
 pub mod endpoints;
 mod error;
+pub mod serde_as;
 use std::collections::HashMap;
 
 pub use error::Error;
@@ -23,21 +24,50 @@ pub type DestinySocketTypeManifest = HashMap<String, DestinySocketTypeDefinition
 #[cfg(test)]
 mod tests {
 
-    use super::*;
+    use std::fs;
+
+    use crate::types::destiny::historical_stats::definitions::DestinyActivityModeType;
+    use crate::types::destiny::DestinyComponentType;
+    use crate::BungieClientBuilder;
 
     const BUNGIE_API_KEY: &str = "";
 
     #[tokio::test]
     async fn run() {
-        let client = bungie_client::BungieClientBuilder::new(BUNGIE_API_KEY)
-            .build()
+        let client = BungieClientBuilder::new(BUNGIE_API_KEY).build().unwrap();
+
+        let user_info = client
+            .search_destiny_player("OscarSix", 7797)
+            .await
+            .unwrap()
+            .pop()
             .unwrap();
 
-        let destiny_manifest = client.destiny_manifest().await.unwrap();
-
-        let definitions = client
-            .destiny_plug_set_definition(&destiny_manifest, "en")
+        let profle_response = client
+            .get_profile(
+                user_info.membership_type,
+                user_info.membership_id,
+                &[DestinyComponentType::Profiles],
+            )
             .await
             .unwrap();
+
+        let character_id = profle_response.profile.unwrap().data.character_ids[0]
+            .parse()
+            .unwrap();
+
+        let res = client
+            .get_activity_history(
+                user_info.membership_type,
+                user_info.membership_id,
+                character_id,
+                None,
+                Some(DestinyActivityModeType::Raid),
+                None,
+            )
+            .await
+            .unwrap();
+
+        fs::write("output.json", serde_json::to_string_pretty(&res).unwrap()).unwrap();
     }
 }
