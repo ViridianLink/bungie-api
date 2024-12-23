@@ -4,15 +4,15 @@ use reqwest::Url;
 
 use crate::bungie_client::BungieClient;
 use crate::types::definitions::DestinyInventoryItemDefinition;
+use crate::types::destiny::config::DestinyManifest;
 use crate::types::destiny::definitions::sockets::{
     DestinyPlugSetDefinition, DestinySocketCategoryDefinition, DestinySocketTypeDefinition,
 };
-use crate::types::destiny::DestinyManifest;
-use crate::{Error, Result};
+use crate::Result;
 
 impl BungieClient {
     pub async fn destiny_manifest(&self) -> Result<DestinyManifest> {
-        self.get::<DestinyManifest>(Url::parse(
+        self.get_bungie_response::<DestinyManifest>(Url::parse(
             "https://www.bungie.net/Platform/Destiny2/Manifest/",
         )?)
         .await
@@ -32,25 +32,8 @@ impl BungieClient {
 
         let url = format!("https://www.bungie.net{}", item_definition_path);
 
-        let request = self.client.get(url);
-
-        let response = request.send().await?;
-
-        if let Some(hv) = response.headers().get("Content-Type") {
-            if !hv
-                .to_str()
-                .map(|s| s.starts_with("application/json"))
-                .unwrap_or(false)
-            {
-                return Err(Error::InvalidContentType(hv.to_owned()));
-            }
-        }
-
-        let deserialized = response
-            .json::<HashMap<String, DestinyInventoryItemDefinition>>()
-            .await?;
-
-        Ok(deserialized)
+        self.get::<HashMap<String, DestinyInventoryItemDefinition>>(Url::parse(&url)?)
+            .await
     }
 
     pub async fn destiny_socket_type_definition(
@@ -67,25 +50,8 @@ impl BungieClient {
 
         let url = format!("https://www.bungie.net{}", item_definition_path);
 
-        let request = self.client.get(url);
-
-        let response = request.send().await?;
-
-        if let Some(hv) = response.headers().get("Content-Type") {
-            if !hv
-                .to_str()
-                .map(|s| s.starts_with("application/json"))
-                .unwrap_or(false)
-            {
-                return Err(Error::InvalidContentType(hv.to_owned()));
-            }
-        }
-
-        let deserialized = response
-            .json::<HashMap<String, DestinySocketTypeDefinition>>()
-            .await?;
-
-        Ok(deserialized)
+        self.get::<HashMap<String, DestinySocketTypeDefinition>>(Url::parse(&url)?)
+            .await
     }
 
     pub async fn destiny_socket_category_definition(
@@ -102,25 +68,8 @@ impl BungieClient {
 
         let url = format!("https://www.bungie.net{}", item_definition_path);
 
-        let request = self.client.get(url);
-
-        let response = request.send().await?;
-
-        if let Some(hv) = response.headers().get("Content-Type") {
-            if !hv
-                .to_str()
-                .map(|s| s.starts_with("application/json"))
-                .unwrap_or(false)
-            {
-                return Err(Error::InvalidContentType(hv.to_owned()));
-            }
-        }
-
-        let deserialized = response
-            .json::<HashMap<String, DestinySocketCategoryDefinition>>()
-            .await?;
-
-        Ok(deserialized)
+        self.get::<HashMap<String, DestinySocketCategoryDefinition>>(Url::parse(&url)?)
+            .await
     }
 
     pub async fn destiny_plug_set_definition(
@@ -137,24 +86,7 @@ impl BungieClient {
 
         let url = format!("https://www.bungie.net{}", item_definition_path);
 
-        let request = self.client.get(url);
-
-        let response = request.send().await?;
-
-        if let Some(hv) = response.headers().get("Content-Type") {
-            if !hv
-                .to_str()
-                .map(|s| s.starts_with("application/json"))
-                .unwrap_or(false)
-            {
-                return Err(Error::InvalidContentType(hv.to_owned()));
-            }
-        }
-
-        let deserialized = response
-            .json::<HashMap<String, DestinyPlugSetDefinition>>()
-            .await?;
-
-        Ok(deserialized)
+        self.get::<HashMap<String, DestinyPlugSetDefinition>>(Url::parse(&url)?)
+            .await
     }
 }
