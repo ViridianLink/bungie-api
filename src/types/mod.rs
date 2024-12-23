@@ -1,12 +1,99 @@
+use std::collections::HashMap;
+
+use components::ComponentResponse;
+use destiny::{
+    components::items::{
+        DestinyItemPlugComponent, DestinyItemPlugObjectivesComponent,
+        DestinyItemReusablePlugsComponent,
+    },
+    entities::items::{
+        DestinyItemInstanceComponent, DestinyItemObjectivesComponent, DestinyItemPerksComponent,
+        DestinyItemRenderComponent, DestinyItemSocketsComponent, DestinyItemStatsComponent,
+        DestinyItemTalentGridComponent,
+    },
+};
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 pub mod common;
+pub mod components;
 pub mod definitions;
 pub mod destiny;
 pub mod exceptions;
 pub mod links;
 pub mod misc;
 pub mod response;
+pub mod user;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[repr(i16)]
+pub enum BungieMembershipType {
+    None = 0,
+    TigerXbox = 1,
+    TigerPsn = 2,
+    TigerSteam = 3,
+    TigerBlizzard = 4,
+    TigerStadia = 5,
+    TigerEgs = 6,
+    TigerDemon = 10,
+    BungieNext = 254,
+    All = -1,
+}
+
+impl<'de> Deserialize<'de> for BungieMembershipType {
+    fn deserialize<D>(deserializer: D) -> Result<BungieMembershipType, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let s = i32::deserialize(deserializer)?;
+        match s {
+            0 => Ok(BungieMembershipType::None),
+            1 => Ok(BungieMembershipType::TigerXbox),
+            2 => Ok(BungieMembershipType::TigerPsn),
+            3 => Ok(BungieMembershipType::TigerSteam),
+            4 => Ok(BungieMembershipType::TigerBlizzard),
+            5 => Ok(BungieMembershipType::TigerStadia),
+            6 => Ok(BungieMembershipType::TigerEgs),
+            10 => Ok(BungieMembershipType::TigerDemon),
+            254 => Ok(BungieMembershipType::BungieNext),
+            -1 => Ok(BungieMembershipType::All),
+            _ => Err(serde::de::Error::custom(format!(
+                "unknown BungieMembershipType: {}",
+                s
+            ))),
+        }
+    }
+}
+
+impl Serialize for BungieMembershipType {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        let s = *self as i16;
+        s.serialize(serializer)
+    }
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct DestinyBaseItemComponentSetOfuint32 {
+    pub objectives: ComponentResponse<HashMap<u32, DestinyItemObjectivesComponent>>,
+    pub perks: ComponentResponse<HashMap<u32, DestinyItemPerksComponent>>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DestinyItemComponentSetOfint64 {
+    pub instances: ComponentResponse<HashMap<i64, DestinyItemInstanceComponent>>,
+    pub render_data: ComponentResponse<HashMap<i64, DestinyItemRenderComponent>>,
+    pub stats: ComponentResponse<HashMap<i64, DestinyItemStatsComponent>>,
+    pub sockets: ComponentResponse<HashMap<i64, DestinyItemSocketsComponent>>,
+    pub reusable_plugs: ComponentResponse<HashMap<i64, DestinyItemReusablePlugsComponent>>,
+    pub plug_objectives: ComponentResponse<HashMap<i64, DestinyItemPlugObjectivesComponent>>,
+    pub talent_grids: ComponentResponse<HashMap<i64, DestinyItemTalentGridComponent>>,
+    pub plug_states: ComponentResponse<HashMap<u32, DestinyItemPlugComponent>>,
+    pub objectives: ComponentResponse<HashMap<i64, DestinyItemObjectivesComponent>>,
+    pub perks: ComponentResponse<HashMap<i64, DestinyItemPerksComponent>>,
+}
 
 #[derive(Debug, Clone, Copy)]
 pub enum TierType {
@@ -56,6 +143,7 @@ impl Serialize for TierType {
     }
 }
 
+#[derive(Debug, Clone, Copy)]
 pub enum ItemLocation {
     Unknown = 0,
     Inventory = 1,
@@ -95,107 +183,6 @@ impl Serialize for ItemLocation {
             ItemLocation::Vault => 2,
             ItemLocation::Vendor => 3,
             ItemLocation::Postmaster => 4,
-        };
-        s.serialize(serializer)
-    }
-}
-
-pub enum ItemBindStatus {
-    NotBound = 0,
-    BoundToCharacter = 1,
-    BoundToAccount = 2,
-    BoundToGuild = 3,
-}
-
-impl<'de> Deserialize<'de> for ItemBindStatus {
-    fn deserialize<D>(deserializer: D) -> Result<ItemBindStatus, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        let s = u8::deserialize(deserializer)?;
-        match s {
-            0 => Ok(ItemBindStatus::NotBound),
-            1 => Ok(ItemBindStatus::BoundToCharacter),
-            2 => Ok(ItemBindStatus::BoundToAccount),
-            3 => Ok(ItemBindStatus::BoundToGuild),
-            _ => Err(serde::de::Error::custom(format!(
-                "unknown ItemBindStatus: {}",
-                s
-            ))),
-        }
-    }
-}
-
-impl Serialize for ItemBindStatus {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: Serializer,
-    {
-        let s = match self {
-            ItemBindStatus::NotBound => 0,
-            ItemBindStatus::BoundToCharacter => 1,
-            ItemBindStatus::BoundToAccount => 2,
-            ItemBindStatus::BoundToGuild => 3,
-        };
-        s.serialize(serializer)
-    }
-}
-
-#[derive(Debug, Clone, Copy)]
-pub enum BungieMembershipType {
-    None = 0,
-    TigerXbox = 1,
-    TigerPsn = 2,
-    TigerSteam = 3,
-    TigerBlizzard = 4,
-    TigerStadia = 5,
-    TigerEgs = 6,
-    TigerDemon = 10,
-    BungieNext = 254,
-    All = -1,
-}
-
-impl<'de> Deserialize<'de> for BungieMembershipType {
-    fn deserialize<D>(deserializer: D) -> Result<BungieMembershipType, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        let s = i32::deserialize(deserializer)?;
-        match s {
-            0 => Ok(BungieMembershipType::None),
-            1 => Ok(BungieMembershipType::TigerXbox),
-            2 => Ok(BungieMembershipType::TigerPsn),
-            3 => Ok(BungieMembershipType::TigerSteam),
-            4 => Ok(BungieMembershipType::TigerBlizzard),
-            5 => Ok(BungieMembershipType::TigerStadia),
-            6 => Ok(BungieMembershipType::TigerEgs),
-            10 => Ok(BungieMembershipType::TigerDemon),
-            254 => Ok(BungieMembershipType::BungieNext),
-            -1 => Ok(BungieMembershipType::All),
-            _ => Err(serde::de::Error::custom(format!(
-                "unknown BungieMembershipType: {}",
-                s
-            ))),
-        }
-    }
-}
-
-impl Serialize for BungieMembershipType {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: Serializer,
-    {
-        let s = match self {
-            BungieMembershipType::None => 0,
-            BungieMembershipType::TigerXbox => 1,
-            BungieMembershipType::TigerPsn => 2,
-            BungieMembershipType::TigerSteam => 3,
-            BungieMembershipType::TigerBlizzard => 4,
-            BungieMembershipType::TigerStadia => 5,
-            BungieMembershipType::TigerEgs => 6,
-            BungieMembershipType::TigerDemon => 10,
-            BungieMembershipType::BungieNext => 254,
-            BungieMembershipType::All => -1,
         };
         s.serialize(serializer)
     }
