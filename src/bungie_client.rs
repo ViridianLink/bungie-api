@@ -2,7 +2,7 @@ use crate::{
     types::{exceptions::PlatformErrorCodes, response::BungieResponse},
     Error, Result,
 };
-use reqwest::{header::HeaderMap, Client, ClientBuilder, RequestBuilder, Url};
+use reqwest::{header::HeaderMap, Client, ClientBuilder, RequestBuilder, Response, Url};
 use serde::de::DeserializeOwned;
 
 pub struct BungieClientBuilder {
@@ -44,13 +44,19 @@ impl BungieClient {
         let url = url.into();
 
         let reqwest = self.client.get(url);
-        self.process_response::<T>(reqwest).await
+        let response = Self::validate_content_type(reqwest).await?;
+        Ok(response.json::<T>().await?)
     }
 
-    pub async fn process_response<T>(&self, reqwest: RequestBuilder) -> Result<T>
+    pub async fn get_bungie_response<T>(&self, url: impl Into<Url>) -> Result<T>
     where
         T: DeserializeOwned,
     {
+        let res = self.get::<BungieResponse<T>>(url).await?;
+        Self::handle_bungie_response(res).await
+    }
+
+    async fn validate_content_type(reqwest: RequestBuilder) -> Result<Response> {
         let response = reqwest.send().await?;
 
         if let Some(hv) = response.headers().get("Content-Type") {
@@ -63,9 +69,12 @@ impl BungieClient {
             }
         }
 
-        let deserialized = response.json::<BungieResponse<T>>().await?;
-        match deserialized.error_code {
-            PlatformErrorCodes::Success => Ok(deserialized.response),
+        Ok(response)
+    }
+
+    pub async fn handle_bungie_response<T>(de: BungieResponse<T>) -> Result<T> {
+        match de.error_code {
+            PlatformErrorCodes::Success => Ok(de.response),
             PlatformErrorCodes::Unknown(code) => {
                 println!("Error Code: {}", code);
                 Err(Error::Bungie(PlatformErrorCodes::Unknown(code)))
