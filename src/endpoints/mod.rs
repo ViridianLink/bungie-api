@@ -62,7 +62,7 @@ impl BungieClient {
         character_id: u64,
         count: Option<i32>,
         mode: Option<DestinyActivityModeType>,
-        page: Option<i32>,
+        page: u32,
     ) -> Result<DestinyActivityHistoryResults> {
         let mut url = Url::parse("https://www.bungie.net/Platform/Destiny2/")?;
 
@@ -84,7 +84,7 @@ impl BungieClient {
             if let Some(mode) = mode {
                 query_pairs.append_pair("mode", &(mode as i32).to_string());
             }
-            query_pairs.append_pair("page", &page.unwrap_or(0).to_string());
+            query_pairs.append_pair("page", &page.to_string());
         }
 
         self.get_bungie_response::<DestinyActivityHistoryResults>(url)
