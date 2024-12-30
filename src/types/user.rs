@@ -18,5 +18,5 @@ pub struct UserInfoCard {
     pub membership_id: u64,
     pub display_name: Option<String>,
     pub bungie_global_display_name: Option<String>,
-    pub bungie_global_display_name_code: i16,
+    pub bungie_global_display_name_code: Option<i16>,
 }
