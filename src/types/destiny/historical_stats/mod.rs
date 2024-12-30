@@ -66,7 +66,7 @@ pub struct DestinyHistoricalStatsValuePair {
 #[serde(rename_all = "camelCase")]
 pub struct DestinyPlayer {
     pub destiny_user_info: UserInfoCard,
-    pub character_class: String,
+    pub character_class: Option<String>,
     pub class_hash: u32,
     pub race_hash: u32,
     pub gender_hash: u32,
