@@ -44,7 +44,7 @@ mod tests {
             .unwrap();
 
         let profle_response = client
-            .get_profile(
+            .profile(
                 user_info.membership_type,
                 user_info.membership_id,
                 &[DestinyComponentType::Profiles],
@@ -57,7 +57,7 @@ mod tests {
             .unwrap();
 
         let res = client
-            .get_activity_history(
+            .activity_history(
                 user_info.membership_type,
                 user_info.membership_id,
                 character_id,

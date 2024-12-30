@@ -5,9 +5,21 @@ use definitions::DestinyActivityModeType;
 use serde::{Deserialize, Serialize};
 
 use crate::serde_as::string_to_u64;
+use crate::types::user::UserInfoCard;
 use crate::types::BungieMembershipType;
 
 pub mod definitions;
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DestinyPostGameCarnageReportData {
+    pub period: DateTime<Utc>,
+    pub starting_phase_index: i32,
+    pub activity_was_started_from_beginning: bool,
+    pub activity_details: DestinyHistoricalStatsActivity,
+    pub entries: Vec<DestinyPostGameCarnageReportEntry>,
+    pub teams: Vec<DestinyPostGameCarnageReportTeamEntry>,
+}
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -20,6 +32,17 @@ pub struct DestinyHistoricalStatsActivity {
     pub modes: Vec<DestinyActivityModeType>,
     pub is_private: bool,
     pub membership_type: BungieMembershipType,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DestinyPostGameCarnageReportEntry {
+    pub standing: i32,
+    pub score: DestinyHistoricalStatsValue,
+    pub player: DestinyPlayer,
+    pub character_id: i64,
+    pub values: HashMap<String, DestinyHistoricalStatsValue>,
+    pub extended: DestinyPostGameCarnageReportExtendedData,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -41,11 +64,47 @@ pub struct DestinyHistoricalStatsValuePair {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+pub struct DestinyPlayer {
+    pub destiny_user_info: UserInfoCard,
+    pub character_class: String,
+    pub class_hash: u32,
+    pub race_hash: u32,
+    pub gender_hash: u32,
+    pub character_level: i32,
+    pub light_level: i32,
+    pub bungie_net_user_info: UserInfoCard,
+    pub clan_name: String,
+    pub clan_tag: String,
+    pub emblem_hash: u32,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct DestinyPostGameCarnageReportExtendedData {
+    pub weapons: Vec<DestinyHistoricalWeaponStats>,
+    pub values: HashMap<String, DestinyHistoricalStatsValue>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DestinyHistoricalWeaponStats {
+    pub reference_id: u32,
+    pub values: HashMap<String, DestinyHistoricalStatsValue>,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DestinyPostGameCarnageReportTeamEntry {
+    pub team_id: i32,
+    pub standing: DestinyHistoricalStatsValue,
+    pub score: DestinyHistoricalStatsValue,
+    pub team_name: String,
+}
+
+#[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct DestinyHistoricalStatsPeriodGroup {
     pub period: DateTime<Utc>,
-
     pub activity_details: DestinyHistoricalStatsActivity,
-
     pub values: HashMap<String, DestinyHistoricalStatsValue>,
 }
 

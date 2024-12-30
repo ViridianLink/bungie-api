@@ -3,7 +3,9 @@ mod manifest;
 use url::Url;
 
 use crate::types::destiny::historical_stats::definitions::DestinyActivityModeType;
-use crate::types::destiny::historical_stats::DestinyActivityHistoryResults;
+use crate::types::destiny::historical_stats::{
+    DestinyActivityHistoryResults, DestinyPostGameCarnageReportData,
+};
 use crate::types::destiny::responses::DestinyProfileResponse;
 use crate::types::destiny::DestinyComponentType;
 use crate::types::user::UserInfoCard;
@@ -26,7 +28,7 @@ impl BungieClient {
         self.get_bungie_response::<Vec<UserInfoCard>>(url).await
     }
 
-    pub async fn get_profile(
+    pub async fn profile(
         &self,
         membership_type: BungieMembershipType,
         membership_id: u64,
@@ -53,7 +55,7 @@ impl BungieClient {
             .await
     }
 
-    pub async fn get_activity_history(
+    pub async fn activity_history(
         &self,
         membership_type: BungieMembershipType,
         membership_id: u64,
@@ -86,6 +88,18 @@ impl BungieClient {
         }
 
         self.get_bungie_response::<DestinyActivityHistoryResults>(url)
+            .await
+    }
+
+    pub async fn post_game_carnage_report(
+        &self,
+        activity_id: i64,
+    ) -> Result<DestinyPostGameCarnageReportData> {
+        let url = Url::parse(&format!(
+            "https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/{activity_id}/"
+        ))?;
+
+        self.get_bungie_response::<DestinyPostGameCarnageReportData>(url)
             .await
     }
 }
