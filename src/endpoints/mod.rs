@@ -93,7 +93,7 @@ impl BungieClient {
 
     pub async fn post_game_carnage_report(
         &self,
-        activity_id: i64,
+        activity_id: u64,
     ) -> Result<DestinyPostGameCarnageReportData> {
         let url = Url::parse(&format!(
             "https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/{activity_id}/"
