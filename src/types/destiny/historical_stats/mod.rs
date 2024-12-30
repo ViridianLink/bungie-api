@@ -42,7 +42,7 @@ pub struct DestinyPostGameCarnageReportEntry {
     pub player: DestinyPlayer,
     pub character_id: String,
     pub values: HashMap<String, DestinyHistoricalStatsValue>,
-    pub extended: DestinyPostGameCarnageReportExtendedData,
+    pub extended: Option<DestinyPostGameCarnageReportExtendedData>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
