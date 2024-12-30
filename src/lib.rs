@@ -56,7 +56,7 @@ mod tests {
             .parse()
             .unwrap();
 
-        let res = client
+        let activities = client
             .activity_history(
                 user_info.membership_type,
                 user_info.membership_id,
@@ -68,6 +68,11 @@ mod tests {
             .await
             .unwrap();
 
-        fs::write("output.json", serde_json::to_string_pretty(&res).unwrap()).unwrap();
+        let pgcr = client
+            .post_game_carnage_report(activities.activities[0].activity_details.instance_id)
+            .await
+            .unwrap();
+
+        fs::write("output.json", serde_json::to_string_pretty(&pgcr).unwrap()).unwrap();
     }
 }
