@@ -40,7 +40,7 @@ pub struct DestinyPostGameCarnageReportEntry {
     pub standing: i32,
     pub score: DestinyHistoricalStatsValue,
     pub player: DestinyPlayer,
-    pub character_id: i64,
+    pub character_id: String,
     pub values: HashMap<String, DestinyHistoricalStatsValue>,
     pub extended: DestinyPostGameCarnageReportExtendedData,
 }
@@ -48,7 +48,7 @@ pub struct DestinyPostGameCarnageReportEntry {
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DestinyHistoricalStatsValue {
-    pub stat_id: String,
+    pub stat_id: Option<String>,
     pub basic: DestinyHistoricalStatsValuePair,
     pub pga: Option<DestinyHistoricalStatsValuePair>,
     pub weighted: Option<DestinyHistoricalStatsValuePair>,
@@ -72,9 +72,9 @@ pub struct DestinyPlayer {
     pub gender_hash: u32,
     pub character_level: i32,
     pub light_level: i32,
-    pub bungie_net_user_info: UserInfoCard,
-    pub clan_name: String,
-    pub clan_tag: String,
+    pub bungie_net_user_info: Option<UserInfoCard>,
+    pub clan_name: Option<String>,
+    pub clan_tag: Option<String>,
     pub emblem_hash: u32,
 }
 
