@@ -80,6 +80,7 @@ pub struct DestinyPlayer {
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct DestinyPostGameCarnageReportExtendedData {
+    #[serde(default)]
     pub weapons: Vec<DestinyHistoricalWeaponStats>,
     pub values: HashMap<String, DestinyHistoricalStatsValue>,
 }
