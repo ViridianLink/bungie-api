@@ -12,7 +12,7 @@ reqwest = { version = "*", default-features = false, features = [
 serde = { version = "*", default-features = false, features = ["derive"] }
 url = { version = "*", default-features = false }
 chrono = { version = "*", default-features = false, features = ["serde"] }
+serde_json = { version = "*", default-features = false }
 
 [dev-dependencies]
 tokio = { version = "*", features = ["full"] }
-serde_json = { version = "*", default-features = false }
