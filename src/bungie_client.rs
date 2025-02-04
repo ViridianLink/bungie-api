@@ -2,7 +2,7 @@ use crate::{
     types::{exceptions::PlatformErrorCodes, response::BungieResponse},
     Error, Result,
 };
-use reqwest::{header::HeaderMap, Client, ClientBuilder, RequestBuilder, Response, Url};
+use reqwest::{header::HeaderMap, Client, ClientBuilder, IntoUrl, RequestBuilder, Response};
 use serde::de::DeserializeOwned;
 
 pub struct BungieClientBuilder {
@@ -28,36 +28,37 @@ pub struct BungieClient {
 impl BungieClient {
     pub fn new(api_key: String) -> Result<Self> {
         let mut default_headers = HeaderMap::new();
-        default_headers.insert("X-API-Key", api_key.parse()?);
+        default_headers.insert("X-API-Key", api_key.parse().unwrap());
 
         let client = ClientBuilder::new()
             .default_headers(default_headers)
-            .build()?;
+            .build()
+            .unwrap();
 
         Ok(BungieClient { client })
     }
 
-    pub async fn get<T>(&self, url: impl Into<Url>) -> Result<T>
-    where
-        T: DeserializeOwned,
-    {
-        let url = url.into();
-
+    pub async fn get<T: DeserializeOwned>(&self, url: impl IntoUrl) -> Result<T> {
         let reqwest = self.client.get(url);
         let response = Self::validate_content_type(reqwest).await?;
-        Ok(response.json::<T>().await?)
+        let text = response.text().await.unwrap();
+        match serde_json::from_str::<T>(&text) {
+            Ok(json) => Ok(json),
+            Err(e) => {
+                #[cfg(test)]
+                std::fs::write("error.json", text).unwrap();
+                Err(e.into())
+            }
+        }
     }
 
-    pub async fn get_bungie_response<T>(&self, url: impl Into<Url>) -> Result<T>
-    where
-        T: DeserializeOwned,
-    {
+    pub async fn get_bungie_response<T: DeserializeOwned>(&self, url: impl IntoUrl) -> Result<T> {
         let res = self.get::<BungieResponse<T>>(url).await?;
         Self::handle_bungie_response(res).await
     }
 
     async fn validate_content_type(reqwest: RequestBuilder) -> Result<Response> {
-        let response = reqwest.send().await?;
+        let response = reqwest.send().await.unwrap();
 
         if let Some(hv) = response.headers().get("Content-Type") {
             if !hv

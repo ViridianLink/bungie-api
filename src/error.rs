@@ -6,9 +6,7 @@ pub enum Error {
     NoResponse,
     Bungie(crate::types::exceptions::PlatformErrorCodes),
 
-    Reqwest(reqwest::Error),
-    InvalidHeaderValue(reqwest::header::InvalidHeaderValue),
-    UrlParse(url::ParseError),
+    SerdeJson(serde_json::Error),
 }
 
 impl std::fmt::Display for Error {
@@ -19,20 +17,8 @@ impl std::fmt::Display for Error {
 
 impl std::error::Error for Error {}
 
-impl From<reqwest::Error> for Error {
-    fn from(error: reqwest::Error) -> Self {
-        Error::Reqwest(error)
-    }
-}
-
-impl From<reqwest::header::InvalidHeaderValue> for Error {
-    fn from(error: reqwest::header::InvalidHeaderValue) -> Self {
-        Error::InvalidHeaderValue(error)
-    }
-}
-
-impl From<url::ParseError> for Error {
-    fn from(error: url::ParseError) -> Self {
-        Error::UrlParse(error)
+impl From<serde_json::Error> for Error {
+    fn from(e: serde_json::Error) -> Self {
+        Error::SerdeJson(e)
     }
 }
