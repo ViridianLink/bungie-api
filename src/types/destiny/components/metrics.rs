@@ -5,6 +5,7 @@ use crate::types::destiny::quests::DestinyObjectiveProgress;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyMetricsComponent {
     pub metrics: HashMap<u32, DestinyMetricComponent>,
     pub metrics_root_node_hash: u32,
@@ -12,6 +13,7 @@ pub struct DestinyMetricsComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyMetricComponent {
     pub invisible: bool,
     pub objective_progress: DestinyObjectiveProgress,

@@ -9,6 +9,7 @@ use crate::types::destiny::{
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyProfileProgressionComponent {
     pub checklists: HashMap<u32, HashMap<u32, bool>>,
     pub seasonal_artifact: DestinyArtifactProfileScoped,
@@ -16,6 +17,7 @@ pub struct DestinyProfileProgressionComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyProfileTransitoryComponent {
     pub party_members: Vec<DestinyProfileTransitoryPartyMember>,
     pub current_activity: DestinyProfileTransitoryCurrentActivity,
@@ -26,6 +28,7 @@ pub struct DestinyProfileTransitoryComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyProfileTransitoryPartyMember {
     pub membership_id: i64,
     pub emblem_hash: u32,
@@ -35,6 +38,7 @@ pub struct DestinyProfileTransitoryPartyMember {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyProfileTransitoryCurrentActivity {
     pub start_time: DateTime<Utc>,
     pub end_time: DateTime<Utc>,
@@ -46,6 +50,7 @@ pub struct DestinyProfileTransitoryCurrentActivity {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyProfileTransitoryJoinability {
     pub open_slots: i32,
     pub privacy_setting: DestinyGamePrivacySetting,
@@ -54,6 +59,7 @@ pub struct DestinyProfileTransitoryJoinability {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyProfileTransitoryTrackingEntry {
     pub location_hash: u32,
     pub item_hash: u32,

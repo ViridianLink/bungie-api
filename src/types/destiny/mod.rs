@@ -23,6 +23,7 @@ use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyProgression {
     pub progression_hash: u32,
     pub daily_progress: i32,
@@ -159,9 +160,10 @@ impl Serialize for DestinyProgressionStepDisplayEffect {
 
 #[derive(Debug, Clone, Copy, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemQuantity {
     pub item_hash: u32,
-    pub item_instance_id: i64,
+    pub item_instance_id: Option<i64>,
     pub quantity: i32,
     pub has_conditional_visibility: bool,
 }
@@ -578,6 +580,7 @@ impl Serialize for DestinyAmmunitionType {
 
 #[derive(Debug, Clone, Copy, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DyeReference {
     pub channel_hash: u32,
     pub dye_hash: u32,
@@ -1662,6 +1665,7 @@ impl Serialize for DestinyRace {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyActivity {
     pub activity_hash: u32,
     pub is_new: bool,
@@ -1725,6 +1729,7 @@ impl Serialize for DestinyActivityDifficultyTier {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyStat {
     pub stat_hash: u32,
     pub value: i32,
@@ -1765,6 +1770,7 @@ impl Serialize for EquipFailureReason {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyTalentNode {
     pub node_index: i32,
     pub node_hash: u32,
@@ -1830,6 +1836,7 @@ impl<'de> Deserialize<'de> for DestinyTalentNodeState {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyTalentNodeStatBlock {
     pub current_step_stats: Vec<DestinyStat>,
     pub next_step_stats: Vec<DestinyStat>,
@@ -1846,6 +1853,7 @@ impl Serialize for DestinyTalentNodeState {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyUnlockStatus {
     pub unlock_hash: u32,
     pub is_set: bool,

@@ -7,6 +7,7 @@ use crate::types::destiny::DestinyRecordState;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyRecordComponent {
     pub state: DestinyRecordState,
     pub objectives: Vec<DestinyObjectiveProgress>,
@@ -18,6 +19,7 @@ pub struct DestinyRecordComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyProfileRecordsComponent {
     pub score: i32,
     pub active_score: i32,
@@ -31,6 +33,7 @@ pub struct DestinyProfileRecordsComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyCharacterRecordsComponent {
     pub featured_record_hashes: Vec<u32>,
     pub records: HashMap<u32, DestinyRecordComponent>,

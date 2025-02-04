@@ -4,6 +4,7 @@ use super::DestinyProgression;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyArtifactProfileScoped {
     pub artifact_hash: u32,
     pub point_progression: DestinyProgression,
@@ -14,6 +15,7 @@ pub struct DestinyArtifactProfileScoped {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyArtifactCharacterScoped {
     pub artifact_hash: u32,
     pub points_used: i32,
@@ -23,6 +25,7 @@ pub struct DestinyArtifactCharacterScoped {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyArtifactTier {
     pub tier_hash: u32,
     pub is_unlocked: bool,
@@ -32,6 +35,7 @@ pub struct DestinyArtifactTier {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyArtifactTierItem {
     pub item_hash: u32,
     pub is_active: bool,

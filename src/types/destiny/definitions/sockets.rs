@@ -9,6 +9,7 @@ use super::DestinyItemSocketEntryPlugItemRandomizedDefinition;
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinySocketTypeDefinition {
     pub display_properties: DestinyDisplayPropertiesDefinition,
     pub insert_action: Option<DestinyInsertPlugActionDefinition>,
@@ -26,17 +27,22 @@ pub struct DestinySocketTypeDefinition {
     pub hash: u32,
     pub index: i32,
     pub redacted: bool,
+    pub blacklisted: bool,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyInsertPlugActionDefinition {
     pub action_execute_seconds: i32,
+    pub action_sound_hash: u32,
+    pub is_positive_action: bool,
     pub action_type: SocketTypeActionType,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyPlugWhitelistEntryDefinition {
     pub category_hash: u32,
     pub category_identifier: String,
@@ -46,6 +52,7 @@ pub struct DestinyPlugWhitelistEntryDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinySocketTypeScalarMaterialRequirementEntry {
     pub currency_item_hash: u32,
     pub scalar_value: i32,
@@ -53,6 +60,7 @@ pub struct DestinySocketTypeScalarMaterialRequirementEntry {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinySocketCategoryDefinition {
     pub display_properties: DestinyDisplayPropertiesDefinition,
     pub ui_category_style: u32,
@@ -60,10 +68,12 @@ pub struct DestinySocketCategoryDefinition {
     pub hash: u32,
     pub index: i32,
     pub redacted: bool,
+    pub blacklisted: bool,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyPlugSetDefinition {
     pub display_properties: Option<DestinyDisplayPropertiesDefinition>,
     #[serde(default)]
@@ -72,4 +82,5 @@ pub struct DestinyPlugSetDefinition {
     pub hash: u32,
     pub index: i32,
     pub redacted: bool,
+    pub blacklisted: bool,
 }

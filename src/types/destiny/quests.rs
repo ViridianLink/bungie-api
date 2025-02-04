@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyObjectiveProgress {
     pub objective_hash: u32,
     pub destination_hash: u32,
@@ -14,6 +15,7 @@ pub struct DestinyObjectiveProgress {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyQuestStatus {
     pub quest_hash: u32,
     pub step_hash: u32,

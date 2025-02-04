@@ -12,12 +12,14 @@ pub struct DestinyItemReusablePlugsComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemPlugObjectivesComponent {
     pub objectives_per_plug: HashMap<u32, Vec<DestinyObjectiveProgress>>,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemPlugComponent {
     pub plug_objectives: Vec<DestinyObjectiveProgress>,
     pub plug_item_hash: u32,

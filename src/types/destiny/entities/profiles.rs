@@ -12,6 +12,7 @@ pub struct DestinyVendorReceiptsComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyProfileComponent {
     pub user_info: UserInfoCard,
     pub date_last_played: DateTime<Utc>,

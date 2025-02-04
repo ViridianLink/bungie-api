@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyManifest {
     pub version: String,
     pub mobile_asset_content_path: String,

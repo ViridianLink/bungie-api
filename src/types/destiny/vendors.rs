@@ -5,6 +5,7 @@ use super::{DestinyItemQuantity, DestinyVendorItemRefundPolicy};
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyVendorReceipt {
     pub currency_paid: Vec<DestinyItemQuantity>,
     pub item_received: DestinyItemQuantity,

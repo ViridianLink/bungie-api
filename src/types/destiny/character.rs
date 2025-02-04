@@ -4,6 +4,7 @@ use super::DyeReference;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyCharacterCustomization {
     pub personality: u32,
     pub face: u32,
@@ -26,6 +27,7 @@ pub struct DestinyCharacterPeerView {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemPeerView {
     pub item_hash: u32,
     pub dyes: Vec<DyeReference>,

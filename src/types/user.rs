@@ -6,6 +6,7 @@ use super::BungieMembershipType;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct UserInfoCard {
     pub supplemental_display_name: Option<String>,
     pub icon_path: Option<String>,

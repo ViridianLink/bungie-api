@@ -4,6 +4,7 @@ use super::{DestinyProgressionResetEntry, DestinyProgressionRewardItemState};
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyFactionProgression {
     pub faction_hash: u32,
     pub faction_vendor_index: i32,

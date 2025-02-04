@@ -4,6 +4,7 @@ use super::quests::DestinyObjectiveProgress;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemPlugBase {
     pub plug_item_hash: u32,
     pub can_insert: bool,
@@ -14,6 +15,7 @@ pub struct DestinyItemPlugBase {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemPlug {
     pub plug_objectives: Vec<DestinyObjectiveProgress>,
     pub plug_item_hash: u32,

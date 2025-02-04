@@ -13,6 +13,7 @@ use crate::types::ItemLocation;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemComponent {
     pub item_hash: u32,
     pub item_instance_id: i64,
@@ -40,6 +41,7 @@ pub struct DestinyItemPerksComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemObjectivesComponent {
     pub objectives: Vec<DestinyObjectiveProgress>,
     pub flavor_objective: DestinyObjectiveProgress,
@@ -48,6 +50,7 @@ pub struct DestinyItemObjectivesComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemInstanceComponent {
     pub damage_type: DamageType,
     pub damage_type_hash: u32,
@@ -66,6 +69,7 @@ pub struct DestinyItemInstanceComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemInstanceEnergy {
     pub energy_type_hash: u32,
     pub energy_type: DestinyEnergyType,
@@ -76,6 +80,7 @@ pub struct DestinyItemInstanceEnergy {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemRenderComponent {
     pub use_custom_dyes: bool,
     pub art_regions: HashMap<i32, i32>,
@@ -93,6 +98,7 @@ pub struct DestinyItemSocketsComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemSocketState {
     pub plug_hash: u32,
     pub is_enabled: bool,
@@ -102,6 +108,7 @@ pub struct DestinyItemSocketState {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemTalentGridComponent {
     pub talent_grid_hash: u32,
     pub nodes: Vec<DestinyTalentNode>,

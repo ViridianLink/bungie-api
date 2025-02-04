@@ -18,6 +18,7 @@ use super::items::DestinyItemPerksComponent;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyCharacterComponent {
     pub membership_id: i64,
     pub membership_type: BungieMembershipType,
@@ -45,6 +46,7 @@ pub struct DestinyCharacterComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyCharacterProgressionComponent {
     pub progressions: HashMap<u32, DestinyProgression>,
     pub factions: HashMap<u32, DestinyFactionProgression>,
@@ -58,6 +60,7 @@ pub struct DestinyCharacterProgressionComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyCharacterRenderComponent {
     pub custom_dyes: Vec<DyeReference>,
     pub customization: DestinyCharacterCustomization,
@@ -66,6 +69,7 @@ pub struct DestinyCharacterRenderComponent {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyCharacterActivitiesComponent {
     pub date_activity_started: DateTime<Utc>,
     pub available_activities: Vec<DestinyActivity>,

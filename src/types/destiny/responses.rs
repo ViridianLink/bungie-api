@@ -33,6 +33,7 @@ use super::entities::profiles::{DestinyProfileComponent, DestinyVendorReceiptsCo
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyProfileResponse {
     pub response_minted_timestamp: DateTime<Utc>,
     pub secondary_components_minted_timestamp: DateTime<Utc>,

@@ -82,6 +82,7 @@ pub struct DestinyBaseItemComponentSetOfuint32 {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyItemComponentSetOfint64 {
     pub instances: ComponentResponse<HashMap<i64, DestinyItemInstanceComponent>>,
     pub render_data: ComponentResponse<HashMap<i64, DestinyItemRenderComponent>>,

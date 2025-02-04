@@ -12,6 +12,7 @@ pub mod definitions;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyPostGameCarnageReportData {
     pub period: DateTime<Utc>,
     pub starting_phase_index: i32,
@@ -23,6 +24,7 @@ pub struct DestinyPostGameCarnageReportData {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyHistoricalStatsActivity {
     pub reference_id: u32,
     pub director_activity_hash: u32,
@@ -36,6 +38,7 @@ pub struct DestinyHistoricalStatsActivity {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyPostGameCarnageReportEntry {
     pub standing: i32,
     pub score: DestinyHistoricalStatsValue,
@@ -47,6 +50,7 @@ pub struct DestinyPostGameCarnageReportEntry {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyHistoricalStatsValue {
     pub stat_id: Option<String>,
     pub basic: DestinyHistoricalStatsValuePair,
@@ -57,6 +61,7 @@ pub struct DestinyHistoricalStatsValue {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyHistoricalStatsValuePair {
     pub value: f64,
     pub display_value: String,
@@ -64,6 +69,7 @@ pub struct DestinyHistoricalStatsValuePair {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyPlayer {
     pub destiny_user_info: UserInfoCard,
     pub character_class: Option<String>,
@@ -87,6 +93,7 @@ pub struct DestinyPostGameCarnageReportExtendedData {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyHistoricalWeaponStats {
     pub reference_id: u32,
     pub values: HashMap<String, DestinyHistoricalStatsValue>,
@@ -94,6 +101,7 @@ pub struct DestinyHistoricalWeaponStats {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyPostGameCarnageReportTeamEntry {
     pub team_id: i32,
     pub standing: DestinyHistoricalStatsValue,
@@ -103,6 +111,7 @@ pub struct DestinyPostGameCarnageReportTeamEntry {
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinyHistoricalStatsPeriodGroup {
     pub period: DateTime<Utc>,
     pub activity_details: DestinyHistoricalStatsActivity,

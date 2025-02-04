@@ -6,6 +6,7 @@ use super::exceptions::PlatformErrorCodes;
 
 #[derive(Deserialize, Serialize)]
 #[serde(rename_all = "PascalCase")]
+#[serde(deny_unknown_fields)]
 pub struct BungieResponse<T> {
     pub response: T,
     pub error_code: PlatformErrorCodes,

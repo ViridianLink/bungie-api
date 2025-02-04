@@ -3,6 +3,7 @@ use std::collections::HashMap;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
+#[serde(deny_unknown_fields)]
 pub struct DestinySocialCommendationsComponent {
     pub total_score: i32,
     pub score_detail_values: Vec<i32>,
