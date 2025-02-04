@@ -19,7 +19,7 @@ impl BungieClient {
         discriminator: u16,
     ) -> Result<Vec<UserInfoCard>> {
         let mut url =
-            Url::parse("https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/")?;
+            Url::parse("https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/").unwrap();
 
         url.path_segments_mut()
             .expect("Cannot set path segments")
@@ -34,7 +34,7 @@ impl BungieClient {
         membership_id: u64,
         components: &[DestinyComponentType],
     ) -> Result<DestinyProfileResponse> {
-        let mut url = Url::parse("https://www.bungie.net/Platform/Destiny2/")?;
+        let mut url = Url::parse("https://www.bungie.net/Platform/Destiny2/").unwrap();
 
         url.path_segments_mut()
             .expect("Cannot set path segments")
@@ -64,7 +64,7 @@ impl BungieClient {
         mode: Option<DestinyActivityModeType>,
         page: u32,
     ) -> Result<DestinyActivityHistoryResults> {
-        let mut url = Url::parse("https://www.bungie.net/Platform/Destiny2/")?;
+        let mut url = Url::parse("https://www.bungie.net/Platform/Destiny2/").unwrap();
 
         url.path_segments_mut()
             .expect("Cannot set path segments")
@@ -97,7 +97,8 @@ impl BungieClient {
     ) -> Result<DestinyPostGameCarnageReportData> {
         let url = Url::parse(&format!(
             "https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/{activity_id}/"
-        ))?;
+        ))
+        .unwrap();
 
         self.get_bungie_response::<DestinyPostGameCarnageReportData>(url)
             .await
