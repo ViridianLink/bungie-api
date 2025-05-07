@@ -2,7 +2,7 @@ use crate::{
     types::{exceptions::PlatformErrorCodes, response::BungieResponse},
     Error, Result,
 };
-use reqwest::{header::HeaderMap, Client, ClientBuilder, IntoUrl, RequestBuilder, Response};
+use reqwest::{header::HeaderMap, Client, ClientBuilder, IntoUrl, Response};
 use serde::de::DeserializeOwned;
 
 pub struct BungieClientBuilder {
@@ -40,8 +40,11 @@ impl BungieClient {
 
     pub async fn get<T: DeserializeOwned>(&self, url: impl IntoUrl) -> Result<T> {
         let reqwest = self.client.get(url);
-        let response = Self::validate_content_type(reqwest).await?;
-        let text = response.text().await.unwrap();
+        let mut res = reqwest.send().await.unwrap();
+        res = Self::validate_status(res)?;
+        res = Self::validate_content_type(res)?;
+        let text = res.text().await.unwrap();
+        println!("{}", text);
         match serde_json::from_str::<T>(&text) {
             Ok(json) => Ok(json),
             Err(e) => {
@@ -57,9 +60,23 @@ impl BungieClient {
         Self::handle_bungie_response(res).await
     }
 
-    async fn validate_content_type(reqwest: RequestBuilder) -> Result<Response> {
-        let response = reqwest.send().await.unwrap();
+    fn validate_status(response: Response) -> Result<Response> {
+        match response.status().as_u16() {
+            // Information
+            100..200 => Ok(response),
+            // Success
+            200..300 => Ok(response),
+            // Redirection
+            300..400 => Ok(response),
+            // Client Error
+            400..500 => Err(Error::ClientError(response)),
+            // Server Error
+            500..600 => Err(Error::ServerError(response)),
+            _ => Ok(response),
+        }
+    }
 
+    fn validate_content_type(response: Response) -> Result<Response> {
         if let Some(hv) = response.headers().get("Content-Type") {
             if !hv
                 .to_str()

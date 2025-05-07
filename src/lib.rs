@@ -24,10 +24,6 @@ pub type DestinySocketTypeManifest = HashMap<String, DestinySocketTypeDefinition
 #[cfg(test)]
 mod tests {
 
-    use std::fs;
-
-    use crate::types::destiny::historical_stats::definitions::DestinyActivityModeType;
-    use crate::types::destiny::DestinyComponentType;
     use crate::BungieClientBuilder;
 
     const BUNGIE_API_KEY: &str = "";
@@ -36,43 +32,20 @@ mod tests {
     async fn run() {
         let client = BungieClientBuilder::new(BUNGIE_API_KEY).build().unwrap();
 
-        let user_info = client
-            .search_destiny_player("OscarSix", 7797)
-            .await
-            .unwrap()
-            .pop()
-            .unwrap();
-
-        let profle_response = client
-            .profile(
-                user_info.membership_type,
-                user_info.membership_id,
-                &[DestinyComponentType::Profiles],
-            )
+        let manifest = client.destiny_manifest().await.unwrap();
+        client
+            .destiny_inventory_item_definition(&manifest, "en")
             .await
             .unwrap();
-
-        let character_id = profle_response.profile.unwrap().data.character_ids[0]
-            .parse()
-            .unwrap();
-
-        let activities = client
-            .activity_history(
-                user_info.membership_type,
-                user_info.membership_id,
-                character_id,
-                None,
-                Some(DestinyActivityModeType::Raid),
-                None,
-            )
+        client
+            .destiny_socket_type_definition(&manifest, "en")
             .await
             .unwrap();
-
-        let pgcr = client
-            .post_game_carnage_report(activities.activities[0].activity_details.instance_id)
+        client
+            .destiny_socket_category_definition(&manifest, "en")
             .await
             .unwrap();
-
-        fs::write("output.json", serde_json::to_string_pretty(&pgcr).unwrap()).unwrap();
+        client.destiny_plug_set_definition(&manifest, "en").await
+        //     .unwrap();
     }
 }
