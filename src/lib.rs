@@ -45,7 +45,9 @@ mod tests {
             .destiny_socket_category_definition(&manifest, "en")
             .await
             .unwrap();
-        client.destiny_plug_set_definition(&manifest, "en").await
-        //     .unwrap();
+        client
+            .destiny_plug_set_definition(&manifest, "en")
+            .await
+            .unwrap();
     }
 }
