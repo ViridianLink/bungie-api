@@ -54,7 +54,6 @@ impl BungieClient {
         res = Self::validate_status(res)?;
         res = Self::validate_content_type(res)?;
         let text = res.text().await.unwrap();
-        println!("{}", text);
         match serde_json::from_str::<T>(&text) {
             Ok(json) => Ok(json),
             Err(e) => {
