@@ -2,7 +2,10 @@ use crate::{
     types::{exceptions::PlatformErrorCodes, response::BungieResponse},
     Error, Result,
 };
-use reqwest::{header::HeaderMap, Client, ClientBuilder, IntoUrl, Response};
+use reqwest::{
+    header::{self, HeaderMap},
+    Client, ClientBuilder, IntoUrl, Response,
+};
 use serde::de::DeserializeOwned;
 
 pub struct BungieClientBuilder {
@@ -27,8 +30,15 @@ pub struct BungieClient {
 
 impl BungieClient {
     pub fn new(api_key: String) -> Result<Self> {
+        const NAME: &str = env!("CARGO_PKG_NAME");
+        const VERSION: &str = env!("CARGO_PKG_VERSION");
+
         let mut default_headers = HeaderMap::new();
         default_headers.insert("X-API-Key", api_key.parse().unwrap());
+        default_headers.insert(
+            header::USER_AGENT,
+            format!("{NAME}/{VERSION}").parse().unwrap(),
+        );
 
         let client = ClientBuilder::new()
             .default_headers(default_headers)
