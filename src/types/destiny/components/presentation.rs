@@ -1,8 +1,8 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-use crate::types::destiny::quests::DestinyObjectiveProgress;
 use crate::types::destiny::DestinyPresentationNodeState;
+use crate::types::destiny::quests::DestinyObjectiveProgress;
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct DestinyPresentationNodesComponent {

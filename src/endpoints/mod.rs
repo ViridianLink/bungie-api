@@ -2,14 +2,14 @@ mod manifest;
 
 use url::Url;
 
+use crate::types::BungieMembershipType;
+use crate::types::destiny::DestinyComponentType;
 use crate::types::destiny::historical_stats::definitions::DestinyActivityModeType;
 use crate::types::destiny::historical_stats::{
     DestinyActivityHistoryResults, DestinyPostGameCarnageReportData,
 };
 use crate::types::destiny::responses::DestinyProfileResponse;
-use crate::types::destiny::DestinyComponentType;
 use crate::types::user::UserInfoCard;
-use crate::types::BungieMembershipType;
 use crate::{BungieClient, Result};
 
 impl BungieClient {
@@ -23,7 +23,7 @@ impl BungieClient {
 
         url.path_segments_mut()
             .expect("Cannot set path segments")
-            .push(format!("{}#{}", username, discriminator).as_str());
+            .push(format!("{username}#{discriminator}").as_str());
 
         self.get_bungie_response::<Vec<UserInfoCard>>(url).await
     }

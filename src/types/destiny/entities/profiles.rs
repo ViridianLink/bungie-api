@@ -1,8 +1,8 @@
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
-use crate::types::destiny::vendors::DestinyVendorReceipt;
 use crate::types::destiny::DestinyGameVersions;
+use crate::types::destiny::vendors::DestinyVendorReceipt;
 use crate::types::user::UserInfoCard;
 
 #[derive(Debug, Deserialize, Serialize)]

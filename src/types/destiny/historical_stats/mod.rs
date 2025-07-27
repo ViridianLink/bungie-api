@@ -5,8 +5,8 @@ use definitions::DestinyActivityModeType;
 use serde::{Deserialize, Serialize};
 
 use crate::serde_as::string_to_u64;
-use crate::types::user::UserInfoCard;
 use crate::types::BungieMembershipType;
+use crate::types::user::UserInfoCard;
 
 pub mod definitions;
 

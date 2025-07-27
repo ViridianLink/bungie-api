@@ -27,8 +27,7 @@ impl<'de> Deserialize<'de> for ComponentPrivacySetting {
             1 => Ok(ComponentPrivacySetting::Public),
             2 => Ok(ComponentPrivacySetting::Private),
             _ => Err(serde::de::Error::custom(format!(
-                "unknown ComponentPrivacySetting: {}",
-                s
+                "unknown ComponentPrivacySetting: {s}"
             ))),
         }
     }

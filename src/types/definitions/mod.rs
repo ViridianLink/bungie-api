@@ -29,10 +29,12 @@ pub struct DestinyInventoryItemDefinition {
     pub collectible_hash: Option<u32>,
     pub icon_watermark: Option<String>,
     pub icon_watermark_shelved: Option<String>,
+    pub icon_watermark_featured: Option<String>,
     pub secondary_icon: Option<String>,
     pub secondary_overlay: Option<String>,
     pub secondary_special: Option<String>,
     pub background_color: Option<DestinyColor>,
+    pub is_featured_item: bool,
     pub screenshot: Option<String>,
     pub item_type_display_name: Option<String>,
     pub flavor_text: Option<String>,
@@ -249,6 +251,7 @@ pub struct DestinyEquippingBlockDefinition {
     pub horn_sound_hash: u32,
     pub ammo_type: DestinyAmmunitionType,
     pub display_strings: Vec<String>,
+    pub equipable_item_set_hash: Option<u32>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]

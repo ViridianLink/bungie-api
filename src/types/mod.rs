@@ -57,8 +57,7 @@ impl<'de> Deserialize<'de> for BungieMembershipType {
             254 => Ok(BungieMembershipType::BungieNext),
             -1 => Ok(BungieMembershipType::All),
             _ => Err(serde::de::Error::custom(format!(
-                "unknown BungieMembershipType: {}",
-                s
+                "unknown BungieMembershipType: {s}"
             ))),
         }
     }
@@ -121,7 +120,7 @@ impl<'de> Deserialize<'de> for TierType {
             4 => Ok(TierType::Rare),
             5 => Ok(TierType::Superior),
             6 => Ok(TierType::Exotic),
-            _ => Err(serde::de::Error::custom(format!("unknown TierType: {}", s))),
+            _ => Err(serde::de::Error::custom(format!("unknown TierType: {s}"))),
         }
     }
 }
@@ -166,8 +165,7 @@ impl<'de> Deserialize<'de> for ItemLocation {
             3 => Ok(ItemLocation::Vendor),
             4 => Ok(ItemLocation::Postmaster),
             _ => Err(serde::de::Error::custom(format!(
-                "unknown ItemLocation: {}",
-                s
+                "unknown ItemLocation: {s}"
             ))),
         }
     }

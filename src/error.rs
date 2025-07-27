@@ -4,8 +4,8 @@ pub type Result<T> = std::result::Result<T, Error>;
 pub enum Error {
     InvalidContentType(reqwest::header::HeaderValue),
     NoResponse,
-    ClientError(reqwest::Response),
-    ServerError(reqwest::Response),
+    ClientError(Box<reqwest::Response>),
+    ServerError(Box<reqwest::Response>),
     Bungie(crate::types::exceptions::PlatformErrorCodes),
 
     SerdeJson(serde_json::Error),

@@ -2,8 +2,8 @@ use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
 
-use crate::types::destiny::quests::DestinyObjectiveProgress;
 use crate::types::destiny::DestinyRecordState;
+use crate::types::destiny::quests::DestinyObjectiveProgress;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]

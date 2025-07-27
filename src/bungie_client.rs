@@ -1,12 +1,9 @@
-use crate::{
-    types::{exceptions::PlatformErrorCodes, response::BungieResponse},
-    Error, Result,
-};
-use reqwest::{
-    header::{self, HeaderMap},
-    Client, ClientBuilder, IntoUrl, Response,
-};
+use reqwest::header::HeaderMap;
+use reqwest::{Client, ClientBuilder, IntoUrl, Response, header};
 use serde::de::DeserializeOwned;
+
+use crate::types::{exceptions::PlatformErrorCodes, response::BungieResponse};
+use crate::{Error, Result};
 
 pub struct BungieClientBuilder {
     api_key: String,
@@ -78,32 +75,32 @@ impl BungieClient {
             // Redirection
             300..400 => Ok(response),
             // Client Error
-            400..500 => Err(Error::ClientError(response)),
+            400..500 => Err(Error::ClientError(Box::new(response))),
             // Server Error
-            500..600 => Err(Error::ServerError(response)),
+            500..600 => Err(Error::ServerError(Box::new(response))),
             _ => Ok(response),
         }
     }
 
     fn validate_content_type(response: Response) -> Result<Response> {
-        if let Some(hv) = response.headers().get("Content-Type") {
-            if !hv
+        if let Some(hv) = response.headers().get("Content-Type")
+            && !hv
                 .to_str()
                 .map(|s| s.starts_with("application/json"))
                 .unwrap_or(false)
-            {
-                return Err(Error::InvalidContentType(hv.to_owned()));
-            }
+        {
+            return Err(Error::InvalidContentType(hv.to_owned()));
         }
 
         Ok(response)
     }
 
     pub async fn handle_bungie_response<T>(de: BungieResponse<T>) -> Result<T> {
+        #[allow(unreachable_patterns)]
         match de.error_code {
             PlatformErrorCodes::Success => Ok(de.response),
             PlatformErrorCodes::Unknown(code) => {
-                println!("Error Code: {}", code);
+                println!("Error Code: {code}");
                 Err(Error::Bungie(PlatformErrorCodes::Unknown(code)))
             }
             code => Err(Error::Bungie(code)),

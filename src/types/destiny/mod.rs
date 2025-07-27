@@ -107,8 +107,7 @@ impl<'de> Deserialize<'de> for DestinyProgressionScope {
             7 => Ok(DestinyProgressionScope::MappedStat),
             8 => Ok(DestinyProgressionScope::MappedUnlockValue),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyProgressionScope variant: {}",
-                s
+                "Unknown DestinyProgressionScope variant: {s}"
             ))),
         }
     }
@@ -142,8 +141,7 @@ impl<'de> Deserialize<'de> for DestinyProgressionStepDisplayEffect {
             1 => Ok(DestinyProgressionStepDisplayEffect::Character),
             2 => Ok(DestinyProgressionStepDisplayEffect::Item),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyProgressionStepDisplayEffect variant: {}",
-                s
+                "Unknown DestinyProgressionStepDisplayEffect variant: {s}"
             ))),
         }
     }
@@ -187,8 +185,7 @@ impl<'de> Deserialize<'de> for SocketTypeActionType {
             1 => Ok(SocketTypeActionType::InfuseItem),
             2 => Ok(SocketTypeActionType::ReinitializeSocket),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown SocketTypeActionType variant: {}",
-                s
+                "Unknown SocketTypeActionType variant: {s}"
             ))),
         }
     }
@@ -224,8 +221,7 @@ impl<'de> Deserialize<'de> for DestinySocketVisibility {
             2 => Ok(DestinySocketVisibility::HiddenWhenEmpty),
             3 => Ok(DestinySocketVisibility::HiddenIfNoPlugsAvailable),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinySocketVisibility variant: {}",
-                s
+                "Unknown DestinySocketVisibility variant: {s}"
             ))),
         }
     }
@@ -271,8 +267,7 @@ impl<'de> Deserialize<'de> for DestinySocketCategoryStyle {
             7 => Ok(DestinySocketCategoryStyle::Abilities),
             8 => Ok(DestinySocketCategoryStyle::Supers),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinySocketCategoryStyle variant: {}",
-                s
+                "Unknown DestinySocketCategoryStyle variant: {s}"
             ))),
         }
     }
@@ -314,8 +309,7 @@ impl<'de> Deserialize<'de> for TierType {
             5 => Ok(TierType::Superior),
             6 => Ok(TierType::Exotic),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown TierType variant: {}",
-                s
+                "Unknown TierType variant: {s}"
             ))),
         }
     }
@@ -347,8 +341,7 @@ impl<'de> Deserialize<'de> for BucketScope {
             0 => Ok(BucketScope::Character),
             1 => Ok(BucketScope::Account),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown BucketScope variant: {}",
-                s
+                "Unknown BucketScope variant: {s}"
             ))),
         }
     }
@@ -386,8 +379,7 @@ impl<'de> Deserialize<'de> for BucketCategory {
             3 => Ok(BucketCategory::Equippable),
             4 => Ok(BucketCategory::Ignored),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown BucketCategory variant: {}",
-                s
+                "Unknown BucketCategory variant: {s}"
             ))),
         }
     }
@@ -425,8 +417,7 @@ impl<'de> Deserialize<'de> for ItemLocation {
             3 => Ok(ItemLocation::Vendor),
             4 => Ok(ItemLocation::Postmaster),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown ItemLocation variant: {}",
-                s
+                "Unknown ItemLocation variant: {s}"
             ))),
         }
     }
@@ -460,8 +451,7 @@ impl<'de> Deserialize<'de> for DestinyStatAggregationType {
             1 => Ok(DestinyStatAggregationType::Character),
             2 => Ok(DestinyStatAggregationType::Item),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyStatAggregationType variant: {}",
-                s
+                "Unknown DestinyStatAggregationType variant: {s}"
             ))),
         }
     }
@@ -497,8 +487,7 @@ impl<'de> Deserialize<'de> for DestinyStatCategory {
             2 => Ok(DestinyStatCategory::Defense),
             3 => Ok(DestinyStatCategory::Primary),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyStatCategory variant: {}",
-                s
+                "Unknown DestinyStatCategory variant: {s}"
             ))),
         }
     }
@@ -562,8 +551,7 @@ impl<'de> Deserialize<'de> for DestinyAmmunitionType {
             3 => Ok(DestinyAmmunitionType::Heavy),
             4 => Ok(DestinyAmmunitionType::Unknown),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyAmmunitionType variant: {}",
-                s
+                "Unknown DestinyAmmunitionType variant: {s}"
             ))),
         }
     }
@@ -607,8 +595,7 @@ impl<'de> Deserialize<'de> for DestinyClass {
             2 => Ok(DestinyClass::Warlock),
             3 => Ok(DestinyClass::Unknown),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyClass variant: {}",
-                s
+                "Unknown DestinyClass variant: {s}",
             ))),
         }
     }
@@ -642,8 +629,7 @@ impl<'de> Deserialize<'de> for DestinyGender {
             1 => Ok(DestinyGender::Female),
             2 => Ok(DestinyGender::Unknown),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyGender variant: {}",
-                s
+                "Unknown DestinyGender variant: {s}"
             ))),
         }
     }
@@ -677,8 +663,7 @@ impl<'de> Deserialize<'de> for DestinyVendorItemRefundPolicy {
             1 => Ok(DestinyVendorItemRefundPolicy::DeletesItem),
             2 => Ok(DestinyVendorItemRefundPolicy::RevokesLicense),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyVendorItemRefundPolicy variant: {}",
-                s
+                "Unknown DestinyVendorItemRefundPolicy variant: {s}"
             ))),
         }
     }
@@ -722,8 +707,7 @@ impl<'de> Deserialize<'de> for DamageType {
             6 => Ok(DamageType::Stasis),
             7 => Ok(DamageType::Strand),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DamageType variant: {}",
-                s
+                "Unknown DamageType variant: {s}"
             ))),
         }
     }
@@ -813,8 +797,7 @@ impl<'de> Deserialize<'de> for DestinyItemSubType {
             32 => Ok(DestinyItemSubType::DummyRepeatableBounty),
             33 => Ok(DestinyItemSubType::Glaive),
             _ => Err(serde::de::Error::custom(format!(
-                "Could not deserialize u8 '{}' to DestinyItemSubType",
-                s
+                "Could not deserialize u8 '{s}' to DestinyItemSubType"
             ))),
         }
     }
@@ -874,8 +857,7 @@ impl<'de> Deserialize<'de> for PlugAvailabilityMode {
             1 => Ok(PlugAvailabilityMode::UnavailableIfSocketContainsMatchingPlugCategory),
             2 => Ok(PlugAvailabilityMode::AvailableIfSocketContainsMatchingPlugCategory),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown PlugAvailabilityMode: {}",
-                s
+                "Unknown PlugAvailabilityMode: {s}"
             ))),
         }
     }
@@ -917,8 +899,7 @@ impl<'de> Deserialize<'de> for DestinyEnergyType {
             5 => Ok(DestinyEnergyType::Subclass),
             6 => Ok(DestinyEnergyType::Stasis),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyEnergyType: {}",
-                s
+                "Unknown DestinyEnergyType: {s}"
             ))),
         }
     }
@@ -981,8 +962,7 @@ impl<'de> Deserialize<'de> for ItemPerkVisibility {
             1 => Ok(ItemPerkVisibility::Disabled),
             2 => Ok(ItemPerkVisibility::Hidden),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown ItemPerkVisibility: {}",
-                s
+                "Unknown ItemPerkVisibility: {s}"
             ))),
         }
     }
@@ -1028,8 +1008,7 @@ impl<'de> Deserialize<'de> for SpecialItemType {
             27 => Ok(SpecialItemType::MissionReward),
             29 => Ok(SpecialItemType::Currency),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown SpecialItemType: {}",
-                s
+                "Unknown SpecialItemType: {s}"
             ))),
         }
     }
@@ -1113,8 +1092,7 @@ impl<'de> Deserialize<'de> for DestinyItemType {
             29 => Ok(DestinyItemType::Finisher),
             30 => Ok(DestinyItemType::Pattern),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyItemType: {}",
-                s
+                "Unknown DestinyItemType: {s}"
             ))),
         }
     }
@@ -1150,8 +1128,7 @@ impl<'de> Deserialize<'de> for DestinyBreakerType {
             2 => Ok(DestinyBreakerType::Disruption),
             3 => Ok(DestinyBreakerType::Stagger),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyBreakerType: {}",
-                s
+                "Unknown DestinyBreakerType: {s}"
             ))),
         }
     }
@@ -1185,8 +1162,7 @@ impl<'de> Deserialize<'de> for DestinyProgressionRewardItemAcquisitionBehavior {
             0 => Ok(DestinyProgressionRewardItemAcquisitionBehavior::Instant),
             1 => Ok(DestinyProgressionRewardItemAcquisitionBehavior::PlayerClaimRequired),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyProgressionRewardItemAcquisitionBehavior: {}",
-                s
+                "Unknown DestinyProgressionRewardItemAcquisitionBehavior: {s}"
             ))),
         }
     }
@@ -1222,8 +1198,7 @@ impl<'de> Deserialize<'de> for ItemBindStatus {
             2 => Ok(ItemBindStatus::BoundToAccount),
             3 => Ok(ItemBindStatus::BoundToGuild),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown ItemBindStatus: {}",
-                s
+                "Unknown ItemBindStatus: {s}"
             ))),
         }
     }
@@ -1420,8 +1395,7 @@ impl<'de> Deserialize<'de> for DestinyComponentType {
             1300 => Ok(DestinyComponentType::Craftables),
             1400 => Ok(DestinyComponentType::SocialCommendations),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyComponentType: {}",
-                s
+                "Unknown DestinyComponentType: {s}"
             ))),
         }
     }
@@ -1579,8 +1553,7 @@ impl<'de> Deserialize<'de> for DestinyGamePrivacySetting {
             3 => Ok(DestinyGamePrivacySetting::InvitationOnly),
             4 => Ok(DestinyGamePrivacySetting::Closed),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyGamePrivacySetting: {}",
-                s
+                "Unknown DestinyGamePrivacySetting: {s}"
             ))),
         }
     }
@@ -1647,8 +1620,7 @@ impl<'de> Deserialize<'de> for DestinyRace {
             2 => Ok(DestinyRace::Exo),
             3 => Ok(DestinyRace::Unknown),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyRace: {}",
-                s
+                "Unknown DestinyRace: {s}"
             ))),
         }
     }
@@ -1711,8 +1683,7 @@ impl<'de> Deserialize<'de> for DestinyActivityDifficultyTier {
             6 => Ok(DestinyActivityDifficultyTier::AlmostImpossible),
             7 => Ok(DestinyActivityDifficultyTier::Impossible),
             _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyActivityDifficultyTier: {}",
-                s
+                "Unknown DestinyActivityDifficultyTier: {s}"
             ))),
         }
     }
@@ -1826,9 +1797,8 @@ impl<'de> Deserialize<'de> for DestinyTalentNodeState {
             13 => DestinyTalentNodeState::Hidden,
             _ => {
                 return Err(serde::de::Error::custom(format!(
-                    "Unknown DestinyTalentNodeState: {}",
-                    s
-                )))
+                    "Unknown DestinyTalentNodeState: {s}"
+                )));
             }
         })
     }

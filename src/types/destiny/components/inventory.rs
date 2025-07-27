@@ -1,8 +1,8 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
-use crate::types::destiny::entities::items::DestinyItemComponent;
 use crate::types::BungieMembershipType;
+use crate::types::destiny::entities::items::DestinyItemComponent;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]

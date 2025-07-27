@@ -181,8 +181,7 @@ impl<'de> Deserialize<'de> for DestinyActivityModeType {
             90 => Ok(DestinyActivityModeType::IronBannerRift),
             91 => Ok(DestinyActivityModeType::IronBannerZoneControl),
             _ => Err(serde::de::Error::custom(format!(
-                "unknown DestinyActivityModeType: {}",
-                s
+                "unknown DestinyActivityModeType: {s}",
             ))),
         }
     }

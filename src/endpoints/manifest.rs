@@ -1,12 +1,12 @@
 use std::collections::HashMap;
 
+use crate::Result;
 use crate::bungie_client::BungieClient;
 use crate::types::definitions::DestinyInventoryItemDefinition;
 use crate::types::destiny::config::DestinyManifest;
 use crate::types::destiny::definitions::sockets::{
     DestinyPlugSetDefinition, DestinySocketCategoryDefinition, DestinySocketTypeDefinition,
 };
-use crate::Result;
 
 impl BungieClient {
     pub async fn destiny_manifest(&self) -> Result<DestinyManifest> {
@@ -28,7 +28,7 @@ impl BungieClient {
             .get("DestinyInventoryItemDefinition")
             .unwrap();
 
-        let url = format!("https://www.bungie.net{}", item_definition_path);
+        let url = format!("https://www.bungie.net{item_definition_path}");
 
         self.get::<HashMap<String, DestinyInventoryItemDefinition>>(url)
             .await
@@ -46,7 +46,7 @@ impl BungieClient {
             .get("DestinySocketTypeDefinition")
             .unwrap();
 
-        let url = format!("https://www.bungie.net{}", item_definition_path);
+        let url = format!("https://www.bungie.net{item_definition_path}");
 
         self.get::<HashMap<String, DestinySocketTypeDefinition>>(url)
             .await
@@ -64,7 +64,7 @@ impl BungieClient {
             .get("DestinySocketCategoryDefinition")
             .unwrap();
 
-        let url = format!("https://www.bungie.net{}", item_definition_path);
+        let url = format!("https://www.bungie.net{item_definition_path}");
 
         self.get::<HashMap<String, DestinySocketCategoryDefinition>>(url)
             .await
@@ -82,7 +82,7 @@ impl BungieClient {
             .get("DestinyPlugSetDefinition")
             .unwrap();
 
-        let url = format!("https://www.bungie.net{}", item_definition_path);
+        let url = format!("https://www.bungie.net{item_definition_path}");
 
         self.get::<HashMap<String, DestinyPlugSetDefinition>>(url)
             .await

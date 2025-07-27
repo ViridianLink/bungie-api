@@ -3,13 +3,13 @@ use std::collections::HashMap;
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
+use crate::types::ItemLocation;
 use crate::types::destiny::perks::DestinyPerkReference;
 use crate::types::destiny::quests::DestinyObjectiveProgress;
 use crate::types::destiny::{
     DamageType, DestinyEnergyType, DestinyProgression, DestinyStat, DestinyTalentNode,
     EquipFailureReason, ItemBindStatus, ItemState, TransferStatuses,
 };
-use crate::types::ItemLocation;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
