@@ -35,6 +35,8 @@ pub struct DestinyInventoryItemDefinition {
     pub secondary_special: Option<String>,
     pub background_color: Option<DestinyColor>,
     pub is_featured_item: bool,
+    pub is_holofoil: bool,
+    pub is_adept: bool,
     pub screenshot: Option<String>,
     pub item_type_display_name: Option<String>,
     pub flavor_text: Option<String>,
