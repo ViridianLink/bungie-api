@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct DestinyDisplayPropertiesDefinition {
+    pub icon_hash: u32,
     pub description: String,
     pub name: String,
     pub icon: Option<String>,
