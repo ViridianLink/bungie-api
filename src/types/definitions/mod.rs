@@ -19,7 +19,7 @@ use super::links::HyperlinkReference;
 use super::misc::DestinyColor;
 use super::{BungieMembershipType, TierType};
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Default, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct DestinyInventoryItemDefinition {
@@ -175,7 +175,7 @@ pub struct DestinyItemCraftingBlockBonusPlugDefinition {
     pub plug_item_hash: u32,
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Default, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct DestinyItemInventoryBlockDefinition {
@@ -195,7 +195,7 @@ pub struct DestinyItemInventoryBlockDefinition {
     pub recipe_item_hash: Option<u32>,
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Default, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 pub struct DestinyItemSetBlockDefinition {

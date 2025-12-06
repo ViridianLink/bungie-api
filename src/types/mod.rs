@@ -95,8 +95,9 @@ pub struct DestinyItemComponentSetOfint64 {
     pub perks: ComponentResponse<HashMap<i64, DestinyItemPerksComponent>>,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Default, Clone, Copy)]
 pub enum TierType {
+    #[default]
     Unknown = 0,
     Currency = 1,
     Basic = 2,

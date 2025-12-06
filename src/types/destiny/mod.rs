@@ -575,11 +575,12 @@ pub struct DyeReference {
 }
 
 #[repr(u8)]
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Default, Clone, Copy)]
 pub enum DestinyClass {
     Titan = 0,
     Hunter = 1,
     Warlock = 2,
+    #[default]
     Unknown = 3,
 }
 
@@ -679,8 +680,9 @@ impl Serialize for DestinyVendorItemRefundPolicy {
 }
 
 #[repr(u8)]
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Default, Clone, Copy)]
 pub enum DamageType {
+    #[default]
     None = 0,
     Kinetic = 1,
     Arc = 2,
@@ -723,8 +725,9 @@ impl Serialize for DamageType {
 }
 
 #[repr(u8)]
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Default, Clone, Copy)]
 pub enum DestinyItemSubType {
+    #[default]
     None = 0,
     Crucible = 1,
     Vanguard = 2,
@@ -978,8 +981,9 @@ impl Serialize for ItemPerkVisibility {
 }
 
 #[repr(u8)]
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Default, Clone, Copy)]
 pub enum SpecialItemType {
+    #[default]
     None = 0,
     SpecialCurrency = 1,
     Armor = 8,
@@ -1024,8 +1028,9 @@ impl Serialize for SpecialItemType {
 }
 
 #[repr(u8)]
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Default, Clone, Copy)]
 pub enum DestinyItemType {
+    #[default]
     None = 0,
     Currency = 1,
     Armor = 2,
@@ -1108,8 +1113,9 @@ impl Serialize for DestinyItemType {
 }
 
 #[repr(u8)]
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Default, Clone, Copy)]
 pub enum DestinyBreakerType {
+    #[default]
     None = 0,
     ShieldPiercing = 1,
     Disruption = 2,
