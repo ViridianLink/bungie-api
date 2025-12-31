@@ -5,7 +5,7 @@ edition = "2024"
 
 [dependencies]
 bitflags = { version = "*", default-features = false }
-reqwest = { version = "*", default-features = false, features = [
+reqwest = { version = "0.12", default-features = false, features = [
     "default-tls",
     "json",
 ] }
