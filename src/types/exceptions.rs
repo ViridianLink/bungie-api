@@ -8,14 +8,14 @@ pub enum PlatformErrorCodes {
 }
 
 impl<'de> Deserialize<'de> for PlatformErrorCodes {
-    fn deserialize<D>(deserializer: D) -> Result<PlatformErrorCodes, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
     {
         let value = u32::deserialize(deserializer)?;
         Ok(match value {
-            1 => PlatformErrorCodes::Success,
-            _ => PlatformErrorCodes::Unknown(value),
+            1 => Self::Success,
+            _ => Self::Unknown(value),
         })
     }
 }
@@ -26,8 +26,8 @@ impl Serialize for PlatformErrorCodes {
         S: serde::Serializer,
     {
         match self {
-            PlatformErrorCodes::Success => 1u32.serialize(serializer),
-            PlatformErrorCodes::Unknown(value) => value.serialize(serializer),
+            Self::Success => 1u32.serialize(serializer),
+            Self::Unknown(value) => value.serialize(serializer),
         }
     }
 }

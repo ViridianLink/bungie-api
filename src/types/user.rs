@@ -1,8 +1,7 @@
 use serde::{Deserialize, Serialize};
 
-use crate::serde_as::string_to_u64;
-
 use super::BungieMembershipType;
+use crate::serde_as::string_to_u64;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]

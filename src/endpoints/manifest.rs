@@ -1,12 +1,14 @@
 use std::collections::HashMap;
 
-use crate::Result;
 use crate::bungie_client::BungieClient;
 use crate::types::definitions::DestinyInventoryItemDefinition;
 use crate::types::destiny::config::DestinyManifest;
 use crate::types::destiny::definitions::sockets::{
-    DestinyPlugSetDefinition, DestinySocketCategoryDefinition, DestinySocketTypeDefinition,
+    DestinyPlugSetDefinition,
+    DestinySocketCategoryDefinition,
+    DestinySocketTypeDefinition,
 };
+use crate::{BungieApiError, Result};
 
 impl BungieClient {
     pub async fn destiny_manifest(&self) -> Result<DestinyManifest> {
@@ -24,14 +26,13 @@ impl BungieClient {
         let item_definition_path = manifest
             .json_world_component_content_paths
             .get(local)
-            .unwrap()
+            .ok_or(BungieApiError::InvalidJsonSchema)?
             .get("DestinyInventoryItemDefinition")
-            .unwrap();
+            .ok_or(BungieApiError::InvalidJsonSchema)?;
 
         let url = format!("https://www.bungie.net{item_definition_path}");
 
-        self.get::<HashMap<String, DestinyInventoryItemDefinition>>(url)
-            .await
+        self.get::<HashMap<String, DestinyInventoryItemDefinition>>(url).await
     }
 
     pub async fn destiny_socket_type_definition(
@@ -42,14 +43,13 @@ impl BungieClient {
         let item_definition_path = manifest
             .json_world_component_content_paths
             .get(local)
-            .unwrap()
+            .ok_or(BungieApiError::InvalidJsonSchema)?
             .get("DestinySocketTypeDefinition")
-            .unwrap();
+            .ok_or(BungieApiError::InvalidJsonSchema)?;
 
         let url = format!("https://www.bungie.net{item_definition_path}");
 
-        self.get::<HashMap<String, DestinySocketTypeDefinition>>(url)
-            .await
+        self.get::<HashMap<String, DestinySocketTypeDefinition>>(url).await
     }
 
     pub async fn destiny_socket_category_definition(
@@ -60,14 +60,13 @@ impl BungieClient {
         let item_definition_path = manifest
             .json_world_component_content_paths
             .get(local)
-            .unwrap()
+            .ok_or(BungieApiError::InvalidJsonSchema)?
             .get("DestinySocketCategoryDefinition")
-            .unwrap();
+            .ok_or(BungieApiError::InvalidJsonSchema)?;
 
         let url = format!("https://www.bungie.net{item_definition_path}");
 
-        self.get::<HashMap<String, DestinySocketCategoryDefinition>>(url)
-            .await
+        self.get::<HashMap<String, DestinySocketCategoryDefinition>>(url).await
     }
 
     pub async fn destiny_plug_set_definition(
@@ -78,13 +77,12 @@ impl BungieClient {
         let item_definition_path = manifest
             .json_world_component_content_paths
             .get(local)
-            .unwrap()
+            .ok_or(BungieApiError::InvalidJsonSchema)?
             .get("DestinyPlugSetDefinition")
-            .unwrap();
+            .ok_or(BungieApiError::InvalidJsonSchema)?;
 
         let url = format!("https://www.bungie.net{item_definition_path}");
 
-        self.get::<HashMap<String, DestinyPlugSetDefinition>>(url)
-            .await
+        self.get::<HashMap<String, DestinyPlugSetDefinition>>(url).await
     }
 }

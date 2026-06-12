@@ -7,8 +7,15 @@ use crate::types::ItemLocation;
 use crate::types::destiny::perks::DestinyPerkReference;
 use crate::types::destiny::quests::DestinyObjectiveProgress;
 use crate::types::destiny::{
-    DamageType, DestinyEnergyType, DestinyProgression, DestinyStat, DestinyTalentNode,
-    EquipFailureReason, ItemBindStatus, ItemState, TransferStatuses,
+    DamageType,
+    DestinyEnergyType,
+    DestinyProgression,
+    DestinyStat,
+    DestinyTalentNode,
+    EquipFailureReason,
+    ItemBindStatus,
+    ItemState,
+    TransferStatuses,
 };
 
 #[derive(Debug, Deserialize, Serialize)]

@@ -17,15 +17,15 @@ pub enum ComponentPrivacySetting {
 }
 
 impl<'de> Deserialize<'de> for ComponentPrivacySetting {
-    fn deserialize<D>(deserializer: D) -> Result<ComponentPrivacySetting, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(ComponentPrivacySetting::None),
-            1 => Ok(ComponentPrivacySetting::Public),
-            2 => Ok(ComponentPrivacySetting::Private),
+            0 => Ok(Self::None),
+            1 => Ok(Self::Public),
+            2 => Ok(Self::Private),
             _ => Err(serde::de::Error::custom(format!(
                 "unknown ComponentPrivacySetting: {s}"
             ))),

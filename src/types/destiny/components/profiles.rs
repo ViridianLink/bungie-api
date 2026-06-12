@@ -1,10 +1,13 @@
+use std::collections::HashMap;
+
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 
 use crate::types::destiny::artifacts::DestinyArtifactProfileScoped;
 use crate::types::destiny::{
-    DestinyGamePrivacySetting, DestinyJoinClosedReasons, DestinyPartyMemberStates,
+    DestinyGamePrivacySetting,
+    DestinyJoinClosedReasons,
+    DestinyPartyMemberStates,
 };
 
 #[derive(Debug, Deserialize, Serialize)]

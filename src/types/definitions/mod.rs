@@ -11,9 +11,18 @@ use sources::DestinyItemSourceDefinition;
 
 use super::common::DestinyDisplayPropertiesDefinition;
 use super::destiny::{
-    DamageType, DestinyAmmunitionType, DestinyBreakerType, DestinyClass, DestinyItemQuantity,
-    DestinyItemSubType, DestinyItemType, DyeReference, EquippingItemBlockAttributes,
-    ItemPerkVisibility, SocketPlugSources, SpecialItemType,
+    DamageType,
+    DestinyAmmunitionType,
+    DestinyBreakerType,
+    DestinyClass,
+    DestinyItemQuantity,
+    DestinyItemSubType,
+    DestinyItemType,
+    DyeReference,
+    EquippingItemBlockAttributes,
+    ItemPerkVisibility,
+    SocketPlugSources,
+    SpecialItemType,
 };
 use super::links::HyperlinkReference;
 use super::misc::DestinyColor;

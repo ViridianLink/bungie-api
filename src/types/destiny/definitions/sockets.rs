@@ -1,11 +1,12 @@
 use serde::{Deserialize, Serialize};
 
+use super::DestinyItemSocketEntryPlugItemRandomizedDefinition;
 use crate::types::common::DestinyDisplayPropertiesDefinition;
 use crate::types::destiny::{
-    DestinySocketCategoryStyle, DestinySocketVisibility, SocketTypeActionType,
+    DestinySocketCategoryStyle,
+    DestinySocketVisibility,
+    SocketTypeActionType,
 };
-
-use super::DestinyItemSocketEntryPlugItemRandomizedDefinition;
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]

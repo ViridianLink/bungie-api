@@ -6,11 +6,12 @@ use crate::types::BungieMembershipType;
 use crate::types::destiny::DestinyComponentType;
 use crate::types::destiny::historical_stats::definitions::DestinyActivityModeType;
 use crate::types::destiny::historical_stats::{
-    DestinyActivityHistoryResults, DestinyPostGameCarnageReportData,
+    DestinyActivityHistoryResults,
+    DestinyPostGameCarnageReportData,
 };
 use crate::types::destiny::responses::DestinyProfileResponse;
 use crate::types::user::UserInfoCard;
-use crate::{BungieClient, Result};
+use crate::{BungieApiError, BungieClient, Result};
 
 impl BungieClient {
     pub async fn search_destiny_player(
@@ -18,11 +19,12 @@ impl BungieClient {
         username: &str,
         discriminator: u16,
     ) -> Result<Vec<UserInfoCard>> {
-        let mut url =
-            Url::parse("https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/").unwrap();
+        let mut url = Url::parse(
+            "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/",
+        )?;
 
         url.path_segments_mut()
-            .expect("Cannot set path segments")
+            .map_err(|()| BungieApiError::InvalidUrl)?
             .push(format!("{username}#{discriminator}").as_str());
 
         self.get_bungie_response::<Vec<UserInfoCard>>(url).await
@@ -34,10 +36,10 @@ impl BungieClient {
         membership_id: u64,
         components: &[DestinyComponentType],
     ) -> Result<DestinyProfileResponse> {
-        let mut url = Url::parse("https://www.bungie.net/Platform/Destiny2/").unwrap();
+        let mut url = Url::parse("https://www.bungie.net/Platform/Destiny2/")?;
 
         url.path_segments_mut()
-            .expect("Cannot set path segments")
+            .map_err(|()| BungieApiError::InvalidUrl)?
             .push(&(membership_type as i16).to_string())
             .push("Profile")
             .push(&membership_id.to_string());
@@ -51,8 +53,7 @@ impl BungieClient {
 
         url.query_pairs_mut().append_pair("components", &components);
 
-        self.get_bungie_response::<DestinyProfileResponse>(url)
-            .await
+        self.get_bungie_response::<DestinyProfileResponse>(url).await
     }
 
     pub async fn activity_history(
@@ -64,10 +65,10 @@ impl BungieClient {
         mode: Option<DestinyActivityModeType>,
         page: u32,
     ) -> Result<DestinyActivityHistoryResults> {
-        let mut url = Url::parse("https://www.bungie.net/Platform/Destiny2/").unwrap();
+        let mut url = Url::parse("https://www.bungie.net/Platform/Destiny2/")?;
 
         url.path_segments_mut()
-            .expect("Cannot set path segments")
+            .map_err(|()| BungieApiError::InvalidUrl)?
             .push(&(membership_type as i16).to_string())
             .push("Account")
             .push(&membership_id.to_string())
@@ -87,8 +88,7 @@ impl BungieClient {
             query_pairs.append_pair("page", &page.to_string());
         }
 
-        self.get_bungie_response::<DestinyActivityHistoryResults>(url)
-            .await
+        self.get_bungie_response::<DestinyActivityHistoryResults>(url).await
     }
 
     pub async fn post_game_carnage_report(
@@ -97,10 +97,8 @@ impl BungieClient {
     ) -> Result<DestinyPostGameCarnageReportData> {
         let url = Url::parse(&format!(
             "https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/{activity_id}/"
-        ))
-        .unwrap();
+        ))?;
 
-        self.get_bungie_response::<DestinyPostGameCarnageReportData>(url)
-            .await
+        self.get_bungie_response::<DestinyPostGameCarnageReportData>(url).await
     }
 }

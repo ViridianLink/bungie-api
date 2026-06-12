@@ -58,12 +58,12 @@ bitflags! {
 }
 
 impl<'de> Deserialize<'de> for DestinyProgressionRewardItemState {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyProgressionRewardItemState, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
-        Ok(DestinyProgressionRewardItemState::from_bits_truncate(s))
+        Ok(Self::from_bits_truncate(s))
     }
 }
 
@@ -91,21 +91,21 @@ pub enum DestinyProgressionScope {
 }
 
 impl<'de> Deserialize<'de> for DestinyProgressionScope {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyProgressionScope, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyProgressionScope::Account),
-            1 => Ok(DestinyProgressionScope::Character),
-            2 => Ok(DestinyProgressionScope::Clan),
-            3 => Ok(DestinyProgressionScope::Item),
-            4 => Ok(DestinyProgressionScope::ImplicitFromEquipment),
-            5 => Ok(DestinyProgressionScope::Mapped),
-            6 => Ok(DestinyProgressionScope::MappedAggregate),
-            7 => Ok(DestinyProgressionScope::MappedStat),
-            8 => Ok(DestinyProgressionScope::MappedUnlockValue),
+            0 => Ok(Self::Account),
+            1 => Ok(Self::Character),
+            2 => Ok(Self::Clan),
+            3 => Ok(Self::Item),
+            4 => Ok(Self::ImplicitFromEquipment),
+            5 => Ok(Self::Mapped),
+            6 => Ok(Self::MappedAggregate),
+            7 => Ok(Self::MappedStat),
+            8 => Ok(Self::MappedUnlockValue),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyProgressionScope variant: {s}"
             ))),
@@ -131,15 +131,15 @@ pub enum DestinyProgressionStepDisplayEffect {
 }
 
 impl<'de> Deserialize<'de> for DestinyProgressionStepDisplayEffect {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyProgressionStepDisplayEffect, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyProgressionStepDisplayEffect::None),
-            1 => Ok(DestinyProgressionStepDisplayEffect::Character),
-            2 => Ok(DestinyProgressionStepDisplayEffect::Item),
+            0 => Ok(Self::None),
+            1 => Ok(Self::Character),
+            2 => Ok(Self::Item),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyProgressionStepDisplayEffect variant: {s}"
             ))),
@@ -175,15 +175,15 @@ pub enum SocketTypeActionType {
 }
 
 impl<'de> Deserialize<'de> for SocketTypeActionType {
-    fn deserialize<D>(deserializer: D) -> Result<SocketTypeActionType, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(SocketTypeActionType::InsertPlug),
-            1 => Ok(SocketTypeActionType::InfuseItem),
-            2 => Ok(SocketTypeActionType::ReinitializeSocket),
+            0 => Ok(Self::InsertPlug),
+            1 => Ok(Self::InfuseItem),
+            2 => Ok(Self::ReinitializeSocket),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown SocketTypeActionType variant: {s}"
             ))),
@@ -210,16 +210,16 @@ pub enum DestinySocketVisibility {
 }
 
 impl<'de> Deserialize<'de> for DestinySocketVisibility {
-    fn deserialize<D>(deserializer: D) -> Result<DestinySocketVisibility, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinySocketVisibility::Visible),
-            1 => Ok(DestinySocketVisibility::Hidden),
-            2 => Ok(DestinySocketVisibility::HiddenWhenEmpty),
-            3 => Ok(DestinySocketVisibility::HiddenIfNoPlugsAvailable),
+            0 => Ok(Self::Visible),
+            1 => Ok(Self::Hidden),
+            2 => Ok(Self::HiddenWhenEmpty),
+            3 => Ok(Self::HiddenIfNoPlugsAvailable),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinySocketVisibility variant: {s}"
             ))),
@@ -251,21 +251,21 @@ pub enum DestinySocketCategoryStyle {
 }
 
 impl<'de> Deserialize<'de> for DestinySocketCategoryStyle {
-    fn deserialize<D>(deserializer: D) -> Result<DestinySocketCategoryStyle, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinySocketCategoryStyle::Unknown),
-            1 => Ok(DestinySocketCategoryStyle::Reusable),
-            2 => Ok(DestinySocketCategoryStyle::Consumable),
-            3 => Ok(DestinySocketCategoryStyle::Unlockable),
-            4 => Ok(DestinySocketCategoryStyle::Intrinsic),
-            5 => Ok(DestinySocketCategoryStyle::EnergyMeter),
-            6 => Ok(DestinySocketCategoryStyle::LargePerk),
-            7 => Ok(DestinySocketCategoryStyle::Abilities),
-            8 => Ok(DestinySocketCategoryStyle::Supers),
+            0 => Ok(Self::Unknown),
+            1 => Ok(Self::Reusable),
+            2 => Ok(Self::Consumable),
+            3 => Ok(Self::Unlockable),
+            4 => Ok(Self::Intrinsic),
+            5 => Ok(Self::EnergyMeter),
+            6 => Ok(Self::LargePerk),
+            7 => Ok(Self::Abilities),
+            8 => Ok(Self::Supers),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinySocketCategoryStyle variant: {s}"
             ))),
@@ -295,19 +295,19 @@ pub enum TierType {
 }
 
 impl<'de> Deserialize<'de> for TierType {
-    fn deserialize<D>(deserializer: D) -> Result<TierType, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(TierType::Unknown),
-            1 => Ok(TierType::Currency),
-            2 => Ok(TierType::Basic),
-            3 => Ok(TierType::Common),
-            4 => Ok(TierType::Rare),
-            5 => Ok(TierType::Superior),
-            6 => Ok(TierType::Exotic),
+            0 => Ok(Self::Unknown),
+            1 => Ok(Self::Currency),
+            2 => Ok(Self::Basic),
+            3 => Ok(Self::Common),
+            4 => Ok(Self::Rare),
+            5 => Ok(Self::Superior),
+            6 => Ok(Self::Exotic),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown TierType variant: {s}"
             ))),
@@ -332,14 +332,14 @@ pub enum BucketScope {
 }
 
 impl<'de> Deserialize<'de> for BucketScope {
-    fn deserialize<D>(deserializer: D) -> Result<BucketScope, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(BucketScope::Character),
-            1 => Ok(BucketScope::Account),
+            0 => Ok(Self::Character),
+            1 => Ok(Self::Account),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown BucketScope variant: {s}"
             ))),
@@ -367,17 +367,17 @@ pub enum BucketCategory {
 }
 
 impl<'de> Deserialize<'de> for BucketCategory {
-    fn deserialize<D>(deserializer: D) -> Result<BucketCategory, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(BucketCategory::Invisible),
-            1 => Ok(BucketCategory::Item),
-            2 => Ok(BucketCategory::Currency),
-            3 => Ok(BucketCategory::Equippable),
-            4 => Ok(BucketCategory::Ignored),
+            0 => Ok(Self::Invisible),
+            1 => Ok(Self::Item),
+            2 => Ok(Self::Currency),
+            3 => Ok(Self::Equippable),
+            4 => Ok(Self::Ignored),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown BucketCategory variant: {s}"
             ))),
@@ -405,17 +405,17 @@ pub enum ItemLocation {
 }
 
 impl<'de> Deserialize<'de> for ItemLocation {
-    fn deserialize<D>(deserializer: D) -> Result<ItemLocation, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(ItemLocation::Unknown),
-            1 => Ok(ItemLocation::Inventory),
-            2 => Ok(ItemLocation::Vault),
-            3 => Ok(ItemLocation::Vendor),
-            4 => Ok(ItemLocation::Postmaster),
+            0 => Ok(Self::Unknown),
+            1 => Ok(Self::Inventory),
+            2 => Ok(Self::Vault),
+            3 => Ok(Self::Vendor),
+            4 => Ok(Self::Postmaster),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown ItemLocation variant: {s}"
             ))),
@@ -441,15 +441,15 @@ pub enum DestinyStatAggregationType {
 }
 
 impl<'de> Deserialize<'de> for DestinyStatAggregationType {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyStatAggregationType, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyStatAggregationType::CharacterAverage),
-            1 => Ok(DestinyStatAggregationType::Character),
-            2 => Ok(DestinyStatAggregationType::Item),
+            0 => Ok(Self::CharacterAverage),
+            1 => Ok(Self::Character),
+            2 => Ok(Self::Item),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyStatAggregationType variant: {s}"
             ))),
@@ -476,16 +476,16 @@ pub enum DestinyStatCategory {
 }
 
 impl<'de> Deserialize<'de> for DestinyStatCategory {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyStatCategory, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyStatCategory::Gameplay),
-            1 => Ok(DestinyStatCategory::Weapon),
-            2 => Ok(DestinyStatCategory::Defense),
-            3 => Ok(DestinyStatCategory::Primary),
+            0 => Ok(Self::Gameplay),
+            1 => Ok(Self::Weapon),
+            2 => Ok(Self::Defense),
+            3 => Ok(Self::Primary),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyStatCategory variant: {s}"
             ))),
@@ -510,12 +510,12 @@ bitflags! {
 }
 
 impl<'de> Deserialize<'de> for EquippingItemBlockAttributes {
-    fn deserialize<D>(deserializer: D) -> Result<EquippingItemBlockAttributes, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
-        Ok(EquippingItemBlockAttributes::from_bits_truncate(s))
+        Ok(Self::from_bits_truncate(s))
     }
 }
 
@@ -539,17 +539,17 @@ pub enum DestinyAmmunitionType {
 }
 
 impl<'de> Deserialize<'de> for DestinyAmmunitionType {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyAmmunitionType, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyAmmunitionType::None),
-            1 => Ok(DestinyAmmunitionType::Primary),
-            2 => Ok(DestinyAmmunitionType::Special),
-            3 => Ok(DestinyAmmunitionType::Heavy),
-            4 => Ok(DestinyAmmunitionType::Unknown),
+            0 => Ok(Self::None),
+            1 => Ok(Self::Primary),
+            2 => Ok(Self::Special),
+            3 => Ok(Self::Heavy),
+            4 => Ok(Self::Unknown),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyAmmunitionType variant: {s}"
             ))),
@@ -585,16 +585,16 @@ pub enum DestinyClass {
 }
 
 impl<'de> Deserialize<'de> for DestinyClass {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyClass, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyClass::Titan),
-            1 => Ok(DestinyClass::Hunter),
-            2 => Ok(DestinyClass::Warlock),
-            3 => Ok(DestinyClass::Unknown),
+            0 => Ok(Self::Titan),
+            1 => Ok(Self::Hunter),
+            2 => Ok(Self::Warlock),
+            3 => Ok(Self::Unknown),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyClass variant: {s}",
             ))),
@@ -620,15 +620,15 @@ pub enum DestinyGender {
 }
 
 impl<'de> Deserialize<'de> for DestinyGender {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyGender, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyGender::Male),
-            1 => Ok(DestinyGender::Female),
-            2 => Ok(DestinyGender::Unknown),
+            0 => Ok(Self::Male),
+            1 => Ok(Self::Female),
+            2 => Ok(Self::Unknown),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyGender variant: {s}"
             ))),
@@ -654,15 +654,15 @@ pub enum DestinyVendorItemRefundPolicy {
 }
 
 impl<'de> Deserialize<'de> for DestinyVendorItemRefundPolicy {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyVendorItemRefundPolicy, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyVendorItemRefundPolicy::NotRefundable),
-            1 => Ok(DestinyVendorItemRefundPolicy::DeletesItem),
-            2 => Ok(DestinyVendorItemRefundPolicy::RevokesLicense),
+            0 => Ok(Self::NotRefundable),
+            1 => Ok(Self::DeletesItem),
+            2 => Ok(Self::RevokesLicense),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyVendorItemRefundPolicy variant: {s}"
             ))),
@@ -694,20 +694,20 @@ pub enum DamageType {
 }
 
 impl<'de> Deserialize<'de> for DamageType {
-    fn deserialize<D>(deserializer: D) -> Result<DamageType, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DamageType::None),
-            1 => Ok(DamageType::Kinetic),
-            2 => Ok(DamageType::Arc),
-            3 => Ok(DamageType::Thermal),
-            4 => Ok(DamageType::Void),
-            5 => Ok(DamageType::Raid),
-            6 => Ok(DamageType::Stasis),
-            7 => Ok(DamageType::Strand),
+            0 => Ok(Self::None),
+            1 => Ok(Self::Kinetic),
+            2 => Ok(Self::Arc),
+            3 => Ok(Self::Thermal),
+            4 => Ok(Self::Void),
+            5 => Ok(Self::Raid),
+            6 => Ok(Self::Stasis),
+            7 => Ok(Self::Strand),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DamageType variant: {s}"
             ))),
@@ -762,43 +762,43 @@ pub enum DestinyItemSubType {
 }
 
 impl<'de> Deserialize<'de> for DestinyItemSubType {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyItemSubType, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyItemSubType::None),
-            1 => Ok(DestinyItemSubType::Crucible),
-            2 => Ok(DestinyItemSubType::Vanguard),
-            5 => Ok(DestinyItemSubType::Exotic),
-            6 => Ok(DestinyItemSubType::AutoRifle),
-            7 => Ok(DestinyItemSubType::Shotgun),
-            8 => Ok(DestinyItemSubType::Machinegun),
-            9 => Ok(DestinyItemSubType::HandCannon),
-            10 => Ok(DestinyItemSubType::RocketLauncher),
-            11 => Ok(DestinyItemSubType::FusionRifle),
-            12 => Ok(DestinyItemSubType::SniperRifle),
-            13 => Ok(DestinyItemSubType::PulseRifle),
-            14 => Ok(DestinyItemSubType::ScoutRifle),
-            16 => Ok(DestinyItemSubType::Crm),
-            17 => Ok(DestinyItemSubType::Sidearm),
-            18 => Ok(DestinyItemSubType::Sword),
-            19 => Ok(DestinyItemSubType::Mask),
-            20 => Ok(DestinyItemSubType::Shader),
-            21 => Ok(DestinyItemSubType::Ornament),
-            22 => Ok(DestinyItemSubType::FusionRifleLine),
-            23 => Ok(DestinyItemSubType::GrenadeLauncher),
-            24 => Ok(DestinyItemSubType::SubmachineGun),
-            25 => Ok(DestinyItemSubType::TraceRifle),
-            26 => Ok(DestinyItemSubType::HelmetArmor),
-            27 => Ok(DestinyItemSubType::GauntletsArmor),
-            28 => Ok(DestinyItemSubType::ChestArmor),
-            29 => Ok(DestinyItemSubType::LegArmor),
-            30 => Ok(DestinyItemSubType::ClassArmor),
-            31 => Ok(DestinyItemSubType::Bow),
-            32 => Ok(DestinyItemSubType::DummyRepeatableBounty),
-            33 => Ok(DestinyItemSubType::Glaive),
+            0 => Ok(Self::None),
+            1 => Ok(Self::Crucible),
+            2 => Ok(Self::Vanguard),
+            5 => Ok(Self::Exotic),
+            6 => Ok(Self::AutoRifle),
+            7 => Ok(Self::Shotgun),
+            8 => Ok(Self::Machinegun),
+            9 => Ok(Self::HandCannon),
+            10 => Ok(Self::RocketLauncher),
+            11 => Ok(Self::FusionRifle),
+            12 => Ok(Self::SniperRifle),
+            13 => Ok(Self::PulseRifle),
+            14 => Ok(Self::ScoutRifle),
+            16 => Ok(Self::Crm),
+            17 => Ok(Self::Sidearm),
+            18 => Ok(Self::Sword),
+            19 => Ok(Self::Mask),
+            20 => Ok(Self::Shader),
+            21 => Ok(Self::Ornament),
+            22 => Ok(Self::FusionRifleLine),
+            23 => Ok(Self::GrenadeLauncher),
+            24 => Ok(Self::SubmachineGun),
+            25 => Ok(Self::TraceRifle),
+            26 => Ok(Self::HelmetArmor),
+            27 => Ok(Self::GauntletsArmor),
+            28 => Ok(Self::ChestArmor),
+            29 => Ok(Self::LegArmor),
+            30 => Ok(Self::ClassArmor),
+            31 => Ok(Self::Bow),
+            32 => Ok(Self::DummyRepeatableBounty),
+            33 => Ok(Self::Glaive),
             _ => Err(serde::de::Error::custom(format!(
                 "Could not deserialize u8 '{s}' to DestinyItemSubType"
             ))),
@@ -823,12 +823,12 @@ bitflags! {
 }
 
 impl<'de> Deserialize<'de> for PlugUiStyles {
-    fn deserialize<D>(deserializer: D) -> Result<PlugUiStyles, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
-        Ok(PlugUiStyles::from_bits_truncate(s))
+        Ok(Self::from_bits_truncate(s))
     }
 }
 
@@ -850,15 +850,15 @@ pub enum PlugAvailabilityMode {
 }
 
 impl<'de> Deserialize<'de> for PlugAvailabilityMode {
-    fn deserialize<D>(deserializer: D) -> Result<PlugAvailabilityMode, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(PlugAvailabilityMode::Normal),
-            1 => Ok(PlugAvailabilityMode::UnavailableIfSocketContainsMatchingPlugCategory),
-            2 => Ok(PlugAvailabilityMode::AvailableIfSocketContainsMatchingPlugCategory),
+            0 => Ok(Self::Normal),
+            1 => Ok(Self::UnavailableIfSocketContainsMatchingPlugCategory),
+            2 => Ok(Self::AvailableIfSocketContainsMatchingPlugCategory),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown PlugAvailabilityMode: {s}"
             ))),
@@ -888,19 +888,19 @@ pub enum DestinyEnergyType {
 }
 
 impl<'de> Deserialize<'de> for DestinyEnergyType {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyEnergyType, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyEnergyType::Any),
-            1 => Ok(DestinyEnergyType::Arc),
-            2 => Ok(DestinyEnergyType::Thermal),
-            3 => Ok(DestinyEnergyType::Void),
-            4 => Ok(DestinyEnergyType::Ghost),
-            5 => Ok(DestinyEnergyType::Subclass),
-            6 => Ok(DestinyEnergyType::Stasis),
+            0 => Ok(Self::Any),
+            1 => Ok(Self::Arc),
+            2 => Ok(Self::Thermal),
+            3 => Ok(Self::Void),
+            4 => Ok(Self::Ghost),
+            5 => Ok(Self::Subclass),
+            6 => Ok(Self::Stasis),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyEnergyType: {s}"
             ))),
@@ -928,12 +928,12 @@ bitflags! {
 }
 
 impl<'de> Deserialize<'de> for SocketPlugSources {
-    fn deserialize<D>(deserializer: D) -> Result<SocketPlugSources, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
-        Ok(SocketPlugSources::from_bits_truncate(s))
+        Ok(Self::from_bits_truncate(s))
     }
 }
 
@@ -955,15 +955,15 @@ pub enum ItemPerkVisibility {
 }
 
 impl<'de> Deserialize<'de> for ItemPerkVisibility {
-    fn deserialize<D>(deserializer: D) -> Result<ItemPerkVisibility, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(ItemPerkVisibility::Visible),
-            1 => Ok(ItemPerkVisibility::Disabled),
-            2 => Ok(ItemPerkVisibility::Hidden),
+            0 => Ok(Self::Visible),
+            1 => Ok(Self::Disabled),
+            2 => Ok(Self::Hidden),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown ItemPerkVisibility: {s}"
             ))),
@@ -996,21 +996,21 @@ pub enum SpecialItemType {
 }
 
 impl<'de> Deserialize<'de> for SpecialItemType {
-    fn deserialize<D>(deserializer: D) -> Result<SpecialItemType, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(SpecialItemType::None),
-            1 => Ok(SpecialItemType::SpecialCurrency),
-            8 => Ok(SpecialItemType::Armor),
-            9 => Ok(SpecialItemType::Weapon),
-            23 => Ok(SpecialItemType::Engram),
-            24 => Ok(SpecialItemType::Consumable),
-            25 => Ok(SpecialItemType::ExchangeMaterial),
-            27 => Ok(SpecialItemType::MissionReward),
-            29 => Ok(SpecialItemType::Currency),
+            0 => Ok(Self::None),
+            1 => Ok(Self::SpecialCurrency),
+            8 => Ok(Self::Armor),
+            9 => Ok(Self::Weapon),
+            23 => Ok(Self::Engram),
+            24 => Ok(Self::Consumable),
+            25 => Ok(Self::ExchangeMaterial),
+            27 => Ok(Self::MissionReward),
+            29 => Ok(Self::Currency),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown SpecialItemType: {s}"
             ))),
@@ -1062,40 +1062,40 @@ pub enum DestinyItemType {
 }
 
 impl<'de> Deserialize<'de> for DestinyItemType {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyItemType, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyItemType::None),
-            1 => Ok(DestinyItemType::Currency),
-            2 => Ok(DestinyItemType::Armor),
-            3 => Ok(DestinyItemType::Weapon),
-            7 => Ok(DestinyItemType::Message),
-            8 => Ok(DestinyItemType::Engram),
-            9 => Ok(DestinyItemType::Consumable),
-            10 => Ok(DestinyItemType::ExchangeMaterial),
-            11 => Ok(DestinyItemType::MissionReward),
-            12 => Ok(DestinyItemType::QuestStep),
-            13 => Ok(DestinyItemType::QuestStepComplete),
-            14 => Ok(DestinyItemType::Emblem),
-            15 => Ok(DestinyItemType::Quest),
-            16 => Ok(DestinyItemType::Subclass),
-            17 => Ok(DestinyItemType::ClanBanner),
-            18 => Ok(DestinyItemType::Aura),
-            19 => Ok(DestinyItemType::Mod),
-            20 => Ok(DestinyItemType::Dummy),
-            21 => Ok(DestinyItemType::Ship),
-            22 => Ok(DestinyItemType::Vehicle),
-            23 => Ok(DestinyItemType::Emote),
-            24 => Ok(DestinyItemType::Ghost),
-            25 => Ok(DestinyItemType::Package),
-            26 => Ok(DestinyItemType::Bounty),
-            27 => Ok(DestinyItemType::Wrapper),
-            28 => Ok(DestinyItemType::SeasonalArtifact),
-            29 => Ok(DestinyItemType::Finisher),
-            30 => Ok(DestinyItemType::Pattern),
+            0 => Ok(Self::None),
+            1 => Ok(Self::Currency),
+            2 => Ok(Self::Armor),
+            3 => Ok(Self::Weapon),
+            7 => Ok(Self::Message),
+            8 => Ok(Self::Engram),
+            9 => Ok(Self::Consumable),
+            10 => Ok(Self::ExchangeMaterial),
+            11 => Ok(Self::MissionReward),
+            12 => Ok(Self::QuestStep),
+            13 => Ok(Self::QuestStepComplete),
+            14 => Ok(Self::Emblem),
+            15 => Ok(Self::Quest),
+            16 => Ok(Self::Subclass),
+            17 => Ok(Self::ClanBanner),
+            18 => Ok(Self::Aura),
+            19 => Ok(Self::Mod),
+            20 => Ok(Self::Dummy),
+            21 => Ok(Self::Ship),
+            22 => Ok(Self::Vehicle),
+            23 => Ok(Self::Emote),
+            24 => Ok(Self::Ghost),
+            25 => Ok(Self::Package),
+            26 => Ok(Self::Bounty),
+            27 => Ok(Self::Wrapper),
+            28 => Ok(Self::SeasonalArtifact),
+            29 => Ok(Self::Finisher),
+            30 => Ok(Self::Pattern),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyItemType: {s}"
             ))),
@@ -1123,16 +1123,16 @@ pub enum DestinyBreakerType {
 }
 
 impl<'de> Deserialize<'de> for DestinyBreakerType {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyBreakerType, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyBreakerType::None),
-            1 => Ok(DestinyBreakerType::ShieldPiercing),
-            2 => Ok(DestinyBreakerType::Disruption),
-            3 => Ok(DestinyBreakerType::Stagger),
+            0 => Ok(Self::None),
+            1 => Ok(Self::ShieldPiercing),
+            2 => Ok(Self::Disruption),
+            3 => Ok(Self::Stagger),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyBreakerType: {s}"
             ))),
@@ -1157,16 +1157,14 @@ pub enum DestinyProgressionRewardItemAcquisitionBehavior {
 }
 
 impl<'de> Deserialize<'de> for DestinyProgressionRewardItemAcquisitionBehavior {
-    fn deserialize<D>(
-        deserializer: D,
-    ) -> Result<DestinyProgressionRewardItemAcquisitionBehavior, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyProgressionRewardItemAcquisitionBehavior::Instant),
-            1 => Ok(DestinyProgressionRewardItemAcquisitionBehavior::PlayerClaimRequired),
+            0 => Ok(Self::Instant),
+            1 => Ok(Self::PlayerClaimRequired),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyProgressionRewardItemAcquisitionBehavior: {s}"
             ))),
@@ -1193,19 +1191,19 @@ pub enum ItemBindStatus {
 }
 
 impl<'de> Deserialize<'de> for ItemBindStatus {
-    fn deserialize<D>(deserializer: D) -> Result<ItemBindStatus, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(ItemBindStatus::NotBound),
-            1 => Ok(ItemBindStatus::BoundToCharacter),
-            2 => Ok(ItemBindStatus::BoundToAccount),
-            3 => Ok(ItemBindStatus::BoundToGuild),
-            _ => Err(serde::de::Error::custom(format!(
-                "Unknown ItemBindStatus: {s}"
-            ))),
+            0 => Ok(Self::NotBound),
+            1 => Ok(Self::BoundToCharacter),
+            2 => Ok(Self::BoundToAccount),
+            3 => Ok(Self::BoundToGuild),
+            _ => {
+                Err(serde::de::Error::custom(format!("Unknown ItemBindStatus: {s}")))
+            },
         }
     }
 }
@@ -1229,12 +1227,12 @@ bitflags! {
 }
 
 impl<'de> Deserialize<'de> for TransferStatuses {
-    fn deserialize<D>(deserializer: D) -> Result<TransferStatuses, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
-        Ok(TransferStatuses::from_bits_truncate(s))
+        Ok(Self::from_bits_truncate(s))
     }
 }
 
@@ -1259,12 +1257,12 @@ bitflags! {
 }
 
 impl<'de> Deserialize<'de> for ItemState {
-    fn deserialize<D>(deserializer: D) -> Result<ItemState, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
-        Ok(ItemState::from_bits_truncate(s))
+        Ok(Self::from_bits_truncate(s))
     }
 }
 
@@ -1294,12 +1292,12 @@ bitflags! {
 }
 
 impl<'de> Deserialize<'de> for DestinyGameVersions {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyGameVersions, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u16::deserialize(deserializer)?;
-        Ok(DestinyGameVersions::from_bits_truncate(s))
+        Ok(Self::from_bits_truncate(s))
     }
 }
 
@@ -1356,50 +1354,50 @@ pub enum DestinyComponentType {
 }
 
 impl<'de> Deserialize<'de> for DestinyComponentType {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyComponentType, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u16::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyComponentType::None),
-            100 => Ok(DestinyComponentType::Profiles),
-            101 => Ok(DestinyComponentType::VendorReceipts),
-            102 => Ok(DestinyComponentType::ProfileInventories),
-            103 => Ok(DestinyComponentType::ProfileCurrencies),
-            104 => Ok(DestinyComponentType::ProfileProgression),
-            105 => Ok(DestinyComponentType::PlatformSilver),
-            200 => Ok(DestinyComponentType::Characters),
-            201 => Ok(DestinyComponentType::CharacterInventories),
-            202 => Ok(DestinyComponentType::CharacterProgressions),
-            203 => Ok(DestinyComponentType::CharacterRenderData),
-            204 => Ok(DestinyComponentType::CharacterActivities),
-            205 => Ok(DestinyComponentType::CharacterEquipment),
-            206 => Ok(DestinyComponentType::CharacterLoadouts),
-            300 => Ok(DestinyComponentType::ItemInstances),
-            301 => Ok(DestinyComponentType::ItemObjectives),
-            302 => Ok(DestinyComponentType::ItemPerks),
-            303 => Ok(DestinyComponentType::ItemRenderData),
-            304 => Ok(DestinyComponentType::ItemStats),
-            305 => Ok(DestinyComponentType::ItemSockets),
-            306 => Ok(DestinyComponentType::ItemTalentGrids),
-            307 => Ok(DestinyComponentType::ItemCommonData),
-            308 => Ok(DestinyComponentType::ItemPlugStates),
-            309 => Ok(DestinyComponentType::ItemPlugObjectives),
-            310 => Ok(DestinyComponentType::ItemReusablePlugs),
-            400 => Ok(DestinyComponentType::Vendors),
-            401 => Ok(DestinyComponentType::VendorCategories),
-            402 => Ok(DestinyComponentType::VendorSales),
-            500 => Ok(DestinyComponentType::Kiosks),
-            600 => Ok(DestinyComponentType::CurrencyLookups),
-            700 => Ok(DestinyComponentType::PresentationNodes),
-            800 => Ok(DestinyComponentType::Collectibles),
-            900 => Ok(DestinyComponentType::Records),
-            1000 => Ok(DestinyComponentType::Transitory),
-            1100 => Ok(DestinyComponentType::Metrics),
-            1200 => Ok(DestinyComponentType::StringVariables),
-            1300 => Ok(DestinyComponentType::Craftables),
-            1400 => Ok(DestinyComponentType::SocialCommendations),
+            0 => Ok(Self::None),
+            100 => Ok(Self::Profiles),
+            101 => Ok(Self::VendorReceipts),
+            102 => Ok(Self::ProfileInventories),
+            103 => Ok(Self::ProfileCurrencies),
+            104 => Ok(Self::ProfileProgression),
+            105 => Ok(Self::PlatformSilver),
+            200 => Ok(Self::Characters),
+            201 => Ok(Self::CharacterInventories),
+            202 => Ok(Self::CharacterProgressions),
+            203 => Ok(Self::CharacterRenderData),
+            204 => Ok(Self::CharacterActivities),
+            205 => Ok(Self::CharacterEquipment),
+            206 => Ok(Self::CharacterLoadouts),
+            300 => Ok(Self::ItemInstances),
+            301 => Ok(Self::ItemObjectives),
+            302 => Ok(Self::ItemPerks),
+            303 => Ok(Self::ItemRenderData),
+            304 => Ok(Self::ItemStats),
+            305 => Ok(Self::ItemSockets),
+            306 => Ok(Self::ItemTalentGrids),
+            307 => Ok(Self::ItemCommonData),
+            308 => Ok(Self::ItemPlugStates),
+            309 => Ok(Self::ItemPlugObjectives),
+            310 => Ok(Self::ItemReusablePlugs),
+            400 => Ok(Self::Vendors),
+            401 => Ok(Self::VendorCategories),
+            402 => Ok(Self::VendorSales),
+            500 => Ok(Self::Kiosks),
+            600 => Ok(Self::CurrencyLookups),
+            700 => Ok(Self::PresentationNodes),
+            800 => Ok(Self::Collectibles),
+            900 => Ok(Self::Records),
+            1000 => Ok(Self::Transitory),
+            1100 => Ok(Self::Metrics),
+            1200 => Ok(Self::StringVariables),
+            1300 => Ok(Self::Craftables),
+            1400 => Ok(Self::SocialCommendations),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyComponentType: {s}"
             ))),
@@ -1425,12 +1423,12 @@ bitflags! {
 }
 
 impl<'de> Deserialize<'de> for DestinyPresentationNodeState {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyPresentationNodeState, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
-        Ok(DestinyPresentationNodeState::from_bits_truncate(s))
+        Ok(Self::from_bits_truncate(s))
     }
 }
 
@@ -1457,12 +1455,12 @@ bitflags! {
 }
 
 impl<'de> Deserialize<'de> for DestinyRecordState {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyRecordState, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
-        Ok(DestinyRecordState::from_bits_truncate(s))
+        Ok(Self::from_bits_truncate(s))
     }
 }
 
@@ -1489,12 +1487,12 @@ bitflags! {
 }
 
 impl<'de> Deserialize<'de> for DestinyCollectibleState {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyCollectibleState, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
-        Ok(DestinyCollectibleState::from_bits_truncate(s))
+        Ok(Self::from_bits_truncate(s))
     }
 }
 
@@ -1518,12 +1516,12 @@ bitflags! {
 }
 
 impl<'de> Deserialize<'de> for DestinyPartyMemberStates {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyPartyMemberStates, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
-        Ok(DestinyPartyMemberStates::from_bits_truncate(s))
+        Ok(Self::from_bits_truncate(s))
     }
 }
 
@@ -1547,17 +1545,17 @@ pub enum DestinyGamePrivacySetting {
 }
 
 impl<'de> Deserialize<'de> for DestinyGamePrivacySetting {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyGamePrivacySetting, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyGamePrivacySetting::Open),
-            1 => Ok(DestinyGamePrivacySetting::ClanAndFriendsOnly),
-            2 => Ok(DestinyGamePrivacySetting::FriendsOnly),
-            3 => Ok(DestinyGamePrivacySetting::InvitationOnly),
-            4 => Ok(DestinyGamePrivacySetting::Closed),
+            0 => Ok(Self::Open),
+            1 => Ok(Self::ClanAndFriendsOnly),
+            2 => Ok(Self::FriendsOnly),
+            3 => Ok(Self::InvitationOnly),
+            4 => Ok(Self::Closed),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyGamePrivacySetting: {s}"
             ))),
@@ -1587,12 +1585,12 @@ bitflags! {
 }
 
 impl<'de> Deserialize<'de> for DestinyJoinClosedReasons {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyJoinClosedReasons, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u16::deserialize(deserializer)?;
-        Ok(DestinyJoinClosedReasons::from_bits_truncate(s))
+        Ok(Self::from_bits_truncate(s))
     }
 }
 
@@ -1615,19 +1613,17 @@ pub enum DestinyRace {
 }
 
 impl<'de> Deserialize<'de> for DestinyRace {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyRace, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyRace::Human),
-            1 => Ok(DestinyRace::Awoken),
-            2 => Ok(DestinyRace::Exo),
-            3 => Ok(DestinyRace::Unknown),
-            _ => Err(serde::de::Error::custom(format!(
-                "Unknown DestinyRace: {s}"
-            ))),
+            0 => Ok(Self::Human),
+            1 => Ok(Self::Awoken),
+            2 => Ok(Self::Exo),
+            3 => Ok(Self::Unknown),
+            _ => Err(serde::de::Error::custom(format!("Unknown DestinyRace: {s}"))),
         }
     }
 }
@@ -1674,20 +1670,20 @@ pub enum DestinyActivityDifficultyTier {
 }
 
 impl<'de> Deserialize<'de> for DestinyActivityDifficultyTier {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyActivityDifficultyTier, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         match s {
-            0 => Ok(DestinyActivityDifficultyTier::Trivial),
-            1 => Ok(DestinyActivityDifficultyTier::Easy),
-            2 => Ok(DestinyActivityDifficultyTier::Normal),
-            3 => Ok(DestinyActivityDifficultyTier::Challenging),
-            4 => Ok(DestinyActivityDifficultyTier::Hard),
-            5 => Ok(DestinyActivityDifficultyTier::Brave),
-            6 => Ok(DestinyActivityDifficultyTier::AlmostImpossible),
-            7 => Ok(DestinyActivityDifficultyTier::Impossible),
+            0 => Ok(Self::Trivial),
+            1 => Ok(Self::Easy),
+            2 => Ok(Self::Normal),
+            3 => Ok(Self::Challenging),
+            4 => Ok(Self::Hard),
+            5 => Ok(Self::Brave),
+            6 => Ok(Self::AlmostImpossible),
+            7 => Ok(Self::Impossible),
             _ => Err(serde::de::Error::custom(format!(
                 "Unknown DestinyActivityDifficultyTier: {s}"
             ))),
@@ -1727,12 +1723,12 @@ bitflags! {
 }
 
 impl<'de> Deserialize<'de> for EquipFailureReason {
-    fn deserialize<D>(deserializer: D) -> Result<EquipFailureReason, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
-        Ok(EquipFailureReason::from_bits_truncate(s))
+        Ok(Self::from_bits_truncate(s))
     }
 }
 
@@ -1781,31 +1777,31 @@ pub enum DestinyTalentNodeState {
 }
 
 impl<'de> Deserialize<'de> for DestinyTalentNodeState {
-    fn deserialize<D>(deserializer: D) -> Result<DestinyTalentNodeState, D::Error>
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: Deserializer<'de>,
     {
         let s = u8::deserialize(deserializer)?;
         Ok(match s {
-            0 => DestinyTalentNodeState::Invalid,
-            1 => DestinyTalentNodeState::CanUpgrade,
-            2 => DestinyTalentNodeState::NoPoints,
-            3 => DestinyTalentNodeState::NoPrerequisites,
-            4 => DestinyTalentNodeState::NoSteps,
-            5 => DestinyTalentNodeState::NoUnlock,
-            6 => DestinyTalentNodeState::NoMaterial,
-            7 => DestinyTalentNodeState::NoGridLevel,
-            8 => DestinyTalentNodeState::SwappingLocked,
-            9 => DestinyTalentNodeState::MustSwap,
-            10 => DestinyTalentNodeState::Complete,
-            11 => DestinyTalentNodeState::Unknown,
-            12 => DestinyTalentNodeState::CreationOnly,
-            13 => DestinyTalentNodeState::Hidden,
+            0 => Self::Invalid,
+            1 => Self::CanUpgrade,
+            2 => Self::NoPoints,
+            3 => Self::NoPrerequisites,
+            4 => Self::NoSteps,
+            5 => Self::NoUnlock,
+            6 => Self::NoMaterial,
+            7 => Self::NoGridLevel,
+            8 => Self::SwappingLocked,
+            9 => Self::MustSwap,
+            10 => Self::Complete,
+            11 => Self::Unknown,
+            12 => Self::CreationOnly,
+            13 => Self::Hidden,
             _ => {
                 return Err(serde::de::Error::custom(format!(
                     "Unknown DestinyTalentNodeState: {s}"
                 )));
-            }
+            },
         })
     }
 }

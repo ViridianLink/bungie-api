@@ -3,7 +3,8 @@ use std::collections::HashMap;
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
-use super::{challenges::DestinyChallengeStatus, quests::DestinyQuestStatus};
+use super::challenges::DestinyChallengeStatus;
+use super::quests::DestinyQuestStatus;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]

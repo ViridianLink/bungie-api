@@ -1,20 +1,28 @@
-use chrono::{DateTime, Utc};
-use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+use chrono::{DateTime, Utc};
+use serde::{Deserialize, Serialize};
+
+use super::items::DestinyItemPerksComponent;
 use crate::types::BungieMembershipType;
 use crate::types::destiny::artifacts::DestinyArtifactCharacterScoped;
-use crate::types::destiny::character::{DestinyCharacterCustomization, DestinyCharacterPeerView};
+use crate::types::destiny::character::{
+    DestinyCharacterCustomization,
+    DestinyCharacterPeerView,
+};
 use crate::types::destiny::historical_stats::definitions::DestinyActivityModeType;
 use crate::types::destiny::milestones::DestinyMilestone;
 use crate::types::destiny::progression::DestinyFactionProgression;
 use crate::types::destiny::quests::{DestinyObjectiveProgress, DestinyQuestStatus};
 use crate::types::destiny::{
-    DestinyActivity, DestinyClass, DestinyGender, DestinyProgression, DestinyRace, DyeReference,
+    DestinyActivity,
+    DestinyClass,
+    DestinyGender,
+    DestinyProgression,
+    DestinyRace,
+    DyeReference,
 };
 use crate::types::misc::DestinyColor;
-
-use super::items::DestinyItemPerksComponent;
 
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
