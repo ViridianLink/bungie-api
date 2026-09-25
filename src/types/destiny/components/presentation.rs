@@ -5,18 +5,20 @@ use serde::{Deserialize, Serialize};
 use crate::types::destiny::DestinyPresentationNodeState;
 use crate::types::destiny::quests::DestinyObjectiveProgress;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPresentationNodesComponent {
     pub nodes: HashMap<u32, DestinyPresentationNodeComponent>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPresentationNodeComponent {
     pub state: DestinyPresentationNodeState,
     pub objective: DestinyObjectiveProgress,
     pub progress_value: i32,
     pub completion_value: i32,
-    pub record_category_score: i32,
+    pub record_category_score: Option<i32>,
 }

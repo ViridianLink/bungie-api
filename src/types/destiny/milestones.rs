@@ -6,9 +6,9 @@ use serde::{Deserialize, Serialize};
 use super::challenges::DestinyChallengeStatus;
 use super::quests::DestinyQuestStatus;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestone {
     pub milestone_hash: u32,
     pub available_quests: Option<Vec<DestinyMilestoneQuest>>,
@@ -17,14 +17,14 @@ pub struct DestinyMilestone {
     pub vendor_hashes: Option<Vec<u32>>,
     pub vendors: Vec<DestinyMilestoneVendor>,
     pub rewards: Vec<DestinyMilestoneRewardCategory>,
-    pub start_date: DateTime<Utc>,
-    pub end_date: DateTime<Utc>,
+    pub start_date: Option<DateTime<Utc>>,
+    pub end_date: Option<DateTime<Utc>>,
     pub order: i32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestoneQuest {
     pub quest_item_hash: u32,
     pub status: DestinyQuestStatus,
@@ -32,79 +32,83 @@ pub struct DestinyMilestoneQuest {
     pub challenges: Vec<DestinyChallengeStatus>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestoneActivity {
     pub activity_hash: u32,
-    pub activity_mode_hash: u32,
-    pub activity_mode_type: i32,
+    pub activity_mode_hash: Option<u32>,
+    pub activity_mode_type: Option<i32>,
     pub modifier_hashes: Vec<u32>,
     pub variants: Vec<DestinyMilestoneActivityVariant>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestoneActivityVariant {
     pub activity_hash: u32,
     pub completion_status: DestinyMilestoneActivityCompletionStatus,
-    pub activity_mode_hash: u32,
-    pub activity_mode_type: i32,
+    pub activity_mode_hash: Option<u32>,
+    pub activity_mode_type: Option<i32>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestoneActivityCompletionStatus {
     pub completed: bool,
     pub phases: Vec<DestinyMilestoneActivityPhase>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestoneActivityPhase {
     pub complete: bool,
     pub phase_hash: u32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestoneChallengeActivity {
     pub activity_hash: u32,
     pub challenges: Vec<DestinyChallengeStatus>,
     pub modifier_hashes: Vec<u32>,
     pub boolean_activity_options: HashMap<u32, bool>,
-    pub loadout_requirement_index: i32,
+    pub loadout_requirement_index: Option<i32>,
     pub phases: Vec<DestinyMilestoneActivityPhase>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestoneVendor {
     pub vendor_hash: u32,
-    pub preview_item_hash: u32,
+    pub preview_item_hash: Option<u32>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestoneRewardCategory {
     pub reward_category_hash: u32,
     pub entries: Vec<DestinyMilestoneRewardEntry>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestoneRewardEntry {
     pub reward_entry_hash: u32,
     pub earned: bool,
     pub redeemed: bool,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestoneContent {
     pub about: Option<String>,
     pub status: Option<String>,
@@ -112,81 +116,81 @@ pub struct DestinyMilestoneContent {
     pub item_categories: Vec<DestinyMilestoneContentItemCategory>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestoneContentItemCategory {
     pub title: Option<String>,
     pub item_hashes: Option<Vec<u32>>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPublicMilestone {
     pub milestone_hash: u32,
     pub available_quests: Vec<DestinyPublicMilestoneQuest>,
     pub activities: Vec<DestinyPublicMilestoneChallengeActivity>,
     pub vendor_hashes: Vec<u32>,
     pub vendors: Vec<DestinyPublicMilestoneVendor>,
-    pub start_date: DateTime<Utc>,
-    pub end_date: DateTime<Utc>,
+    pub start_date: Option<DateTime<Utc>>,
+    pub end_date: Option<DateTime<Utc>>,
     pub order: i32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPublicMilestoneQuest {
     pub quest_item_hash: u32,
     pub activity: DestinyPublicMilestoneActivity,
     pub challenges: Vec<DestinyPublicMilestoneChallenge>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPublicMilestoneActivity {
     pub activity_hash: u32,
     pub modifier_hashes: Vec<u32>,
     pub variants: Vec<DestinyPublicMilestoneActivityVariant>,
-    pub activity_mode_hash: u32,
-    pub activity_mode_type: i32,
+    pub activity_mode_hash: Option<u32>,
+    pub activity_mode_type: Option<i32>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPublicMilestoneActivityVariant {
     pub activity_hash: u32,
-    pub activity_mode_hash: u32,
-    pub activity_mode_type: i32,
+    pub activity_mode_hash: Option<u32>,
+    pub activity_mode_type: Option<i32>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPublicMilestoneChallenge {
     pub objective_hash: u32,
-    pub activity_hash: u32,
+    pub activity_hash: Option<u32>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPublicMilestoneChallengeActivity {
     pub activity_hash: u32,
     pub challenge_objective_hashes: Vec<u32>,
     pub modifier_hashes: Vec<u32>,
-    pub loadout_requirement_index: i32,
+    pub loadout_requirement_index: Option<i32>,
     pub phase_hashes: Vec<u32>,
     pub boolean_activity_options: HashMap<u32, bool>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPublicMilestoneVendor {
     pub vendor_hash: u32,
-    pub preview_item_hash: u32,
+    pub preview_item_hash: Option<u32>,
 }

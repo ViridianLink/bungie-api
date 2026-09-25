@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::fmt;
 
 use components::ComponentResponse;
 use destiny::components::items::{
@@ -15,6 +16,8 @@ use destiny::entities::items::{
     DestinyItemStatsComponent,
     DestinyItemTalentGridComponent,
 };
+pub use destiny::{ItemLocation, TierType};
+use serde::de::{self, Visitor};
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
 pub mod common;
@@ -27,6 +30,11 @@ pub mod misc;
 pub mod response;
 pub mod user;
 
+/// The membership types supported by the Bungie.net accounts system.
+///
+/// Serialized as its numeric value. Deserialization accepts either the numeric
+/// value or the variant name, because Bungie uses the name when this type is
+/// the key of a dictionary (for example `DestinyPlatformSilverComponent`).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 #[repr(i16)]
 pub enum BungieMembershipType {
@@ -38,8 +46,47 @@ pub enum BungieMembershipType {
     TigerStadia = 5,
     TigerEgs = 6,
     TigerDemon = 10,
+    GoliathGame = 20,
     BungieNext = 254,
     All = -1,
+}
+
+impl BungieMembershipType {
+    #[must_use]
+    pub const fn from_i64(value: i64) -> Option<Self> {
+        Some(match value {
+            0 => Self::None,
+            1 => Self::TigerXbox,
+            2 => Self::TigerPsn,
+            3 => Self::TigerSteam,
+            4 => Self::TigerBlizzard,
+            5 => Self::TigerStadia,
+            6 => Self::TigerEgs,
+            10 => Self::TigerDemon,
+            20 => Self::GoliathGame,
+            254 => Self::BungieNext,
+            -1 => Self::All,
+            _ => return None,
+        })
+    }
+
+    #[must_use]
+    pub fn from_name(name: &str) -> Option<Self> {
+        Some(match name {
+            "None" => Self::None,
+            "TigerXbox" => Self::TigerXbox,
+            "TigerPsn" => Self::TigerPsn,
+            "TigerSteam" => Self::TigerSteam,
+            "TigerBlizzard" => Self::TigerBlizzard,
+            "TigerStadia" => Self::TigerStadia,
+            "TigerEgs" => Self::TigerEgs,
+            "TigerDemon" => Self::TigerDemon,
+            "GoliathGame" => Self::GoliathGame,
+            "BungieNext" => Self::BungieNext,
+            "All" => Self::All,
+            _ => return None,
+        })
+    }
 }
 
 impl<'de> Deserialize<'de> for BungieMembershipType {
@@ -47,22 +94,42 @@ impl<'de> Deserialize<'de> for BungieMembershipType {
     where
         D: Deserializer<'de>,
     {
-        let s = i32::deserialize(deserializer)?;
-        match s {
-            0 => Ok(Self::None),
-            1 => Ok(Self::TigerXbox),
-            2 => Ok(Self::TigerPsn),
-            3 => Ok(Self::TigerSteam),
-            4 => Ok(Self::TigerBlizzard),
-            5 => Ok(Self::TigerStadia),
-            6 => Ok(Self::TigerEgs),
-            10 => Ok(Self::TigerDemon),
-            254 => Ok(Self::BungieNext),
-            -1 => Ok(Self::All),
-            _ => Err(serde::de::Error::custom(format!(
-                "unknown BungieMembershipType: {s}"
-            ))),
+        struct MembershipTypeVisitor;
+
+        impl Visitor<'_> for MembershipTypeVisitor {
+            type Value = BungieMembershipType;
+
+            fn expecting(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+                f.write_str("a BungieMembershipType number or name")
+            }
+
+            fn visit_i64<E: de::Error>(self, v: i64) -> Result<Self::Value, E> {
+                BungieMembershipType::from_i64(v).ok_or_else(|| {
+                    E::custom(format!("unknown BungieMembershipType: {v}"))
+                })
+            }
+
+            fn visit_u64<E: de::Error>(self, v: u64) -> Result<Self::Value, E> {
+                i64::try_from(v)
+                    .ok()
+                    .and_then(BungieMembershipType::from_i64)
+                    .ok_or_else(|| {
+                        E::custom(format!("unknown BungieMembershipType: {v}"))
+                    })
+            }
+
+            fn visit_str<E: de::Error>(self, v: &str) -> Result<Self::Value, E> {
+                v.parse::<i64>()
+                    .ok()
+                    .and_then(BungieMembershipType::from_i64)
+                    .or_else(|| BungieMembershipType::from_name(v))
+                    .ok_or_else(|| {
+                        E::custom(format!("unknown BungieMembershipType: {v}"))
+                    })
+            }
         }
+
+        deserializer.deserialize_any(MembershipTypeVisitor)
     }
 }
 
@@ -71,123 +138,39 @@ impl Serialize for BungieMembershipType {
     where
         S: Serializer,
     {
-        let s = *self as i16;
-        s.serialize(serializer)
+        (*self as i16).serialize(serializer)
     }
 }
 
-#[derive(Debug, Deserialize, Serialize)]
-pub struct DestinyBaseItemComponentSetOfuint32 {
-    pub objectives: ComponentResponse<HashMap<u32, DestinyItemObjectivesComponent>>,
-    pub perks: ComponentResponse<HashMap<u32, DestinyItemPerksComponent>>,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
+pub struct DestinyBaseItemComponentSetOfuint32 {
+    pub objectives:
+        Option<ComponentResponse<HashMap<u32, DestinyItemObjectivesComponent>>>,
+    pub perks: Option<ComponentResponse<HashMap<u32, DestinyItemPerksComponent>>>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemComponentSetOfint64 {
-    pub instances: ComponentResponse<HashMap<i64, DestinyItemInstanceComponent>>,
-    pub render_data: ComponentResponse<HashMap<i64, DestinyItemRenderComponent>>,
-    pub stats: ComponentResponse<HashMap<i64, DestinyItemStatsComponent>>,
-    pub sockets: ComponentResponse<HashMap<i64, DestinyItemSocketsComponent>>,
+    pub instances:
+        Option<ComponentResponse<HashMap<i64, DestinyItemInstanceComponent>>>,
+    pub render_data:
+        Option<ComponentResponse<HashMap<i64, DestinyItemRenderComponent>>>,
+    pub stats: Option<ComponentResponse<HashMap<i64, DestinyItemStatsComponent>>>,
+    pub sockets:
+        Option<ComponentResponse<HashMap<i64, DestinyItemSocketsComponent>>>,
     pub reusable_plugs:
-        ComponentResponse<HashMap<i64, DestinyItemReusablePlugsComponent>>,
+        Option<ComponentResponse<HashMap<i64, DestinyItemReusablePlugsComponent>>>,
     pub plug_objectives:
-        ComponentResponse<HashMap<i64, DestinyItemPlugObjectivesComponent>>,
+        Option<ComponentResponse<HashMap<i64, DestinyItemPlugObjectivesComponent>>>,
     pub talent_grids:
-        ComponentResponse<HashMap<i64, DestinyItemTalentGridComponent>>,
-    pub plug_states: ComponentResponse<HashMap<u32, DestinyItemPlugComponent>>,
-    pub objectives: ComponentResponse<HashMap<i64, DestinyItemObjectivesComponent>>,
-    pub perks: ComponentResponse<HashMap<i64, DestinyItemPerksComponent>>,
-}
-
-#[derive(Debug, Default, Clone, Copy)]
-pub enum TierType {
-    #[default]
-    Unknown = 0,
-    Currency = 1,
-    Basic = 2,
-    Common = 3,
-    Rare = 4,
-    Superior = 5,
-    Exotic = 6,
-}
-
-impl<'de> Deserialize<'de> for TierType {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        let s = u8::deserialize(deserializer)?;
-        match s {
-            0 => Ok(Self::Unknown),
-            1 => Ok(Self::Currency),
-            2 => Ok(Self::Basic),
-            3 => Ok(Self::Common),
-            4 => Ok(Self::Rare),
-            5 => Ok(Self::Superior),
-            6 => Ok(Self::Exotic),
-            _ => Err(serde::de::Error::custom(format!("unknown TierType: {s}"))),
-        }
-    }
-}
-
-impl Serialize for TierType {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: Serializer,
-    {
-        let s = match self {
-            Self::Unknown => 0,
-            Self::Currency => 1,
-            Self::Basic => 2,
-            Self::Common => 3,
-            Self::Rare => 4,
-            Self::Superior => 5,
-            Self::Exotic => 6,
-        };
-        s.serialize(serializer)
-    }
-}
-
-#[derive(Debug, Clone, Copy)]
-pub enum ItemLocation {
-    Unknown = 0,
-    Inventory = 1,
-    Vault = 2,
-    Vendor = 3,
-    Postmaster = 4,
-}
-
-impl<'de> Deserialize<'de> for ItemLocation {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        let s = u8::deserialize(deserializer)?;
-        match s {
-            0 => Ok(Self::Unknown),
-            1 => Ok(Self::Inventory),
-            2 => Ok(Self::Vault),
-            3 => Ok(Self::Vendor),
-            4 => Ok(Self::Postmaster),
-            _ => Err(serde::de::Error::custom(format!("unknown ItemLocation: {s}"))),
-        }
-    }
-}
-
-impl Serialize for ItemLocation {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: Serializer,
-    {
-        let s = match self {
-            Self::Unknown => 0,
-            Self::Inventory => 1,
-            Self::Vault => 2,
-            Self::Vendor => 3,
-            Self::Postmaster => 4,
-        };
-        s.serialize(serializer)
-    }
+        Option<ComponentResponse<HashMap<i64, DestinyItemTalentGridComponent>>>,
+    pub plug_states:
+        Option<ComponentResponse<HashMap<u32, DestinyItemPlugComponent>>>,
+    pub objectives:
+        Option<ComponentResponse<HashMap<i64, DestinyItemObjectivesComponent>>>,
+    pub perks: Option<ComponentResponse<HashMap<i64, DestinyItemPerksComponent>>>,
 }

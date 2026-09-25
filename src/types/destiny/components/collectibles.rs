@@ -4,24 +4,24 @@ use serde::{Deserialize, Serialize};
 
 use crate::types::destiny::DestinyCollectibleState;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyCollectiblesComponent {
     pub collectibles: HashMap<u32, DestinyCollectibleComponent>,
     pub collection_categories_root_node_hash: u32,
     pub collection_badges_root_node_hash: u32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 
 pub struct DestinyCollectibleComponent {
     pub state: DestinyCollectibleState,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyProfileCollectiblesComponent {
     pub recent_collectible_hashes: Vec<u32>,
     pub newness_flagged_collectible_hashes: Vec<u32>,

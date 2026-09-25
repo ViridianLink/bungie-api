@@ -1,15 +1,28 @@
+//! A typed async client for the Bungie.net Destiny 2 API.
+//!
+//! ```no_run
+//! # async fn run() -> bungie_api::Result<()> {
+//! use bungie_api::BungieClientBuilder;
+//!
+//! let client = BungieClientBuilder::new("your-api-key").build()?;
+//! let manifest = client.destiny_manifest().await?;
+//! let items = client.destiny_inventory_item_definition(&manifest, "en").await?;
+//! # Ok(())
+//! # }
+//! ```
+
 mod bungie_client;
+mod serde_as;
 
 pub mod endpoints;
 pub mod error;
-pub mod serde_as;
-use std::collections::HashMap;
-
-pub use error::{BungieApiError, Result};
-
 pub mod types;
 
+use std::collections::HashMap;
+
 pub use bungie_client::{BungieClient, BungieClientBuilder};
+pub use endpoints::DestinyDefinition;
+pub use error::{BungieApiError, Result};
 pub use types::definitions::DestinyInventoryItemDefinition;
 pub use types::destiny::definitions::sockets::{
     DestinyPlugSetDefinition,
@@ -26,15 +39,19 @@ pub type DestinySocketTypeManifest = HashMap<String, DestinySocketTypeDefinition
 
 #[cfg(test)]
 mod tests {
-
     use crate::BungieClientBuilder;
 
-    const BUNGIE_API_KEY: &str = "";
-
+    /// Downloads the live manifest and definitions. Needs network access and a
+    /// Bungie API key in `BUNGIE_API_KEY`, so it only runs when asked for:
+    /// `BUNGIE_API_KEY=... cargo test --features strict -- --ignored`
     #[expect(clippy::unwrap_used, reason = "Unwrap allowed in tests")]
+    #[expect(clippy::expect_used, reason = "Expect allowed in tests")]
+    #[ignore = "requires network access and BUNGIE_API_KEY"]
     #[tokio::test]
-    async fn run() {
-        let client = BungieClientBuilder::new(BUNGIE_API_KEY).build().unwrap();
+    async fn live_manifest() {
+        let api_key =
+            std::env::var("BUNGIE_API_KEY").expect("BUNGIE_API_KEY not set");
+        let client = BungieClientBuilder::new(api_key).build().unwrap();
 
         let manifest = client.destiny_manifest().await.unwrap();
         client.destiny_inventory_item_definition(&manifest, "en").await.unwrap();

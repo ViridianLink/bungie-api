@@ -4,7 +4,7 @@ use crate::types::destiny::{DestinyEnergyType, PlugAvailabilityMode, PlugUiStyle
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyDerivedItemCategoryDefinition {
     pub category_description: String,
     pub items: Vec<DestinyDerivedItemDefinition>,
@@ -13,19 +13,19 @@ pub struct DestinyDerivedItemCategoryDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyDerivedItemDefinition {
-    pub item_hash: u32,
+    pub item_hash: Option<u32>,
     pub item_name: Option<String>,
     pub item_detail: Option<String>,
     pub item_description: Option<String>,
     pub icon_path: Option<String>,
-    pub vendor_item_index: u32,
+    pub vendor_item_index: i32,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemPlugDefinition {
     pub insertion_rules: Vec<DestinyPlugRuleDefinition>,
     pub plug_category_identifier: String,
@@ -51,14 +51,14 @@ pub struct DestinyItemPlugDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPlugRuleDefinition {
     pub failure_message: String,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyParentItemOverride {
     pub additional_equip_requirements_display_strings: Vec<String>,
     pub pip_icon: Option<String>,
@@ -66,7 +66,7 @@ pub struct DestinyParentItemOverride {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyEnergyCapacityEntry {
     pub capacity_value: i32,
     pub energy_type_hash: u32,
@@ -75,7 +75,7 @@ pub struct DestinyEnergyCapacityEntry {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyEnergyCostEntry {
     pub energy_cost: i32,
     pub energy_type_hash: u32,

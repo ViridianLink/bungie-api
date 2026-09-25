@@ -1,0 +1,36 @@
+{
+ "activities": [
+  {
+   "period": "2024-01-01T00:00:00Z",
+   "activityDetails": {
+    "referenceId": 1,
+    "directorActivityHash": 1,
+    "instanceId": "1",
+    "mode": 93,
+    "modes": [
+     93
+    ],
+    "isPrivate": true,
+    "membershipType": -1
+   },
+   "values": {
+    "key": {
+     "statId": "text",
+     "basic": {
+      "value": 1.5,
+      "displayValue": "text"
+     },
+     "pga": {
+      "value": 1.5,
+      "displayValue": "text"
+     },
+     "weighted": {
+      "value": 1.5,
+      "displayValue": "text"
+     },
+     "activityId": "1"
+    }
+   }
+  }
+ ]
+}

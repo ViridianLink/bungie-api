@@ -1,0 +1,31 @@
+{
+ "version": "text",
+ "mobileAssetContentPath": "text",
+ "mobileGearAssetDataBases": [
+  {
+   "version": 1,
+   "path": "text"
+  }
+ ],
+ "mobileWorldContentPaths": {
+  "key": "text"
+ },
+ "jsonWorldContentPaths": {
+  "key": "text"
+ },
+ "jsonWorldComponentContentPaths": {
+  "key": {
+   "key": "text"
+  }
+ },
+ "mobileClanBannerDatabasePath": "text",
+ "mobileGearCDN": {
+  "key": "text"
+ },
+ "iconImagePyramidInfo": [
+  {
+   "name": "text",
+   "factor": 1.5
+  }
+ ]
+}

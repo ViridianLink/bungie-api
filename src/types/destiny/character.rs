@@ -2,9 +2,9 @@ use serde::{Deserialize, Serialize};
 
 use super::DyeReference;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyCharacterCustomization {
     pub personality: u32,
     pub face: u32,
@@ -20,14 +20,16 @@ pub struct DestinyCharacterCustomization {
     pub decal_index: i32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyCharacterPeerView {
     pub equipment: Vec<DestinyItemPeerView>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemPeerView {
     pub item_hash: u32,
     pub dyes: Vec<DyeReference>,

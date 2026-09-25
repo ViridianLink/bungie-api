@@ -4,16 +4,16 @@ use serde::{Deserialize, Serialize};
 
 use crate::types::destiny::quests::DestinyObjectiveProgress;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyKiosksComponent {
     pub kiosk_items: HashMap<u32, Vec<DestinyKioskItem>>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyKioskItem {
     pub index: i32,
     pub can_acquire: bool,

@@ -44,9 +44,9 @@ use crate::types::{
     DestinyItemComponentSetOfint64,
 };
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyProfileResponse {
     pub response_minted_timestamp: DateTime<Utc>,
     pub secondary_components_minted_timestamp: DateTime<Utc>,
@@ -91,7 +91,7 @@ pub struct DestinyProfileResponse {
     pub character_plug_sets:
         Option<ComponentResponse<HashMap<i64, DestinyPlugSetsComponent>>>,
     pub character_uninstanced_item_components:
-        Option<DestinyBaseItemComponentSetOfuint32>,
+        Option<HashMap<i64, DestinyBaseItemComponentSetOfuint32>>,
     pub character_presentation_nodes:
         Option<ComponentResponse<HashMap<i64, DestinyPresentationNodesComponent>>>,
     pub character_records:

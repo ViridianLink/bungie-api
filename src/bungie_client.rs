@@ -1,105 +1,180 @@
-use reqwest::header::HeaderMap;
-use reqwest::{Client, ClientBuilder, IntoUrl, Response, header};
-use serde::de::DeserializeOwned;
+use reqwest::header::{self, HeaderMap, HeaderValue};
+use reqwest::{Client, ClientBuilder, IntoUrl, RequestBuilder, StatusCode};
+use serde::Serialize;
+use serde::de::{DeserializeOwned, IgnoredAny};
+use url::Url;
 
 use crate::types::exceptions::PlatformErrorCodes;
 use crate::types::response::BungieResponse;
 use crate::{BungieApiError, Result};
 
+pub(crate) const BUNGIE_URL: &str = "https://www.bungie.net";
+const PLATFORM_URL: &str = "https://www.bungie.net/Platform/";
+
 pub struct BungieClientBuilder {
     api_key: String,
+    user_agent: Option<String>,
 }
 
 impl BungieClientBuilder {
+    #[must_use]
     pub fn new(api_key: impl Into<String>) -> Self {
-        Self { api_key: api_key.into() }
+        Self { api_key: api_key.into(), user_agent: None }
+    }
+
+    /// Overrides the `User-Agent` header, which defaults to this crate's name
+    /// and version. Bungie asks applications to identify themselves, for
+    /// example `AppName/1.0 AppId/12345 (+https://example.com;me@example.com)`.
+    #[must_use]
+    pub fn user_agent(mut self, user_agent: impl Into<String>) -> Self {
+        self.user_agent = Some(user_agent.into());
+        self
     }
 
     pub fn build(self) -> Result<BungieClient> {
-        BungieClient::new(&self.api_key)
-    }
-}
+        const DEFAULT_USER_AGENT: &str =
+            concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION"));
 
-pub struct BungieClient {
-    pub(crate) client: Client,
-}
+        let mut api_key = HeaderValue::from_str(&self.api_key)?;
+        api_key.set_sensitive(true);
 
-impl BungieClient {
-    pub fn new(api_key: &str) -> Result<Self> {
-        const NAME: &str = env!("CARGO_PKG_NAME");
-        const VERSION: &str = env!("CARGO_PKG_VERSION");
+        let user_agent = match self.user_agent {
+            Some(user_agent) => HeaderValue::from_str(&user_agent)?,
+            None => HeaderValue::from_static(DEFAULT_USER_AGENT),
+        };
 
         let mut default_headers = HeaderMap::new();
-        default_headers.insert("X-API-Key", api_key.parse()?);
-        default_headers
-            .insert(header::USER_AGENT, format!("{NAME}/{VERSION}").parse()?);
+        default_headers.insert("X-API-Key", api_key);
+        default_headers.insert(header::USER_AGENT, user_agent);
 
         let client =
             ClientBuilder::new().default_headers(default_headers).build()?;
 
-        Ok(Self { client })
+        Ok(BungieClient { client, platform_url: Url::parse(PLATFORM_URL)? })
+    }
+}
+
+/// A client for the Bungie.net Platform API.
+///
+/// Cloning is cheap and shares the underlying connection pool.
+#[derive(Debug, Clone)]
+pub struct BungieClient {
+    pub(crate) client: Client,
+    platform_url: Url,
+}
+
+impl BungieClient {
+    pub fn new(api_key: &str) -> Result<Self> {
+        BungieClientBuilder::new(api_key).build()
     }
 
+    /// Sends a GET request and deserializes the JSON body as `T`.
     pub async fn get<T: DeserializeOwned>(&self, url: impl IntoUrl) -> Result<T> {
-        let reqwest = self.client.get(url);
-        let mut res = reqwest.send().await?;
-        res = Self::validate_status(res)?;
-        res = Self::validate_content_type(res)?;
-        let text = res.text().await?;
-        match serde_json::from_str::<T>(&text) {
-            Ok(json) => Ok(json),
-            Err(e) => {
-                #[cfg(test)]
-                std::fs::write("error.json", text)?;
-                Err(e.into())
-            },
+        let (status, content_type, body) = Self::send(self.client.get(url)).await?;
+
+        if !status.is_success() {
+            return Err(Self::http_error(status, body.as_ref()));
         }
+        Self::validate_content_type(content_type.as_ref())?;
+
+        Self::parse_json(body.as_ref())
     }
 
+    /// Sends a GET request to a Platform endpoint and unwraps the
+    /// [`BungieResponse`] envelope.
     pub async fn get_bungie_response<T: DeserializeOwned>(
         &self,
         url: impl IntoUrl,
     ) -> Result<T> {
-        let res = self.get::<BungieResponse<T>>(url).await?;
-        Self::handle_bungie_response(res)
+        Self::send_bungie(self.client.get(url)).await
     }
 
-    fn validate_status(response: Response) -> Result<Response> {
-        match response.status().as_u16() {
-            100..400 => Ok(response),
-            // Client Error
-            400..500 => Err(BungieApiError::ClientError(Box::new(response))),
-            // Server Error
-            500..600 => Err(BungieApiError::ServerError(Box::new(response))),
-            code => {
-                println!("unrecognized code: {code}");
-                Ok(response)
-            },
+    /// Sends a POST request with a JSON body to a Platform endpoint and
+    /// unwraps the [`BungieResponse`] envelope.
+    pub async fn post_bungie_response<T, B>(
+        &self,
+        url: impl IntoUrl,
+        body: &B,
+    ) -> Result<T>
+    where
+        T: DeserializeOwned,
+        B: Serialize + ?Sized,
+    {
+        Self::send_bungie(self.client.post(url).json(body)).await
+    }
+
+    /// Builds a Platform API URL from path segments, with the trailing slash
+    /// Bungie expects.
+    pub(crate) fn platform_url<I>(&self, segments: I) -> Result<Url>
+    where
+        I: IntoIterator,
+        I::Item: AsRef<str>,
+    {
+        let mut url = self.platform_url.clone();
+        url.path_segments_mut()
+            .map_err(|()| BungieApiError::InvalidUrl)?
+            .pop_if_empty()
+            .extend(segments)
+            .push("");
+        Ok(url)
+    }
+
+    async fn send(
+        request: RequestBuilder,
+    ) -> Result<(StatusCode, Option<HeaderValue>, impl AsRef<[u8]>)> {
+        let response = request.send().await?;
+        let status = response.status();
+        let content_type = response.headers().get(header::CONTENT_TYPE).cloned();
+        let body = response.bytes().await?;
+        Ok((status, content_type, body))
+    }
+
+    async fn send_bungie<T: DeserializeOwned>(request: RequestBuilder) -> Result<T> {
+        let (status, content_type, body) = Self::send(request).await?;
+        let body = body.as_ref();
+
+        if !status.is_success() {
+            // Bungie usually explains failures in its JSON envelope.
+            return Err(
+                match serde_json::from_slice::<BungieResponse<IgnoredAny>>(body) {
+                    Ok(envelope)
+                        if envelope.error_code != PlatformErrorCodes::Success =>
+                    {
+                        envelope.into_error()
+                    },
+                    _ => Self::http_error(status, body),
+                },
+            );
+        }
+        Self::validate_content_type(content_type.as_ref())?;
+
+        Self::parse_json::<BungieResponse<T>>(body)?.into_result()
+    }
+
+    fn parse_json<T: DeserializeOwned>(body: &[u8]) -> Result<T> {
+        serde_json::from_slice(body).map_err(|e| {
+            // Keep the payload around to make schema mismatches easy to debug.
+            #[cfg(test)]
+            let _ = std::fs::write("error.json", body);
+            e.into()
+        })
+    }
+
+    fn http_error(status: StatusCode, body: &[u8]) -> BungieApiError {
+        BungieApiError::Http {
+            status,
+            body: String::from_utf8_lossy(body).into_owned(),
         }
     }
 
-    fn validate_content_type(response: Response) -> Result<Response> {
-        if let Some(hv) = response.headers().get("Content-Type")
-            && !hv.to_str().is_ok_and(|s| s.starts_with("application/json"))
-        {
-            return Err(BungieApiError::InvalidContentType(hv.to_owned()));
-        }
-
-        Ok(response)
-    }
-
-    pub fn handle_bungie_response<T>(de: BungieResponse<T>) -> Result<T> {
-        #[expect(
-            unreachable_patterns,
-            reason = "PlatformErrorCodes is non exhaustive"
-        )]
-        match de.error_code {
-            PlatformErrorCodes::Success => Ok(de.response),
-            PlatformErrorCodes::Unknown(code) => {
-                println!("Error Code: {code}");
-                Err(BungieApiError::Bungie(PlatformErrorCodes::Unknown(code)))
+    fn validate_content_type(content_type: Option<&HeaderValue>) -> Result<()> {
+        match content_type {
+            Some(hv)
+                if !hv.to_str().is_ok_and(|s| s.starts_with("application/json")) =>
+            {
+                Err(BungieApiError::InvalidContentType(hv.clone()))
             },
-            code => Err(BungieApiError::Bungie(code)),
+            _ => Ok(()),
         }
     }
 }

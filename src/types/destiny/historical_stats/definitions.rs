@@ -1,7 +1,9 @@
-use serde::{Deserialize, Deserializer, Serialize, Serializer};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 #[repr(u8)]
-#[derive(Debug, Copy, Clone)]
+#[derive(
+    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
+)]
 pub enum DestinyActivityModeType {
     None = 0,
     Story = 2,
@@ -87,112 +89,6 @@ pub enum DestinyActivityModeType {
     ZoneControl = 89,
     IronBannerRift = 90,
     IronBannerZoneControl = 91,
-}
-
-impl<'de> Deserialize<'de> for DestinyActivityModeType {
-    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
-        let s = u16::deserialize(deserializer)?;
-        match s {
-            0 => Ok(Self::None),
-            2 => Ok(Self::Story),
-            3 => Ok(Self::Strike),
-            4 => Ok(Self::Raid),
-            5 => Ok(Self::AllPvP),
-            6 => Ok(Self::Patrol),
-            7 => Ok(Self::AllPvE),
-            9 => Ok(Self::Reserved9),
-            10 => Ok(Self::Control),
-            11 => Ok(Self::Reserved11),
-            12 => Ok(Self::Clash),
-            13 => Ok(Self::Reserved13),
-            15 => Ok(Self::CrimsonDoubles),
-            16 => Ok(Self::Nightfall),
-            17 => Ok(Self::HeroicNightfall),
-            18 => Ok(Self::AllStrikes),
-            19 => Ok(Self::IronBanner),
-            20 => Ok(Self::Reserved20),
-            21 => Ok(Self::Reserved21),
-            22 => Ok(Self::Reserved22),
-            24 => Ok(Self::Reserved24),
-            25 => Ok(Self::AllMayhem),
-            26 => Ok(Self::Reserved26),
-            27 => Ok(Self::Reserved27),
-            28 => Ok(Self::Reserved28),
-            29 => Ok(Self::Reserved29),
-            30 => Ok(Self::Reserved30),
-            31 => Ok(Self::Supremacy),
-            32 => Ok(Self::PrivateMatchesAll),
-            37 => Ok(Self::Survival),
-            38 => Ok(Self::Countdown),
-            39 => Ok(Self::TrialsOfTheNine),
-            40 => Ok(Self::Social),
-            41 => Ok(Self::TrialsCountdown),
-            42 => Ok(Self::TrialsSurvival),
-            43 => Ok(Self::IronBannerControl),
-            44 => Ok(Self::IronBannerClash),
-            45 => Ok(Self::IronBannerSupremacy),
-            46 => Ok(Self::ScoredNightfall),
-            47 => Ok(Self::ScoredHeroicNightfall),
-            48 => Ok(Self::Rumble),
-            49 => Ok(Self::AllDoubles),
-            50 => Ok(Self::Doubles),
-            51 => Ok(Self::PrivateMatchesClash),
-            52 => Ok(Self::PrivateMatchesControl),
-            53 => Ok(Self::PrivateMatchesSupremacy),
-            54 => Ok(Self::PrivateMatchesCountdown),
-            55 => Ok(Self::PrivateMatchesSurvival),
-            56 => Ok(Self::PrivateMatchesMayhem),
-            57 => Ok(Self::PrivateMatchesRumble),
-            58 => Ok(Self::HeroicAdventure),
-            59 => Ok(Self::Showdown),
-            60 => Ok(Self::Lockdown),
-            61 => Ok(Self::Scorched),
-            62 => Ok(Self::ScorchedTeam),
-            63 => Ok(Self::Gambit),
-            64 => Ok(Self::AllPvECompetitive),
-            65 => Ok(Self::Breakthrough),
-            66 => Ok(Self::BlackArmoryRun),
-            67 => Ok(Self::Salvage),
-            68 => Ok(Self::IronBannerSalvage),
-            69 => Ok(Self::PvPCompetitive),
-            70 => Ok(Self::PvPQuickplay),
-            71 => Ok(Self::ClashQuickplay),
-            72 => Ok(Self::ClashCompetitive),
-            73 => Ok(Self::ControlQuickplay),
-            74 => Ok(Self::ControlCompetitive),
-            75 => Ok(Self::GambitPrime),
-            76 => Ok(Self::Reckoning),
-            77 => Ok(Self::Menagerie),
-            78 => Ok(Self::VexOffensive),
-            79 => Ok(Self::NightmareHunt),
-            80 => Ok(Self::Elimination),
-            81 => Ok(Self::Momentum),
-            82 => Ok(Self::Dungeon),
-            83 => Ok(Self::Sundial),
-            84 => Ok(Self::TrialsOfOsiris),
-            85 => Ok(Self::Dares),
-            86 => Ok(Self::Offensive),
-            87 => Ok(Self::LostSector),
-            88 => Ok(Self::Rift),
-            89 => Ok(Self::ZoneControl),
-            90 => Ok(Self::IronBannerRift),
-            91 => Ok(Self::IronBannerZoneControl),
-            _ => Err(serde::de::Error::custom(format!(
-                "unknown DestinyActivityModeType: {s}",
-            ))),
-        }
-    }
-}
-
-impl Serialize for DestinyActivityModeType {
-    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-    where
-        S: Serializer,
-    {
-        let s = *self as u8;
-        s.serialize(serializer)
-    }
+    Relic = 92,
+    LawlessFrontier = 93,
 }

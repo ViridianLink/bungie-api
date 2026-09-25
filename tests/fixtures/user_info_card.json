@@ -1,0 +1,14 @@
+{
+ "supplementalDisplayName": "text",
+ "iconPath": "text",
+ "crossSaveOverride": -1,
+ "applicableMembershipTypes": [
+  -1
+ ],
+ "isPublic": true,
+ "membershipType": -1,
+ "membershipId": "1",
+ "displayName": "text",
+ "bungieGlobalDisplayName": "text",
+ "bungieGlobalDisplayNameCode": 1
+}
