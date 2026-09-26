@@ -1,13 +1,8 @@
-//! Serde helpers for the quirks of the Bungie.net JSON format.
-
 use std::fmt::Display;
 use std::str::FromStr;
 
 use serde::{Deserialize, Deserializer, Serializer, de};
 
-/// A JSON integer as Bungie sends it: `int64` and `uint64` values are encoded
-/// as strings so JavaScript clients do not lose precision, but plain numbers are
-/// accepted too.
 #[derive(Deserialize)]
 #[serde(untagged)]
 enum RawInt {
@@ -32,7 +27,6 @@ impl RawInt {
     }
 }
 
-/// `#[serde(with = "int64")]` for 64-bit integers encoded as JSON strings.
 pub(crate) mod int64 {
     use super::{Deserialize, Deserializer, Display, FromStr, RawInt, Serializer};
 
@@ -57,8 +51,6 @@ pub(crate) mod int64 {
     }
 }
 
-/// `#[serde(with = "int64_option", default)]` for optional 64-bit integers
-/// encoded as JSON strings.
 pub(crate) mod int64_option {
     use super::{Deserialize, Deserializer, Display, FromStr, RawInt, Serializer};
 
@@ -92,11 +84,6 @@ pub(crate) mod int64_option {
     }
 }
 
-/// Implements `Serialize` and `Deserialize` for a `bitflags` type using its raw
-/// numeric value, which is how Bungie encodes bitmask enums.
-///
-/// Unknown bits are dropped on deserialization so that flags added to the API
-/// later do not cause errors.
 macro_rules! impl_bitflags_serde {
     ($name:ident) => {
         impl<'de> ::serde::Deserialize<'de> for $name {

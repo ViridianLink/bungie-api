@@ -30,11 +30,6 @@ pub mod misc;
 pub mod response;
 pub mod user;
 
-/// The membership types supported by the Bungie.net accounts system.
-///
-/// Serialized as its numeric value. Deserialization accepts either the numeric
-/// value or the variant name, because Bungie uses the name when this type is
-/// the key of a dictionary (for example `DestinyPlatformSilverComponent`).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 #[repr(i16)]
 pub enum BungieMembershipType {

@@ -1,16 +1,3 @@
-//! A typed async client for the Bungie.net Destiny 2 API.
-//!
-//! ```no_run
-//! # async fn run() -> bungie_api::Result<()> {
-//! use bungie_api::BungieClientBuilder;
-//!
-//! let client = BungieClientBuilder::new("your-api-key").build()?;
-//! let manifest = client.destiny_manifest().await?;
-//! let items = client.destiny_inventory_item_definition(&manifest, "en").await?;
-//! # Ok(())
-//! # }
-//! ```
-
 mod bungie_client;
 mod serde_as;
 
@@ -48,9 +35,6 @@ mod tests {
         BungieClientBuilder::new(api_key).build().unwrap()
     }
 
-    /// Downloads the live manifest and definitions. Needs network access, so it
-    /// only runs when asked for: `cargo test -- --ignored`. The manifest does
-    /// not require an API key; `BUNGIE_API_KEY` is used if set.
     #[expect(clippy::unwrap_used, reason = "Unwrap allowed in tests")]
     #[ignore = "requires network access"]
     #[tokio::test]
@@ -64,9 +48,6 @@ mod tests {
         client.destiny_plug_set_definition(&manifest, "en").await.unwrap();
     }
 
-    /// Looks up the player in `BUNGIE_TEST_PLAYER` (`Name#1234`), then loads
-    /// their profile with every component and their activity history. Needs
-    /// `BUNGIE_API_KEY`; skipped when either variable is unset.
     #[expect(clippy::unwrap_used, reason = "Unwrap allowed in tests")]
     #[ignore = "requires network access, BUNGIE_API_KEY and BUNGIE_TEST_PLAYER"]
     #[tokio::test]
@@ -81,7 +62,6 @@ mod tests {
 
         let cards =
             client.search_destiny_player(name, code.parse().unwrap()).await.unwrap();
-        // Prefer the cross save primary account.
         let card = cards
             .iter()
             .find(|c| c.membership_type == c.cross_save_override)

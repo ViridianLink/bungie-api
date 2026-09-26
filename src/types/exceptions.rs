@@ -1,10 +1,5 @@
 use serde::{Deserialize, Serialize};
 
-/// A Bungie.net platform error code.
-///
-/// Only `Success` is modelled explicitly. Every other code is kept as its raw
-/// value; the name of the code is sent alongside it as the response's
-/// `ErrorStatus`.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 #[non_exhaustive]
 pub enum PlatformErrorCodes {
@@ -13,7 +8,6 @@ pub enum PlatformErrorCodes {
 }
 
 impl PlatformErrorCodes {
-    /// The numeric value of the code.
     #[must_use]
     pub const fn code(self) -> u32 {
         match self {
