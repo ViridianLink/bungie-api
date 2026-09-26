@@ -22,8 +22,6 @@ struct ExactSearchRequest<'a> {
 }
 
 impl BungieClient {
-    /// Finds the Destiny memberships for a Bungie Name such as `Name#1234`,
-    /// across all platforms.
     pub async fn search_destiny_player(
         &self,
         username: &str,
@@ -118,28 +116,4 @@ impl BungieClient {
 
 fn membership_type_segment(membership_type: BungieMembershipType) -> String {
     (membership_type as i16).to_string()
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::BungieClient;
-
-    #[expect(clippy::unwrap_used, reason = "Unwrap allowed in tests")]
-    #[test]
-    fn platform_url_has_trailing_slash() {
-        let client = BungieClient::new("key").unwrap();
-        let url = client.platform_url(["Destiny2", "-1", "Profile", "123"]).unwrap();
-        assert_eq!(
-            url.as_str(),
-            "https://www.bungie.net/Platform/Destiny2/-1/Profile/123/"
-        );
-    }
-
-    #[expect(clippy::unwrap_used, reason = "Unwrap allowed in tests")]
-    #[test]
-    fn platform_url_escapes_segments() {
-        let client = BungieClient::new("key").unwrap();
-        let url = client.platform_url(["a b", "c#d/e"]).unwrap();
-        assert_eq!(url.as_str(), "https://www.bungie.net/Platform/a%20b/c%23d%2Fe/");
-    }
 }

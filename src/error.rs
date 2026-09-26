@@ -11,30 +11,22 @@ pub type Result<T> = std::result::Result<T, BungieApiError>;
 #[derive(Debug)]
 #[non_exhaustive]
 pub enum BungieApiError {
-    /// The server answered with a non-success HTTP status and no Bungie error
-    /// envelope could be read from the body.
     Http {
         status: StatusCode,
         body: String,
     },
-    /// The server answered with a content type other than JSON.
     InvalidContentType(HeaderValue),
-    /// Bungie answered with a platform error code other than `Success`.
     Bungie {
         code: PlatformErrorCodes,
         status: String,
         message: String,
         throttle_seconds: i32,
     },
-    /// Bungie reported success but sent no `Response` payload.
     MissingResponse,
-    /// The manifest has no content path for the requested locale and
-    /// definition.
     ManifestPathNotFound {
         locale: String,
         definition: &'static str,
     },
-    /// A URL could not be built for the request.
     InvalidUrl,
     SerdeJson(serde_json::Error),
     Request(reqwest::Error),

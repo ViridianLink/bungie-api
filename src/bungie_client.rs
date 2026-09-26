@@ -22,9 +22,6 @@ impl BungieClientBuilder {
         Self { api_key: api_key.into(), user_agent: None }
     }
 
-    /// Overrides the `User-Agent` header, which defaults to this crate's name
-    /// and version. Bungie asks applications to identify themselves, for
-    /// example `AppName/1.0 AppId/12345 (+https://example.com;me@example.com)`.
     #[must_use]
     pub fn user_agent(mut self, user_agent: impl Into<String>) -> Self {
         self.user_agent = Some(user_agent.into());
@@ -54,9 +51,6 @@ impl BungieClientBuilder {
     }
 }
 
-/// A client for the Bungie.net Platform API.
-///
-/// Cloning is cheap and shares the underlying connection pool.
 #[derive(Debug, Clone)]
 pub struct BungieClient {
     pub(crate) client: Client,
@@ -68,7 +62,6 @@ impl BungieClient {
         BungieClientBuilder::new(api_key).build()
     }
 
-    /// Sends a GET request and deserializes the JSON body as `T`.
     pub async fn get<T: DeserializeOwned>(&self, url: impl IntoUrl) -> Result<T> {
         let (status, content_type, body) = Self::send(self.client.get(url)).await?;
 
@@ -80,8 +73,6 @@ impl BungieClient {
         Self::parse_json(body.as_ref())
     }
 
-    /// Sends a GET request to a Platform endpoint and unwraps the
-    /// [`BungieResponse`] envelope.
     pub async fn get_bungie_response<T: DeserializeOwned>(
         &self,
         url: impl IntoUrl,
@@ -89,8 +80,6 @@ impl BungieClient {
         Self::send_bungie(self.client.get(url)).await
     }
 
-    /// Sends a POST request with a JSON body to a Platform endpoint and
-    /// unwraps the [`BungieResponse`] envelope.
     pub async fn post_bungie_response<T, B>(
         &self,
         url: impl IntoUrl,
@@ -103,8 +92,6 @@ impl BungieClient {
         Self::send_bungie(self.client.post(url).json(body)).await
     }
 
-    /// Builds a Platform API URL from path segments, with the trailing slash
-    /// Bungie expects.
     pub(crate) fn platform_url<I>(&self, segments: I) -> Result<Url>
     where
         I: IntoIterator,

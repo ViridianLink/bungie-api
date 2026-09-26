@@ -13,10 +13,7 @@ use crate::types::destiny::definitions::sockets::{
 };
 use crate::{BungieApiError, Result};
 
-/// A definition type that can be downloaded from the Destiny manifest.
 pub trait DestinyDefinition: DeserializeOwned {
-    /// The name of the definition's table in the manifest, for example
-    /// `DestinyInventoryItemDefinition`.
     const NAME: &'static str;
 }
 
@@ -41,8 +38,7 @@ impl BungieClient {
         let url = self.platform_url(["Destiny2", "Manifest"])?;
         self.get_bungie_response(url).await
     }
-
-    /// Downloads every definition of type `T` for `locale`, keyed by hash.
+    
     pub async fn destiny_definitions<T: DestinyDefinition>(
         &self,
         manifest: &DestinyManifest,

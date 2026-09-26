@@ -5,12 +5,10 @@ use serde::{Deserialize, Serialize};
 use super::exceptions::PlatformErrorCodes;
 use crate::{BungieApiError, Result};
 
-/// The envelope Bungie wraps around every Platform API response.
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "PascalCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct BungieResponse<T> {
-    /// Absent when `error_code` is anything other than `Success`.
     pub response: Option<T>,
     pub error_code: PlatformErrorCodes,
     pub throttle_seconds: i32,
@@ -22,7 +20,6 @@ pub struct BungieResponse<T> {
 }
 
 impl<T> BungieResponse<T> {
-    /// Returns the payload, or the Bungie error the envelope describes.
     pub fn into_result(self) -> Result<T> {
         if self.error_code == PlatformErrorCodes::Success {
             self.response.ok_or(BungieApiError::MissingResponse)
