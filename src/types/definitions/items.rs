@@ -15,7 +15,7 @@ pub struct DestinyDerivedItemCategoryDefinition {
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyDerivedItemDefinition {
-    pub item_hash: Option<u32>,
+    pub item_hash: u32,
     pub item_name: Option<String>,
     pub item_detail: Option<String>,
     pub item_description: Option<String>,

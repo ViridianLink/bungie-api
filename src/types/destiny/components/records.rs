@@ -13,7 +13,7 @@ pub struct DestinyRecordComponent {
     pub objectives: Vec<DestinyObjectiveProgress>,
     pub interval_objectives: Vec<DestinyObjectiveProgress>,
     pub intervals_redeemed_count: i32,
-    pub completed_count: Option<i32>,
+    pub completed_count: i32,
     pub reward_visibilty: Vec<bool>,
 }
 

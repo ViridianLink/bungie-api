@@ -38,7 +38,7 @@ pub struct DestinyProgression {
     pub step_index: i32,
     pub progress_to_next_level: i32,
     pub next_level_at: i32,
-    pub current_reset_count: Option<i32>,
+    pub current_reset_count: i32,
     pub season_resets: Vec<DestinyProgressionResetEntry>,
     pub reward_item_states: Vec<DestinyProgressionRewardItemState>,
     #[serde(default)]
@@ -633,7 +633,7 @@ pub struct DestinyActivity {
     pub challenges: Vec<DestinyChallengeStatus>,
     pub modifier_hashes: Vec<u32>,
     pub boolean_activity_options: HashMap<u32, bool>,
-    pub loadout_requirement_index: Option<i32>,
+    pub loadout_requirement_index: i32,
     #[serde(default)]
     pub fireteam_requirement_failure_indices: Vec<i32>,
     #[serde(default)]

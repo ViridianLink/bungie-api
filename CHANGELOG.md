@@ -8,10 +8,6 @@
   `GET SearchDestinyPlayer` endpoint no longer exists.
 - 64-bit IDs (`characterId`, `itemInstanceId`, `membershipId`, ...) are parsed
   from the strings Bungie sends instead of failing.
-- Fields the API marks nullable are `Option`s, so non-instanced items, profiles
-  without a current season and similar no longer fail to deserialize.
-- `ComponentResponse::data` is optional, so private components no longer fail.
-- Item component sets only require the components that were requested.
 - `characterUninstancedItemComponents` is keyed by character ID.
 - `platformSilver` keys (membership type names) deserialize.
 - `DestinyMilestoneActivityPhase::phase_hash` reads `phaseHash`.

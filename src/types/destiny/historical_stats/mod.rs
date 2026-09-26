@@ -14,8 +14,8 @@ pub mod definitions;
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPostGameCarnageReportData {
     pub period: Timestamp,
-    pub starting_phase_index: Option<i32>,
-    pub activity_was_started_from_beginning: Option<bool>,
+    pub starting_phase_index: i32,
+    pub activity_was_started_from_beginning: bool,
     pub activity_details: DestinyHistoricalStatsActivity,
     pub entries: Vec<DestinyPostGameCarnageReportEntry>,
     pub teams: Vec<DestinyPostGameCarnageReportTeamEntry>,

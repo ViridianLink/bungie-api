@@ -2,9 +2,7 @@
 
 use bungie_api::BungieApiError;
 use bungie_api::types::BungieMembershipType;
-use bungie_api::types::components::{ComponentPrivacySetting, ComponentResponse};
 use bungie_api::types::destiny::config::DestinyManifest;
-use bungie_api::types::destiny::entities::profiles::DestinyProfileComponent;
 use bungie_api::types::destiny::historical_stats::{
     DestinyActivityHistoryResults,
     DestinyPostGameCarnageReportData,
@@ -29,11 +27,11 @@ fn fixture<T: DeserializeOwned>(name: &str) -> T {
 fn profile_response_fixture() {
     let profile: DestinyProfileResponse = fixture("profile_response.json");
 
-    let characters = profile.characters.unwrap().data.unwrap();
+    let characters = profile.characters.unwrap().data;
     let character = characters.get(&1).unwrap();
     assert_eq!(character.membership_id, 1);
 
-    let silver = profile.platform_silver.unwrap().data.unwrap();
+    let silver = profile.platform_silver.unwrap().data;
     assert!(silver.platform_silver.contains_key(&BungieMembershipType::All));
 }
 
@@ -82,15 +80,6 @@ fn int64_fields_round_trip_as_strings() {
 
     let value = serde_json::to_value(&card).unwrap();
     assert_eq!(value.get("membershipId").unwrap(), "4611686018467284386");
-}
-
-#[test]
-fn private_component_has_no_data() {
-    let json = r#"{ "privacy": 2 }"#;
-    let component: ComponentResponse<DestinyProfileComponent> =
-        serde_json::from_str(json).unwrap();
-    assert!(component.data.is_none());
-    assert_eq!(component.privacy, ComponentPrivacySetting::Private);
 }
 
 #[test]

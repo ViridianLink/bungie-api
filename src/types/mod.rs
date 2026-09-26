@@ -146,31 +146,25 @@ impl Serialize for BungieMembershipType {
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyBaseItemComponentSetOfuint32 {
-    pub objectives:
-        Option<ComponentResponse<HashMap<u32, DestinyItemObjectivesComponent>>>,
-    pub perks: Option<ComponentResponse<HashMap<u32, DestinyItemPerksComponent>>>,
+    pub objectives: ComponentResponse<HashMap<u32, DestinyItemObjectivesComponent>>,
+    pub perks: ComponentResponse<HashMap<u32, DestinyItemPerksComponent>>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemComponentSetOfint64 {
-    pub instances:
-        Option<ComponentResponse<HashMap<i64, DestinyItemInstanceComponent>>>,
-    pub render_data:
-        Option<ComponentResponse<HashMap<i64, DestinyItemRenderComponent>>>,
-    pub stats: Option<ComponentResponse<HashMap<i64, DestinyItemStatsComponent>>>,
-    pub sockets:
-        Option<ComponentResponse<HashMap<i64, DestinyItemSocketsComponent>>>,
+    pub instances: ComponentResponse<HashMap<i64, DestinyItemInstanceComponent>>,
+    pub render_data: ComponentResponse<HashMap<i64, DestinyItemRenderComponent>>,
+    pub stats: ComponentResponse<HashMap<i64, DestinyItemStatsComponent>>,
+    pub sockets: ComponentResponse<HashMap<i64, DestinyItemSocketsComponent>>,
     pub reusable_plugs:
-        Option<ComponentResponse<HashMap<i64, DestinyItemReusablePlugsComponent>>>,
+        ComponentResponse<HashMap<i64, DestinyItemReusablePlugsComponent>>,
     pub plug_objectives:
-        Option<ComponentResponse<HashMap<i64, DestinyItemPlugObjectivesComponent>>>,
+        ComponentResponse<HashMap<i64, DestinyItemPlugObjectivesComponent>>,
     pub talent_grids:
-        Option<ComponentResponse<HashMap<i64, DestinyItemTalentGridComponent>>>,
-    pub plug_states:
-        Option<ComponentResponse<HashMap<u32, DestinyItemPlugComponent>>>,
-    pub objectives:
-        Option<ComponentResponse<HashMap<i64, DestinyItemObjectivesComponent>>>,
-    pub perks: Option<ComponentResponse<HashMap<i64, DestinyItemPerksComponent>>>,
+        ComponentResponse<HashMap<i64, DestinyItemTalentGridComponent>>,
+    pub plug_states: ComponentResponse<HashMap<u32, DestinyItemPlugComponent>>,
+    pub objectives: ComponentResponse<HashMap<i64, DestinyItemObjectivesComponent>>,
+    pub perks: ComponentResponse<HashMap<i64, DestinyItemPerksComponent>>,
 }

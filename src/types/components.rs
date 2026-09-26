@@ -2,13 +2,11 @@ use serde::{Deserialize, Serialize};
 
 use crate::serde_as::serde_repr_enum;
 
-/// A single profile component. `data` is absent when the component is private
-/// to the caller or disabled.
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct ComponentResponse<T> {
-    pub data: Option<T>,
+    pub data: T,
     pub privacy: ComponentPrivacySetting,
     #[serde(default)]
     pub disabled: bool,

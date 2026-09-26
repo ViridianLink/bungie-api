@@ -56,7 +56,7 @@ pub struct DestinyCharacterComponent {
     pub level_progression: DestinyProgression,
     pub base_character_level: i32,
     pub percent_to_next_level: f32,
-    pub title_record_hash: Option<u32>,
+    pub title_record_hash: u32,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -92,10 +92,10 @@ pub struct DestinyCharacterActivitiesComponent {
     pub available_activities: Vec<DestinyActivity>,
     pub current_activity_hash: u32,
     pub current_activity_mode_hash: u32,
-    pub current_activity_mode_type: Option<i32>,
+    pub current_activity_mode_type: i32,
     pub current_activity_mode_hashes: Vec<u32>,
     pub current_activity_mode_types: Vec<DestinyActivityModeType>,
-    pub current_playlist_activity_hash: Option<u32>,
+    pub current_playlist_activity_hash: u32,
     pub last_completed_story_hash: u32,
     #[serde(default)]
     pub available_activity_interactables: Vec<DestinyActivityInteractableReference>,

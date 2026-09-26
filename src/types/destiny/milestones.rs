@@ -17,8 +17,8 @@ pub struct DestinyMilestone {
     pub vendor_hashes: Option<Vec<u32>>,
     pub vendors: Vec<DestinyMilestoneVendor>,
     pub rewards: Vec<DestinyMilestoneRewardCategory>,
-    pub start_date: Option<Timestamp>,
-    pub end_date: Option<Timestamp>,
+    pub start_date: Timestamp,
+    pub end_date: Timestamp,
     pub order: i32,
 }
 
@@ -37,8 +37,8 @@ pub struct DestinyMilestoneQuest {
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestoneActivity {
     pub activity_hash: u32,
-    pub activity_mode_hash: Option<u32>,
-    pub activity_mode_type: Option<i32>,
+    pub activity_mode_hash: u32,
+    pub activity_mode_type: i32,
     pub modifier_hashes: Vec<u32>,
     pub variants: Vec<DestinyMilestoneActivityVariant>,
 }
@@ -49,8 +49,8 @@ pub struct DestinyMilestoneActivity {
 pub struct DestinyMilestoneActivityVariant {
     pub activity_hash: u32,
     pub completion_status: DestinyMilestoneActivityCompletionStatus,
-    pub activity_mode_hash: Option<u32>,
-    pub activity_mode_type: Option<i32>,
+    pub activity_mode_hash: u32,
+    pub activity_mode_type: i32,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -77,7 +77,7 @@ pub struct DestinyMilestoneChallengeActivity {
     pub challenges: Vec<DestinyChallengeStatus>,
     pub modifier_hashes: Vec<u32>,
     pub boolean_activity_options: HashMap<u32, bool>,
-    pub loadout_requirement_index: Option<i32>,
+    pub loadout_requirement_index: i32,
     pub phases: Vec<DestinyMilestoneActivityPhase>,
 }
 
@@ -86,7 +86,7 @@ pub struct DestinyMilestoneChallengeActivity {
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyMilestoneVendor {
     pub vendor_hash: u32,
-    pub preview_item_hash: Option<u32>,
+    pub preview_item_hash: u32,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -133,8 +133,8 @@ pub struct DestinyPublicMilestone {
     pub activities: Vec<DestinyPublicMilestoneChallengeActivity>,
     pub vendor_hashes: Vec<u32>,
     pub vendors: Vec<DestinyPublicMilestoneVendor>,
-    pub start_date: Option<Timestamp>,
-    pub end_date: Option<Timestamp>,
+    pub start_date: Timestamp,
+    pub end_date: Timestamp,
     pub order: i32,
 }
 
@@ -154,8 +154,8 @@ pub struct DestinyPublicMilestoneActivity {
     pub activity_hash: u32,
     pub modifier_hashes: Vec<u32>,
     pub variants: Vec<DestinyPublicMilestoneActivityVariant>,
-    pub activity_mode_hash: Option<u32>,
-    pub activity_mode_type: Option<i32>,
+    pub activity_mode_hash: u32,
+    pub activity_mode_type: i32,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -163,8 +163,8 @@ pub struct DestinyPublicMilestoneActivity {
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPublicMilestoneActivityVariant {
     pub activity_hash: u32,
-    pub activity_mode_hash: Option<u32>,
-    pub activity_mode_type: Option<i32>,
+    pub activity_mode_hash: u32,
+    pub activity_mode_type: i32,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -172,7 +172,7 @@ pub struct DestinyPublicMilestoneActivityVariant {
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPublicMilestoneChallenge {
     pub objective_hash: u32,
-    pub activity_hash: Option<u32>,
+    pub activity_hash: u32,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -182,7 +182,7 @@ pub struct DestinyPublicMilestoneChallengeActivity {
     pub activity_hash: u32,
     pub challenge_objective_hashes: Vec<u32>,
     pub modifier_hashes: Vec<u32>,
-    pub loadout_requirement_index: Option<i32>,
+    pub loadout_requirement_index: i32,
     pub phase_hashes: Vec<u32>,
     pub boolean_activity_options: HashMap<u32, bool>,
 }
@@ -192,5 +192,5 @@ pub struct DestinyPublicMilestoneChallengeActivity {
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPublicMilestoneVendor {
     pub vendor_hash: u32,
-    pub preview_item_hash: Option<u32>,
+    pub preview_item_hash: u32,
 }

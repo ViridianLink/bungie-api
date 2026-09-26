@@ -20,5 +20,5 @@ pub struct DestinyPresentationNodeComponent {
     pub objective: DestinyObjectiveProgress,
     pub progress_value: i32,
     pub completion_value: i32,
-    pub record_category_score: Option<i32>,
+    pub record_category_score: i32,
 }

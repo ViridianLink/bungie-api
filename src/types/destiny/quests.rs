@@ -5,9 +5,9 @@ use serde::{Deserialize, Serialize};
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyObjectiveProgress {
     pub objective_hash: u32,
-    pub destination_hash: Option<u32>,
-    pub activity_hash: Option<u32>,
-    pub progress: Option<i32>,
+    pub destination_hash: u32,
+    pub activity_hash: u32,
+    pub progress: i32,
     pub completion_value: i32,
     pub complete: bool,
     pub visible: bool,
@@ -26,5 +26,5 @@ pub struct DestinyQuestStatus {
     pub completed: bool,
     pub redeemed: bool,
     pub started: bool,
-    pub vendor_hash: Option<u32>,
+    pub vendor_hash: u32,
 }
