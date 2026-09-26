@@ -23,11 +23,13 @@ pub struct DestinyItemPlugObjectivesComponent {
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemPlugComponent {
+    #[serde(default)]
     pub plug_objectives: Vec<DestinyObjectiveProgress>,
     pub plug_item_hash: u32,
     pub can_insert: bool,
     pub enabled: bool,
     pub insert_fail_indexes: Vec<i32>,
+    #[serde(default)]
     pub enable_fail_indexes: Vec<i32>,
     pub stack_size: Option<i32>,
     pub max_stack_size: Option<i32>,

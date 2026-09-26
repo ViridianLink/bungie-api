@@ -25,8 +25,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             ])
             .await?;
 
-        let characters =
-            profile.characters.map_or_else(Default::default, |c| c.data);
+        let characters = profile.characters.and_then(|c| c.data).unwrap_or_default();
         for (id, character) in characters {
             println!(
                 "{id}: {:?} {:?}, light {}",

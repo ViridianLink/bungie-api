@@ -32,14 +32,16 @@ pub struct DestinyItemComponent {
     pub transfer_status: TransferStatuses,
     pub lockable: bool,
     pub state: ItemState,
-    pub override_style_item_hash: u32,
-    pub expiration_date: Timestamp,
+    pub override_style_item_hash: Option<u32>,
+    pub expiration_date: Option<Timestamp>,
     pub is_wrapper: bool,
     pub tooltip_notification_indexes: Vec<i32>,
-    pub metric_hash: u32,
-    pub metric_objective: DestinyObjectiveProgress,
-    pub version_number: i32,
+    pub metric_hash: Option<u32>,
+    pub metric_objective: Option<DestinyObjectiveProgress>,
+    pub version_number: Option<i32>,
+    #[serde(default)]
     pub item_value_visibility: Vec<bool>,
+    pub dismantle_permission: i32,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -54,8 +56,8 @@ pub struct DestinyItemPerksComponent {
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemObjectivesComponent {
     pub objectives: Vec<DestinyObjectiveProgress>,
-    pub flavor_objective: DestinyObjectiveProgress,
-    pub date_completed: Timestamp,
+    pub flavor_objective: Option<DestinyObjectiveProgress>,
+    pub date_completed: Option<Timestamp>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -63,8 +65,8 @@ pub struct DestinyItemObjectivesComponent {
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemInstanceComponent {
     pub damage_type: DamageType,
-    pub damage_type_hash: u32,
-    pub primary_stat: DestinyStat,
+    pub damage_type_hash: Option<u32>,
+    pub primary_stat: Option<DestinyStat>,
     pub item_level: i32,
     pub quality: i32,
     pub is_equipped: bool,
@@ -72,9 +74,9 @@ pub struct DestinyItemInstanceComponent {
     pub equip_required_level: i32,
     pub unlock_hashes_required_to_equip: Vec<u32>,
     pub cannot_equip_reason: EquipFailureReason,
-    pub breaker_type: i32,
-    pub breaker_type_hash: u32,
-    pub energy: DestinyItemInstanceEnergy,
+    pub breaker_type: Option<i32>,
+    pub breaker_type_hash: Option<u32>,
+    pub energy: Option<DestinyItemInstanceEnergy>,
     pub gear_tier: Option<i32>,
 }
 
@@ -115,9 +117,10 @@ pub struct DestinyItemSocketsComponent {
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemSocketState {
-    pub plug_hash: u32,
+    pub plug_hash: Option<u32>,
     pub is_enabled: bool,
     pub is_visible: bool,
+    #[serde(default)]
     pub enable_fail_indexes: Vec<i32>,
 }
 

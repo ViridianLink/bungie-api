@@ -9,7 +9,7 @@ pub struct DestinyArtifactProfileScoped {
     pub artifact_hash: u32,
     pub point_progression: DestinyProgression,
     pub points_acquired: i32,
-    pub power_bonus_progression: DestinyProgression,
+    pub power_bonus_progression: Option<DestinyProgression>,
     pub power_bonus: i32,
 }
 

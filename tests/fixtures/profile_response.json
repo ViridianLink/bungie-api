@@ -35,6 +35,7 @@
   "data": {
    "items": [
     {
+     "dismantlePermission": 1,
      "itemHash": 1,
      "itemInstanceId": "1",
      "quantity": 1,
@@ -74,6 +75,7 @@
   "data": {
    "items": [
     {
+     "dismantlePermission": 1,
      "itemHash": 1,
      "itemInstanceId": "1",
      "quantity": 1,
@@ -154,6 +156,7 @@
   "data": {
    "platformSilver": {
     "All": {
+     "dismantlePermission": 1,
      "itemHash": 1,
      "itemInstanceId": "1",
      "quantity": 1,
@@ -582,6 +585,7 @@
    "1": {
     "items": [
      {
+      "dismantlePermission": 1,
       "itemHash": 1,
       "itemInstanceId": "1",
       "quantity": 1,
@@ -1009,6 +1013,16 @@
         "displayBehavior": 2,
         "rewardItems": [
          {
+          "visibilityUnlockExpression": {
+           "steps": [
+            {
+             "stepOperator": 1,
+             "unlockHash": 1,
+             "value": 0
+            }
+           ],
+           "scope": 1
+          },
           "itemQuantity": {
            "itemHash": 1,
            "itemInstanceId": "1",
@@ -1040,6 +1054,7 @@
       "difficultyTierCollectionHash": 1,
       "difficultyTiers": [
        {
+        "isEnabled": true,
         "difficultyTierIndex": 1,
         "fixedActivitySkulls": [
          {
@@ -1085,6 +1100,7 @@
    "1": {
     "items": [
      {
+      "dismantlePermission": 1,
       "itemHash": 1,
       "itemInstanceId": "1",
       "quantity": 1,

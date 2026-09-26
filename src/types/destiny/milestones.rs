@@ -12,13 +12,17 @@ use super::quests::DestinyQuestStatus;
 pub struct DestinyMilestone {
     pub milestone_hash: u32,
     pub available_quests: Option<Vec<DestinyMilestoneQuest>>,
+    #[serde(default)]
     pub activities: Vec<DestinyMilestoneChallengeActivity>,
+    #[serde(default)]
     pub values: HashMap<String, f32>,
     pub vendor_hashes: Option<Vec<u32>>,
+    #[serde(default)]
     pub vendors: Vec<DestinyMilestoneVendor>,
+    #[serde(default)]
     pub rewards: Vec<DestinyMilestoneRewardCategory>,
-    pub start_date: Timestamp,
-    pub end_date: Timestamp,
+    pub start_date: Option<Timestamp>,
+    pub end_date: Option<Timestamp>,
     pub order: i32,
 }
 
@@ -28,7 +32,8 @@ pub struct DestinyMilestone {
 pub struct DestinyMilestoneQuest {
     pub quest_item_hash: u32,
     pub status: DestinyQuestStatus,
-    pub activity: DestinyMilestoneActivity,
+    pub activity: Option<DestinyMilestoneActivity>,
+    #[serde(default)]
     pub challenges: Vec<DestinyChallengeStatus>,
 }
 
@@ -76,8 +81,10 @@ pub struct DestinyMilestoneChallengeActivity {
     pub activity_hash: u32,
     pub challenges: Vec<DestinyChallengeStatus>,
     pub modifier_hashes: Vec<u32>,
+    #[serde(default)]
     pub boolean_activity_options: HashMap<u32, bool>,
-    pub loadout_requirement_index: i32,
+    pub loadout_requirement_index: Option<i32>,
+    #[serde(default)]
     pub phases: Vec<DestinyMilestoneActivityPhase>,
 }
 

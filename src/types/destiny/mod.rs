@@ -38,8 +38,10 @@ pub struct DestinyProgression {
     pub step_index: i32,
     pub progress_to_next_level: i32,
     pub next_level_at: i32,
-    pub current_reset_count: i32,
+    pub current_reset_count: Option<i32>,
+    #[serde(default)]
     pub season_resets: Vec<DestinyProgressionResetEntry>,
+    #[serde(default)]
     pub reward_item_states: Vec<DestinyProgressionRewardItemState>,
     #[serde(default)]
     pub reward_item_socket_override_states:
@@ -630,10 +632,13 @@ pub struct DestinyActivity {
     pub display_level: Option<i32>,
     pub recommended_light: Option<i32>,
     pub difficulty_tier: DestinyActivityDifficultyTier,
+    #[serde(default)]
     pub challenges: Vec<DestinyChallengeStatus>,
+    #[serde(default)]
     pub modifier_hashes: Vec<u32>,
+    #[serde(default)]
     pub boolean_activity_options: HashMap<u32, bool>,
-    pub loadout_requirement_index: i32,
+    pub loadout_requirement_index: Option<i32>,
     #[serde(default)]
     pub fireteam_requirement_failure_indices: Vec<i32>,
     #[serde(default)]
@@ -756,6 +761,7 @@ pub struct DestinyActivityDifficultyTierCollectionComponent {
 pub struct DestinyActivityDifficultyTierComponent {
     pub difficulty_tier_index: i32,
     pub fixed_activity_skulls: Vec<DestinyActivitySkullComponent>,
+    pub is_enabled: bool,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]

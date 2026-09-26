@@ -10,10 +10,13 @@ use crate::types::destiny::quests::DestinyObjectiveProgress;
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyRecordComponent {
     pub state: DestinyRecordState,
+    #[serde(default)]
     pub objectives: Vec<DestinyObjectiveProgress>,
+    #[serde(default)]
     pub interval_objectives: Vec<DestinyObjectiveProgress>,
     pub intervals_redeemed_count: i32,
-    pub completed_count: i32,
+    pub completed_count: Option<i32>,
+    #[serde(default)]
     pub reward_visibilty: Vec<bool>,
 }
 

@@ -25,8 +25,10 @@ pub struct DestinyFactionProgression {
     pub step_index: i32,
     pub progress_to_next_level: i32,
     pub next_level_at: i32,
-    pub current_reset_count: i32,
+    pub current_reset_count: Option<i32>,
+    #[serde(default)]
     pub season_resets: Vec<DestinyProgressionResetEntry>,
+    #[serde(default)]
     pub reward_item_states: Vec<DestinyProgressionRewardItemState>,
     #[serde(default)]
     pub reward_item_socket_override_states:

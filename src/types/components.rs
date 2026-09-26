@@ -6,7 +6,7 @@ use crate::serde_as::serde_repr_enum;
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct ComponentResponse<T> {
-    pub data: T,
+    pub data: Option<T>,
     pub privacy: ComponentPrivacySetting,
     #[serde(default)]
     pub disabled: bool,

@@ -24,6 +24,7 @@ pub struct DestinyCollectibleComponent {
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyProfileCollectiblesComponent {
     pub recent_collectible_hashes: Vec<u32>,
+    #[serde(default)]
     pub newness_flagged_collectible_hashes: Vec<u32>,
     pub collectibles: HashMap<u32, DestinyCollectibleComponent>,
     pub collection_categories_root_node_hash: u32,

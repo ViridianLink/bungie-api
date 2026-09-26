@@ -23,6 +23,19 @@ FIXTURES = {
 }
 
 
+# Fields Bungie sends that the spec does not document, keyed by schema name.
+UNDOCUMENTED = {
+    "Destiny.Entities.Items.DestinyItemComponent": {"dismantlePermission": 1},
+    "Destiny.DestinyActivityDifficultyTierComponent": {"isEnabled": True},
+    "Destiny.Definitions.DestinyActivityRewardItem": {
+        "visibilityUnlockExpression": {
+            "steps": [{"stepOperator": 1, "unlockHash": 1, "value": 0}],
+            "scope": 1,
+        },
+    },
+}
+
+
 def main() -> None:
     spec = json.loads(pathlib.Path(sys.argv[1]).read_text())
     schemas = spec["components"]["schemas"]
@@ -81,7 +94,7 @@ def main() -> None:
         return scalar(prop)
 
     def obj(schema: dict, stack: tuple) -> dict:
-        out = {}
+        out = dict(UNDOCUMENTED.get(stack[-1], {}))
         for name, prop in schema.get("properties", {}).items():
             item = value(prop, stack)
             if item is not None:

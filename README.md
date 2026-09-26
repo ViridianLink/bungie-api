@@ -67,9 +67,10 @@ every field populated. Regenerate it after updating the models:
 python3 tests/fixtures/generate.py path/to/openapi.json
 ```
 
-A test that downloads the live manifest and definitions is ignored by default
-(no API key needed):
+Tests against the live API are ignored by default. The manifest test needs no
+API key; the player test searches for a player, loads their profile with every
+component and their activity history:
 
 ```sh
-cargo test -- --ignored
+BUNGIE_API_KEY=... BUNGIE_TEST_PLAYER='Name#1234' cargo test -- --ignored
 ```

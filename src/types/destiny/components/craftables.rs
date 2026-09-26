@@ -24,6 +24,7 @@ pub struct DestinyCraftableComponent {
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyCraftableSocketComponent {
     pub plug_set_hash: u32,
+    #[serde(default)]
     pub plugs: Vec<DestinyCraftableSocketPlugComponent>,
 }
 

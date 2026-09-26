@@ -92,10 +92,12 @@ pub struct DestinyCharacterActivitiesComponent {
     pub available_activities: Vec<DestinyActivity>,
     pub current_activity_hash: u32,
     pub current_activity_mode_hash: u32,
-    pub current_activity_mode_type: i32,
+    pub current_activity_mode_type: Option<i32>,
+    #[serde(default)]
     pub current_activity_mode_hashes: Vec<u32>,
+    #[serde(default)]
     pub current_activity_mode_types: Vec<DestinyActivityModeType>,
-    pub current_playlist_activity_hash: u32,
+    pub current_playlist_activity_hash: Option<u32>,
     pub last_completed_story_hash: u32,
     #[serde(default)]
     pub available_activity_interactables: Vec<DestinyActivityInteractableReference>,

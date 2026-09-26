@@ -11,6 +11,16 @@
 - `characterUninstancedItemComponents` is keyed by character ID.
 - `platformSilver` keys (membership type names) deserialize.
 - `DestinyMilestoneActivityPhase::phase_hash` reads `phaseHash`.
+- Fields that live profile and activity history responses omit are optional
+  (or default to empty for lists and maps), including
+  `ComponentResponse::data` (absent for private components), the item
+  component sets (only requested components are sent) and several item,
+  record, objective, milestone and progression fields.
+- `DestinyItemComponent::dismantle_permission`,
+  `DestinyActivityDifficultyTierComponent::is_enabled` and
+  `DestinyActivityRewardItem::visibility_unlock_expression`, which Bungie sends
+  but does not document.
+- `DestinyActivityModeType::SparrowRacing` (94).
 - `DestinyColor` accepts the `colorHash` field present in manifest
   definitions.
 - Bungie error envelopes, including those returned with HTTP 4xx/5xx statuses,
@@ -31,8 +41,10 @@
 
 ### Changed
 
-- `DestinySocketTypeDefinition::insert_action` is no longer optional; the
-  live manifest always includes it.
+- `DestinySocketTypeDefinition::insert_action`,
+  `DestinyActivityRewardItem::ui_style` and
+  `DestinyHistoricalStatsValue::stat_id` are no longer optional; live data
+  always includes them.
 - `BungieApiError` is `#[non_exhaustive]` and reworked: `ClientError` and
   `ServerError` became `Http { status, body }`, `Bungie` carries the error
   details, `InvalidJsonSchema` became `ManifestPathNotFound`, `NoResponse`

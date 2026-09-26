@@ -17,8 +17,8 @@ pub struct DestinyPresentationNodesComponent {
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPresentationNodeComponent {
     pub state: DestinyPresentationNodeState,
-    pub objective: DestinyObjectiveProgress,
+    pub objective: Option<DestinyObjectiveProgress>,
     pub progress_value: i32,
     pub completion_value: i32,
-    pub record_category_score: i32,
+    pub record_category_score: Option<i32>,
 }

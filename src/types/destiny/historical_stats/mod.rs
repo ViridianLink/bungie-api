@@ -54,7 +54,7 @@ pub struct DestinyPostGameCarnageReportEntry {
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyHistoricalStatsValue {
-    pub stat_id: Option<String>,
+    pub stat_id: String,
     pub basic: DestinyHistoricalStatsValuePair,
     pub pga: Option<DestinyHistoricalStatsValuePair>,
     pub weighted: Option<DestinyHistoricalStatsValuePair>,

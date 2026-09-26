@@ -89,5 +89,6 @@ serde_repr_enum! {
         IronBannerZoneControl = 91,
         Relic = 92,
         LawlessFrontier = 93,
+        SparrowRacing = 94,
     }
 }
