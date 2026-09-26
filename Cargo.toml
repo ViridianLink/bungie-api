@@ -134,9 +134,9 @@ single_call_fn = "allow"
 single_match_else = "allow"
 
 [features]
-# Reject JSON fields that the typed models do not know about. Useful for
-# detecting API drift in tests; leave off in production so new fields added by
-# Bungie do not break deserialization.
+default = ["strict"]
+# Reject JSON fields that the typed models do not know about. Disable default
+# features to ignore unknown fields instead.
 strict = []
 
 [dependencies]

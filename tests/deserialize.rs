@@ -15,8 +15,8 @@ use bungie_api::types::user::UserInfoCard;
 use serde::de::DeserializeOwned;
 
 /// Fixtures are generated from Bungie's `OpenAPI` spec by
-/// `tests/fixtures/generate.py`, with every field populated. Run the tests with
-/// `--features strict` to also reject fields the models do not know about.
+/// `tests/fixtures/generate.py`, with every field populated. With the default
+/// `strict` feature, fields the models do not know about are rejected.
 fn fixture<T: DeserializeOwned>(name: &str) -> T {
     let path = format!("{}/tests/fixtures/{name}", env!("CARGO_MANIFEST_DIR"));
     let json = std::fs::read_to_string(path).unwrap();

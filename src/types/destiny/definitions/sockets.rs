@@ -13,7 +13,7 @@ use crate::types::destiny::{
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinySocketTypeDefinition {
     pub display_properties: DestinyDisplayPropertiesDefinition,
-    pub insert_action: Option<DestinyInsertPlugActionDefinition>,
+    pub insert_action: DestinyInsertPlugActionDefinition,
     #[serde(default)]
     pub plug_whitelist: Vec<DestinyPlugWhitelistEntryDefinition>,
     pub socket_category_hash: u32,

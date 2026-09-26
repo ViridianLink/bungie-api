@@ -45,9 +45,8 @@ Bungie returns errors in a JSON envelope; these surface as
 
 ## Features
 
-- `strict`: reject JSON fields the models do not know about. Useful for
-  detecting API drift in tests. Leave it off in production so fields Bungie adds
-  later do not break deserialization.
+- `strict` (default): reject JSON fields the models do not know about. Build
+  with `default-features = false` to ignore unknown fields instead.
 
 ## Development
 
@@ -56,8 +55,8 @@ The crate uses the nightly toolchain pinned in `rust-toolchain.toml` (for
 
 ```sh
 cargo fmt --check
-cargo clippy --all-targets --features strict -- -D warnings
-cargo test --features strict
+cargo clippy --all-targets -- -D warnings
+cargo test
 ```
 
 `tests/fixtures` holds JSON generated from Bungie's
@@ -68,8 +67,9 @@ every field populated. Regenerate it after updating the models:
 python3 tests/fixtures/generate.py path/to/openapi.json
 ```
 
-A test against the live API is ignored by default:
+A test that downloads the live manifest and definitions is ignored by default
+(no API key needed):
 
 ```sh
-BUNGIE_API_KEY=... cargo test --features strict -- --ignored
+cargo test -- --ignored
 ```

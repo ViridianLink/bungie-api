@@ -41,16 +41,14 @@ pub type DestinySocketTypeManifest = HashMap<String, DestinySocketTypeDefinition
 mod tests {
     use crate::BungieClientBuilder;
 
-    /// Downloads the live manifest and definitions. Needs network access and a
-    /// Bungie API key in `BUNGIE_API_KEY`, so it only runs when asked for:
-    /// `BUNGIE_API_KEY=... cargo test --features strict -- --ignored`
+    /// Downloads the live manifest and definitions. Needs network access, so it
+    /// only runs when asked for: `cargo test -- --ignored`. The manifest does
+    /// not require an API key; `BUNGIE_API_KEY` is used if set.
     #[expect(clippy::unwrap_used, reason = "Unwrap allowed in tests")]
-    #[expect(clippy::expect_used, reason = "Expect allowed in tests")]
-    #[ignore = "requires network access and BUNGIE_API_KEY"]
+    #[ignore = "requires network access"]
     #[tokio::test]
     async fn live_manifest() {
-        let api_key =
-            std::env::var("BUNGIE_API_KEY").expect("BUNGIE_API_KEY not set");
+        let api_key = std::env::var("BUNGIE_API_KEY").unwrap_or_default();
         let client = BungieClientBuilder::new(api_key).build().unwrap();
 
         let manifest = client.destiny_manifest().await.unwrap();

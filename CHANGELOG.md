@@ -11,6 +11,8 @@
 - `characterUninstancedItemComponents` is keyed by character ID.
 - `platformSilver` keys (membership type names) deserialize.
 - `DestinyMilestoneActivityPhase::phase_hash` reads `phaseHash`.
+- `DestinyColor` accepts the `colorHash` field present in manifest
+  definitions.
 - Bungie error envelopes, including those returned with HTTP 4xx/5xx statuses,
   surface as `BungieApiError::Bungie` with the status and message instead of a
   JSON error.
@@ -21,7 +23,7 @@
   `BungieMembershipType::GoliathGame`, `DestinyActivityModeType::{Relic,
   LawlessFrontier}`, `ItemState::Enhanced`, new `DestinyGameVersions`, gear
   tier, season pass hashes, skulls and difficulty tiers.
-- `strict` feature to opt in to `deny_unknown_fields`.
+- `strict` feature, on by default, controlling `deny_unknown_fields`.
 - `BungieClientBuilder::user_agent`.
 - `BungieClient::destiny_definitions::<T>()` and the `DestinyDefinition` trait.
 - `BungieClient::post_bungie_response`.
@@ -29,7 +31,8 @@
 
 ### Changed
 
-- Unknown JSON fields are ignored unless the `strict` feature is enabled.
+- `DestinySocketTypeDefinition::insert_action` is no longer optional; the
+  live manifest always includes it.
 - `BungieApiError` is `#[non_exhaustive]` and reworked: `ClientError` and
   `ServerError` became `Http { status, body }`, `Bungie` carries the error
   details, `InvalidJsonSchema` became `ManifestPathNotFound`, `NoResponse`
