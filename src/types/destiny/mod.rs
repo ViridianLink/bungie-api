@@ -20,9 +20,8 @@ use bitflags::bitflags;
 use challenges::DestinyChallengeStatus;
 use definitions::{DestinyActivityRewardMapping, DestinyMaterialRequirement};
 use serde::{Deserialize, Serialize};
-use serde_repr::{Deserialize_repr, Serialize_repr};
 
-use crate::serde_as::impl_bitflags_serde;
+use crate::serde_as::{impl_bitflags_serde, serde_repr_enum};
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
@@ -67,30 +66,28 @@ bitflags! {
 
 impl_bitflags_serde!(DestinyProgressionRewardItemState);
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyProgressionScope {
-    Account = 0,
-    Character = 1,
-    Clan = 2,
-    Item = 3,
-    ImplicitFromEquipment = 4,
-    Mapped = 5,
-    MappedAggregate = 6,
-    MappedStat = 7,
-    MappedUnlockValue = 8,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyProgressionScope: u8 {
+        Account = 0,
+        Character = 1,
+        Clan = 2,
+        Item = 3,
+        ImplicitFromEquipment = 4,
+        Mapped = 5,
+        MappedAggregate = 6,
+        MappedStat = 7,
+        MappedUnlockValue = 8,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyProgressionStepDisplayEffect {
-    None = 0,
-    Character = 1,
-    Item = 2,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyProgressionStepDisplayEffect: u8 {
+        None = 0,
+        Character = 1,
+        Item = 2,
+    }
 }
 
 #[derive(Debug, Clone, Copy, Deserialize, Serialize)]
@@ -104,118 +101,101 @@ pub struct DestinyItemQuantity {
     pub has_conditional_visibility: bool,
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum SocketTypeActionType {
-    InsertPlug = 0,
-    InfuseItem = 1,
-    ReinitializeSocket = 2,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum SocketTypeActionType: u8 {
+        InsertPlug = 0,
+        InfuseItem = 1,
+        ReinitializeSocket = 2,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinySocketVisibility {
-    Visible = 0,
-    Hidden = 1,
-    HiddenWhenEmpty = 2,
-    HiddenIfNoPlugsAvailable = 3,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinySocketVisibility: u8 {
+        Visible = 0,
+        Hidden = 1,
+        HiddenWhenEmpty = 2,
+        HiddenIfNoPlugsAvailable = 3,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinySocketCategoryStyle {
-    Unknown = 0,
-    Reusable = 1,
-    Consumable = 2,
-    Unlockable = 3,
-    Intrinsic = 4,
-    EnergyMeter = 5,
-    LargePerk = 6,
-    Abilities = 7,
-    Supers = 8,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinySocketCategoryStyle: u8 {
+        Unknown = 0,
+        Reusable = 1,
+        Consumable = 2,
+        Unlockable = 3,
+        Intrinsic = 4,
+        EnergyMeter = 5,
+        LargePerk = 6,
+        Abilities = 7,
+        Supers = 8,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug,
-    Default,
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    Hash,
-    Deserialize_repr,
-    Serialize_repr,
-)]
-pub enum TierType {
-    #[default]
-    Unknown = 0,
-    Currency = 1,
-    Basic = 2,
-    Common = 3,
-    Rare = 4,
-    Superior = 5,
-    Exotic = 6,
+serde_repr_enum! {
+    #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum TierType: u8 {
+        #[default]
+        Unknown = 0,
+        Currency = 1,
+        Basic = 2,
+        Common = 3,
+        Rare = 4,
+        Superior = 5,
+        Exotic = 6,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum BucketScope {
-    Character = 0,
-    Account = 1,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum BucketScope: u8 {
+        Character = 0,
+        Account = 1,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum BucketCategory {
-    Invisible = 0,
-    Item = 1,
-    Currency = 2,
-    Equippable = 3,
-    Ignored = 4,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum BucketCategory: u8 {
+        Invisible = 0,
+        Item = 1,
+        Currency = 2,
+        Equippable = 3,
+        Ignored = 4,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum ItemLocation {
-    Unknown = 0,
-    Inventory = 1,
-    Vault = 2,
-    Vendor = 3,
-    Postmaster = 4,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum ItemLocation: u8 {
+        Unknown = 0,
+        Inventory = 1,
+        Vault = 2,
+        Vendor = 3,
+        Postmaster = 4,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyStatAggregationType {
-    CharacterAverage = 0,
-    Character = 1,
-    Item = 2,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyStatAggregationType: u8 {
+        CharacterAverage = 0,
+        Character = 1,
+        Item = 2,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyStatCategory {
-    Gameplay = 0,
-    Weapon = 1,
-    Defense = 2,
-    Primary = 3,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyStatCategory: u8 {
+        Gameplay = 0,
+        Weapon = 1,
+        Defense = 2,
+        Primary = 3,
+    }
 }
 
 bitflags! {
@@ -227,16 +207,15 @@ bitflags! {
 
 impl_bitflags_serde!(EquippingItemBlockAttributes);
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyAmmunitionType {
-    None = 0,
-    Primary = 1,
-    Special = 2,
-    Heavy = 3,
-    Unknown = 4,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyAmmunitionType: u8 {
+        None = 0,
+        Primary = 1,
+        Special = 2,
+        Heavy = 3,
+        Unknown = 4,
+    }
 }
 
 #[derive(Debug, Clone, Copy, Deserialize, Serialize)]
@@ -247,115 +226,86 @@ pub struct DyeReference {
     pub dye_hash: u32,
 }
 
-#[repr(u8)]
-#[derive(
-    Debug,
-    Default,
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    Hash,
-    Deserialize_repr,
-    Serialize_repr,
-)]
-pub enum DestinyClass {
-    Titan = 0,
-    Hunter = 1,
-    Warlock = 2,
-    #[default]
-    Unknown = 3,
+serde_repr_enum! {
+    #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyClass: u8 {
+        Titan = 0,
+        Hunter = 1,
+        Warlock = 2,
+        #[default]
+        Unknown = 3,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyGender {
-    Male = 0,
-    Female = 1,
-    Unknown = 2,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyGender: u8 {
+        Male = 0,
+        Female = 1,
+        Unknown = 2,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyVendorItemRefundPolicy {
-    NotRefundable = 0,
-    DeletesItem = 1,
-    RevokesLicense = 2,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyVendorItemRefundPolicy: u8 {
+        NotRefundable = 0,
+        DeletesItem = 1,
+        RevokesLicense = 2,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug,
-    Default,
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    Hash,
-    Deserialize_repr,
-    Serialize_repr,
-)]
-pub enum DamageType {
-    #[default]
-    None = 0,
-    Kinetic = 1,
-    Arc = 2,
-    Thermal = 3,
-    Void = 4,
-    Raid = 5,
-    Stasis = 6,
-    Strand = 7,
+serde_repr_enum! {
+    #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DamageType: u8 {
+        #[default]
+        None = 0,
+        Kinetic = 1,
+        Arc = 2,
+        Thermal = 3,
+        Void = 4,
+        Raid = 5,
+        Stasis = 6,
+        Strand = 7,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug,
-    Default,
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    Hash,
-    Deserialize_repr,
-    Serialize_repr,
-)]
-pub enum DestinyItemSubType {
-    #[default]
-    None = 0,
-    Crucible = 1,
-    Vanguard = 2,
-    Exotic = 5,
-    AutoRifle = 6,
-    Shotgun = 7,
-    Machinegun = 8,
-    HandCannon = 9,
-    RocketLauncher = 10,
-    FusionRifle = 11,
-    SniperRifle = 12,
-    PulseRifle = 13,
-    ScoutRifle = 14,
-    Crm = 16,
-    Sidearm = 17,
-    Sword = 18,
-    Mask = 19,
-    Shader = 20,
-    Ornament = 21,
-    FusionRifleLine = 22,
-    GrenadeLauncher = 23,
-    SubmachineGun = 24,
-    TraceRifle = 25,
-    HelmetArmor = 26,
-    GauntletsArmor = 27,
-    ChestArmor = 28,
-    LegArmor = 29,
-    ClassArmor = 30,
-    Bow = 31,
-    DummyRepeatableBounty = 32,
-    Glaive = 33,
+serde_repr_enum! {
+    #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyItemSubType: u8 {
+        #[default]
+        None = 0,
+        Crucible = 1,
+        Vanguard = 2,
+        Exotic = 5,
+        AutoRifle = 6,
+        Shotgun = 7,
+        Machinegun = 8,
+        HandCannon = 9,
+        RocketLauncher = 10,
+        FusionRifle = 11,
+        SniperRifle = 12,
+        PulseRifle = 13,
+        ScoutRifle = 14,
+        Crm = 16,
+        Sidearm = 17,
+        Sword = 18,
+        Mask = 19,
+        Shader = 20,
+        Ornament = 21,
+        FusionRifleLine = 22,
+        GrenadeLauncher = 23,
+        SubmachineGun = 24,
+        TraceRifle = 25,
+        HelmetArmor = 26,
+        GauntletsArmor = 27,
+        ChestArmor = 28,
+        LegArmor = 29,
+        ClassArmor = 30,
+        Bow = 31,
+        DummyRepeatableBounty = 32,
+        Glaive = 33,
+    }
 }
 
 bitflags! {
@@ -367,28 +317,26 @@ bitflags! {
 
 impl_bitflags_serde!(PlugUiStyles);
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum PlugAvailabilityMode {
-    Normal = 0,
-    UnavailableIfSocketContainsMatchingPlugCategory = 1,
-    AvailableIfSocketContainsMatchingPlugCategory = 2,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum PlugAvailabilityMode: u8 {
+        Normal = 0,
+        UnavailableIfSocketContainsMatchingPlugCategory = 1,
+        AvailableIfSocketContainsMatchingPlugCategory = 2,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyEnergyType {
-    Any = 0,
-    Arc = 1,
-    Thermal = 2,
-    Void = 3,
-    Ghost = 4,
-    Subclass = 5,
-    Stasis = 6,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyEnergyType: u8 {
+        Any = 0,
+        Arc = 1,
+        Thermal = 2,
+        Void = 3,
+        Ghost = 4,
+        Subclass = 5,
+        Stasis = 6,
+    }
 }
 
 bitflags! {
@@ -403,123 +351,93 @@ bitflags! {
 
 impl_bitflags_serde!(SocketPlugSources);
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum ItemPerkVisibility {
-    Visible = 0,
-    Disabled = 1,
-    Hidden = 2,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum ItemPerkVisibility: u8 {
+        Visible = 0,
+        Disabled = 1,
+        Hidden = 2,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug,
-    Default,
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    Hash,
-    Deserialize_repr,
-    Serialize_repr,
-)]
-pub enum SpecialItemType {
-    #[default]
-    None = 0,
-    SpecialCurrency = 1,
-    Armor = 8,
-    Weapon = 9,
-    Engram = 23,
-    Consumable = 24,
-    ExchangeMaterial = 25,
-    MissionReward = 27,
-    Currency = 29,
+serde_repr_enum! {
+    #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum SpecialItemType: u8 {
+        #[default]
+        None = 0,
+        SpecialCurrency = 1,
+        Armor = 8,
+        Weapon = 9,
+        Engram = 23,
+        Consumable = 24,
+        ExchangeMaterial = 25,
+        MissionReward = 27,
+        Currency = 29,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug,
-    Default,
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    Hash,
-    Deserialize_repr,
-    Serialize_repr,
-)]
-pub enum DestinyItemType {
-    #[default]
-    None = 0,
-    Currency = 1,
-    Armor = 2,
-    Weapon = 3,
-    Message = 7,
-    Engram = 8,
-    Consumable = 9,
-    ExchangeMaterial = 10,
-    MissionReward = 11,
-    QuestStep = 12,
-    QuestStepComplete = 13,
-    Emblem = 14,
-    Quest = 15,
-    Subclass = 16,
-    ClanBanner = 17,
-    Aura = 18,
-    Mod = 19,
-    Dummy = 20,
-    Ship = 21,
-    Vehicle = 22,
-    Emote = 23,
-    Ghost = 24,
-    Package = 25,
-    Bounty = 26,
-    Wrapper = 27,
-    SeasonalArtifact = 28,
-    Finisher = 29,
-    Pattern = 30,
+serde_repr_enum! {
+    #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyItemType: u8 {
+        #[default]
+        None = 0,
+        Currency = 1,
+        Armor = 2,
+        Weapon = 3,
+        Message = 7,
+        Engram = 8,
+        Consumable = 9,
+        ExchangeMaterial = 10,
+        MissionReward = 11,
+        QuestStep = 12,
+        QuestStepComplete = 13,
+        Emblem = 14,
+        Quest = 15,
+        Subclass = 16,
+        ClanBanner = 17,
+        Aura = 18,
+        Mod = 19,
+        Dummy = 20,
+        Ship = 21,
+        Vehicle = 22,
+        Emote = 23,
+        Ghost = 24,
+        Package = 25,
+        Bounty = 26,
+        Wrapper = 27,
+        SeasonalArtifact = 28,
+        Finisher = 29,
+        Pattern = 30,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug,
-    Default,
-    Clone,
-    Copy,
-    PartialEq,
-    Eq,
-    Hash,
-    Deserialize_repr,
-    Serialize_repr,
-)]
-pub enum DestinyBreakerType {
-    #[default]
-    None = 0,
-    ShieldPiercing = 1,
-    Disruption = 2,
-    Stagger = 3,
+serde_repr_enum! {
+    #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyBreakerType: u8 {
+        #[default]
+        None = 0,
+        ShieldPiercing = 1,
+        Disruption = 2,
+        Stagger = 3,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyProgressionRewardItemAcquisitionBehavior {
-    Instant = 0,
-    PlayerClaimRequired = 1,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyProgressionRewardItemAcquisitionBehavior: u8 {
+        Instant = 0,
+        PlayerClaimRequired = 1,
+    }
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum ItemBindStatus {
-    NotBound = 0,
-    BoundToCharacter = 1,
-    BoundToAccount = 2,
-    BoundToGuild = 3,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum ItemBindStatus: u8 {
+        NotBound = 0,
+        BoundToCharacter = 1,
+        BoundToAccount = 2,
+        BoundToGuild = 3,
+    }
 }
 
 bitflags! {
@@ -568,49 +486,48 @@ bitflags! {
 
 impl_bitflags_serde!(DestinyGameVersions);
 
-#[repr(u16)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyComponentType {
-    None = 0,
-    Profiles = 100,
-    VendorReceipts = 101,
-    ProfileInventories = 102,
-    ProfileCurrencies = 103,
-    ProfileProgression = 104,
-    PlatformSilver = 105,
-    Characters = 200,
-    CharacterInventories = 201,
-    CharacterProgressions = 202,
-    CharacterRenderData = 203,
-    CharacterActivities = 204,
-    CharacterEquipment = 205,
-    CharacterLoadouts = 206,
-    ItemInstances = 300,
-    ItemObjectives = 301,
-    ItemPerks = 302,
-    ItemRenderData = 303,
-    ItemStats = 304,
-    ItemSockets = 305,
-    ItemTalentGrids = 306,
-    ItemCommonData = 307,
-    ItemPlugStates = 308,
-    ItemPlugObjectives = 309,
-    ItemReusablePlugs = 310,
-    Vendors = 400,
-    VendorCategories = 401,
-    VendorSales = 402,
-    Kiosks = 500,
-    CurrencyLookups = 600,
-    PresentationNodes = 700,
-    Collectibles = 800,
-    Records = 900,
-    Transitory = 1000,
-    Metrics = 1100,
-    StringVariables = 1200,
-    Craftables = 1300,
-    SocialCommendations = 1400,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyComponentType: u16 {
+        None = 0,
+        Profiles = 100,
+        VendorReceipts = 101,
+        ProfileInventories = 102,
+        ProfileCurrencies = 103,
+        ProfileProgression = 104,
+        PlatformSilver = 105,
+        Characters = 200,
+        CharacterInventories = 201,
+        CharacterProgressions = 202,
+        CharacterRenderData = 203,
+        CharacterActivities = 204,
+        CharacterEquipment = 205,
+        CharacterLoadouts = 206,
+        ItemInstances = 300,
+        ItemObjectives = 301,
+        ItemPerks = 302,
+        ItemRenderData = 303,
+        ItemStats = 304,
+        ItemSockets = 305,
+        ItemTalentGrids = 306,
+        ItemCommonData = 307,
+        ItemPlugStates = 308,
+        ItemPlugObjectives = 309,
+        ItemReusablePlugs = 310,
+        Vendors = 400,
+        VendorCategories = 401,
+        VendorSales = 402,
+        Kiosks = 500,
+        CurrencyLookups = 600,
+        PresentationNodes = 700,
+        Collectibles = 800,
+        Records = 900,
+        Transitory = 1000,
+        Metrics = 1100,
+        StringVariables = 1200,
+        Craftables = 1300,
+        SocialCommendations = 1400,
+    }
 }
 
 bitflags! {
@@ -665,16 +582,15 @@ bitflags! {
 
 impl_bitflags_serde!(DestinyPartyMemberStates);
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyGamePrivacySetting {
-    Open = 0,
-    ClanAndFriendsOnly = 1,
-    FriendsOnly = 2,
-    InvitationOnly = 3,
-    Closed = 4,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyGamePrivacySetting: u8 {
+        Open = 0,
+        ClanAndFriendsOnly = 1,
+        FriendsOnly = 2,
+        InvitationOnly = 3,
+        Closed = 4,
+    }
 }
 
 bitflags! {
@@ -691,15 +607,14 @@ bitflags! {
 
 impl_bitflags_serde!(DestinyJoinClosedReasons);
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyRace {
-    Human = 0,
-    Awoken = 1,
-    Exo = 2,
-    Unknown = 3,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyRace: u8 {
+        Human = 0,
+        Awoken = 1,
+        Exo = 2,
+        Unknown = 3,
+    }
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -729,19 +644,18 @@ pub struct DestinyActivity {
     pub visible_rewards: Vec<DestinyActivityRewardMapping>,
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyActivityDifficultyTier {
-    Trivial = 0,
-    Easy = 1,
-    Normal = 2,
-    Challenging = 3,
-    Hard = 4,
-    Brave = 5,
-    AlmostImpossible = 6,
-    Impossible = 7,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyActivityDifficultyTier: u8 {
+        Trivial = 0,
+        Easy = 1,
+        Normal = 2,
+        Challenging = 3,
+        Hard = 4,
+        Brave = 5,
+        AlmostImpossible = 6,
+        Impossible = 7,
+    }
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -784,25 +698,24 @@ pub struct DestinyTalentNode {
     pub node_stats_block: DestinyTalentNodeStatBlock,
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyTalentNodeState {
-    Invalid = 0,
-    CanUpgrade = 1,
-    NoPoints = 2,
-    NoPrerequisites = 3,
-    NoSteps = 4,
-    NoUnlock = 5,
-    NoMaterial = 6,
-    NoGridLevel = 7,
-    SwappingLocked = 8,
-    MustSwap = 9,
-    Complete = 10,
-    Unknown = 11,
-    CreationOnly = 12,
-    Hidden = 13,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyTalentNodeState: u8 {
+        Invalid = 0,
+        CanUpgrade = 1,
+        NoPoints = 2,
+        NoPrerequisites = 3,
+        NoSteps = 4,
+        NoUnlock = 5,
+        NoMaterial = 6,
+        NoGridLevel = 7,
+        SwappingLocked = 8,
+        MustSwap = 9,
+        Complete = 10,
+        Unknown = 11,
+        CreationOnly = 12,
+        Hidden = 13,
+    }
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -862,12 +775,11 @@ pub struct DestinyActivitySkullComponent {
     pub is_enabled: bool,
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum DestinyActivityRewardDisplayMode {
-    Aggregate = 0,
-    PickFirst = 1,
-    Count = 2,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum DestinyActivityRewardDisplayMode: u8 {
+        Aggregate = 0,
+        PickFirst = 1,
+        Count = 2,
+    }
 }

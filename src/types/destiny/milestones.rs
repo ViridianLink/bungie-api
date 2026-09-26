@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use chrono::{DateTime, Utc};
+use jiff::Timestamp;
 use serde::{Deserialize, Serialize};
 
 use super::challenges::DestinyChallengeStatus;
@@ -17,8 +17,8 @@ pub struct DestinyMilestone {
     pub vendor_hashes: Option<Vec<u32>>,
     pub vendors: Vec<DestinyMilestoneVendor>,
     pub rewards: Vec<DestinyMilestoneRewardCategory>,
-    pub start_date: Option<DateTime<Utc>>,
-    pub end_date: Option<DateTime<Utc>>,
+    pub start_date: Option<Timestamp>,
+    pub end_date: Option<Timestamp>,
     pub order: i32,
 }
 
@@ -133,8 +133,8 @@ pub struct DestinyPublicMilestone {
     pub activities: Vec<DestinyPublicMilestoneChallengeActivity>,
     pub vendor_hashes: Vec<u32>,
     pub vendors: Vec<DestinyPublicMilestoneVendor>,
-    pub start_date: Option<DateTime<Utc>>,
-    pub end_date: Option<DateTime<Utc>>,
+    pub start_date: Option<Timestamp>,
+    pub end_date: Option<Timestamp>,
     pub order: i32,
 }
 

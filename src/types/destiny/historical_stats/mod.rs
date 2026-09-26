@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
-use chrono::{DateTime, Utc};
 use definitions::DestinyActivityModeType;
+use jiff::Timestamp;
 use serde::{Deserialize, Serialize};
 
 use crate::types::BungieMembershipType;
@@ -13,7 +13,7 @@ pub mod definitions;
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPostGameCarnageReportData {
-    pub period: DateTime<Utc>,
+    pub period: Timestamp,
     pub starting_phase_index: Option<i32>,
     pub activity_was_started_from_beginning: Option<bool>,
     pub activity_details: DestinyHistoricalStatsActivity,
@@ -120,7 +120,7 @@ pub struct DestinyPostGameCarnageReportTeamEntry {
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyHistoricalStatsPeriodGroup {
-    pub period: DateTime<Utc>,
+    pub period: Timestamp,
     pub activity_details: DestinyHistoricalStatsActivity,
     pub values: HashMap<String, DestinyHistoricalStatsValue>,
 }

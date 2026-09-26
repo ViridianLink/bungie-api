@@ -1,4 +1,4 @@
-use chrono::{DateTime, Utc};
+use jiff::Timestamp;
 use serde::{Deserialize, Serialize};
 
 use super::{DestinyItemQuantity, DestinyVendorItemRefundPolicy};
@@ -16,5 +16,5 @@ pub struct DestinyVendorReceipt {
     pub sequence_number: i32,
     #[serde(with = "crate::serde_as::int64")]
     pub time_to_expiration: i64,
-    pub expires_on: DateTime<Utc>,
+    pub expires_on: Timestamp,
 }

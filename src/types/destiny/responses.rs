@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use chrono::{DateTime, Utc};
+use jiff::Timestamp;
 use serde::{Deserialize, Serialize};
 
 use super::components::collectibles::{
@@ -48,8 +48,8 @@ use crate::types::{
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyProfileResponse {
-    pub response_minted_timestamp: DateTime<Utc>,
-    pub secondary_components_minted_timestamp: DateTime<Utc>,
+    pub response_minted_timestamp: Timestamp,
+    pub secondary_components_minted_timestamp: Timestamp,
     pub vendor_receipts: Option<ComponentResponse<DestinyVendorReceiptsComponent>>,
     pub profile_inventory: Option<ComponentResponse<DestinyInventoryComponent>>,
     pub profile_currencies: Option<ComponentResponse<DestinyInventoryComponent>>,

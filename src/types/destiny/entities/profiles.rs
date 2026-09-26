@@ -1,4 +1,4 @@
-use chrono::{DateTime, Utc};
+use jiff::Timestamp;
 use serde::{Deserialize, Serialize};
 
 use crate::types::destiny::DestinyGameVersions;
@@ -17,7 +17,7 @@ pub struct DestinyVendorReceiptsComponent {
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyProfileComponent {
     pub user_info: UserInfoCard,
-    pub date_last_played: DateTime<Utc>,
+    pub date_last_played: Timestamp,
     pub versions_owned: DestinyGameVersions,
     pub character_ids: Vec<String>,
     pub season_hashes: Vec<u32>,

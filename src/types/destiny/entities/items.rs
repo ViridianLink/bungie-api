@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use chrono::{DateTime, Utc};
+use jiff::Timestamp;
 use serde::{Deserialize, Serialize};
 
 use crate::types::destiny::perks::DestinyPerkReference;
@@ -33,7 +33,7 @@ pub struct DestinyItemComponent {
     pub lockable: bool,
     pub state: ItemState,
     pub override_style_item_hash: Option<u32>,
-    pub expiration_date: Option<DateTime<Utc>>,
+    pub expiration_date: Option<Timestamp>,
     pub is_wrapper: bool,
     pub tooltip_notification_indexes: Vec<i32>,
     pub metric_hash: Option<u32>,
@@ -55,7 +55,7 @@ pub struct DestinyItemPerksComponent {
 pub struct DestinyItemObjectivesComponent {
     pub objectives: Vec<DestinyObjectiveProgress>,
     pub flavor_objective: DestinyObjectiveProgress,
-    pub date_completed: Option<DateTime<Utc>>,
+    pub date_completed: Option<Timestamp>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]

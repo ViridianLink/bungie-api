@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
-use serde_repr::{Deserialize_repr, Serialize_repr};
+
+use crate::serde_as::serde_repr_enum;
 
 /// A single profile component. `data` is absent when the component is private
 /// to the caller or disabled.
@@ -13,12 +14,11 @@ pub struct ComponentResponse<T> {
     pub disabled: bool,
 }
 
-#[repr(u8)]
-#[derive(
-    Debug, Clone, Copy, PartialEq, Eq, Hash, Deserialize_repr, Serialize_repr,
-)]
-pub enum ComponentPrivacySetting {
-    None = 0,
-    Public = 1,
-    Private = 2,
+serde_repr_enum! {
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+    pub enum ComponentPrivacySetting: u8 {
+        None = 0,
+        Public = 1,
+        Private = 2,
+    }
 }

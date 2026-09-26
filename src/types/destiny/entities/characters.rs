@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use chrono::{DateTime, Utc};
+use jiff::Timestamp;
 use serde::{Deserialize, Serialize};
 
 use super::items::DestinyItemPerksComponent;
@@ -36,7 +36,7 @@ pub struct DestinyCharacterComponent {
     pub membership_type: BungieMembershipType,
     #[serde(with = "crate::serde_as::int64")]
     pub character_id: i64,
-    pub date_last_played: DateTime<Utc>,
+    pub date_last_played: Timestamp,
     #[serde(with = "crate::serde_as::int64")]
     pub minutes_played_this_session: i64,
     #[serde(with = "crate::serde_as::int64")]
@@ -88,7 +88,7 @@ pub struct DestinyCharacterRenderComponent {
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyCharacterActivitiesComponent {
-    pub date_activity_started: DateTime<Utc>,
+    pub date_activity_started: Timestamp,
     pub available_activities: Vec<DestinyActivity>,
     pub current_activity_hash: u32,
     pub current_activity_mode_hash: u32,

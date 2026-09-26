@@ -124,3 +124,64 @@ macro_rules! impl_bitflags_serde {
 }
 
 pub(crate) use impl_bitflags_serde;
+
+/// Declares a fieldless enum with an explicit `repr` and implements `Serialize`
+/// and `Deserialize` using its numeric value, which is how Bungie encodes
+/// enums.
+///
+/// ```text
+/// serde_repr_enum! {
+///     #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+///     pub enum DestinyClass: u8 {
+///         Titan = 0,
+///         Hunter = 1,
+///     }
+/// }
+/// ```
+macro_rules! serde_repr_enum {
+    (
+        $(#[$attr:meta])*
+        $vis:vis enum $name:ident: $repr:ty {
+            $(
+                $(#[$variant_attr:meta])*
+                $variant:ident = $value:literal
+            ),* $(,)?
+        }
+    ) => {
+        $(#[$attr])*
+        #[repr($repr)]
+        $vis enum $name {
+            $(
+                $(#[$variant_attr])*
+                $variant = $value,
+            )*
+        }
+
+        impl ::serde::Serialize for $name {
+            fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+            where
+                S: ::serde::Serializer,
+            {
+                ::serde::Serialize::serialize(&(*self as $repr), serializer)
+            }
+        }
+
+        impl<'de> ::serde::Deserialize<'de> for $name {
+            fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+            where
+                D: ::serde::Deserializer<'de>,
+            {
+                let value = <$repr as ::serde::Deserialize>::deserialize(deserializer)?;
+                match value {
+                    $($value => Ok(Self::$variant),)*
+                    _ => Err(<D::Error as ::serde::de::Error>::custom(format!(
+                        concat!("unknown ", stringify!($name), ": {}"),
+                        value
+                    ))),
+                }
+            }
+        }
+    };
+}
+
+pub(crate) use serde_repr_enum;

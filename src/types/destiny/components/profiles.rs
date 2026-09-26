@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use chrono::{DateTime, Utc};
+use jiff::Timestamp;
 use serde::{Deserialize, Serialize};
 
 use crate::types::destiny::artifacts::DestinyArtifactProfileScoped;
@@ -44,8 +44,8 @@ pub struct DestinyProfileTransitoryPartyMember {
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyProfileTransitoryCurrentActivity {
-    pub start_time: Option<DateTime<Utc>>,
-    pub end_time: Option<DateTime<Utc>>,
+    pub start_time: Option<Timestamp>,
+    pub end_time: Option<Timestamp>,
     pub score: f32,
     pub highest_opposing_faction_score: f32,
     pub number_of_opponents: i32,
@@ -70,5 +70,5 @@ pub struct DestinyProfileTransitoryTrackingEntry {
     pub objective_hash: Option<u32>,
     pub activity_hash: Option<u32>,
     pub questline_item_hash: Option<u32>,
-    pub tracked_date: Option<DateTime<Utc>>,
+    pub tracked_date: Option<Timestamp>,
 }

@@ -47,4 +47,5 @@
   re-exported from `types::destiny`.
 - `DestinyManifest::mobile_gear_c_d_n` was renamed to `mobile_gear_cdn`.
 - The library no longer prints to stdout.
+- Date-time fields use `jiff::Timestamp` instead of `chrono::DateTime<Utc>`.
 - Dependencies are pinned to explicit versions instead of `*`.
