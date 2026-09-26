@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use chrono::{DateTime, Utc};
+use jiff::Timestamp;
 use serde::{Deserialize, Serialize};
 
 use super::components::collectibles::{
@@ -44,12 +44,12 @@ use crate::types::{
     DestinyItemComponentSetOfint64,
 };
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyProfileResponse {
-    pub response_minted_timestamp: DateTime<Utc>,
-    pub secondary_components_minted_timestamp: DateTime<Utc>,
+    pub response_minted_timestamp: Timestamp,
+    pub secondary_components_minted_timestamp: Timestamp,
     pub vendor_receipts: Option<ComponentResponse<DestinyVendorReceiptsComponent>>,
     pub profile_inventory: Option<ComponentResponse<DestinyInventoryComponent>>,
     pub profile_currencies: Option<ComponentResponse<DestinyInventoryComponent>>,
@@ -91,7 +91,7 @@ pub struct DestinyProfileResponse {
     pub character_plug_sets:
         Option<ComponentResponse<HashMap<i64, DestinyPlugSetsComponent>>>,
     pub character_uninstanced_item_components:
-        Option<DestinyBaseItemComponentSetOfuint32>,
+        Option<HashMap<i64, DestinyBaseItemComponentSetOfuint32>>,
     pub character_presentation_nodes:
         Option<ComponentResponse<HashMap<i64, DestinyPresentationNodesComponent>>>,
     pub character_records:

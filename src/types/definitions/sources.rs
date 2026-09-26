@@ -6,7 +6,7 @@ use super::DestinyInventoryItemStatDefinition;
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemSourceDefinition {
     pub level: i32,
     pub min_quality: i32,

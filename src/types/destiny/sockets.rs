@@ -2,25 +2,34 @@ use serde::{Deserialize, Serialize};
 
 use super::quests::DestinyObjectiveProgress;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemPlugBase {
     pub plug_item_hash: u32,
     pub can_insert: bool,
     pub enabled: bool,
+    #[serde(default)]
     pub insert_fail_indexes: Vec<i32>,
+    #[serde(default)]
     pub enable_fail_indexes: Vec<i32>,
+    pub stack_size: Option<i32>,
+    pub max_stack_size: Option<i32>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemPlug {
+    #[serde(default)]
     pub plug_objectives: Vec<DestinyObjectiveProgress>,
     pub plug_item_hash: u32,
     pub can_insert: bool,
     pub enabled: bool,
+    #[serde(default)]
     pub insert_fail_indexes: Vec<i32>,
+    #[serde(default)]
     pub enable_fail_indexes: Vec<i32>,
+    pub stack_size: Option<i32>,
+    pub max_stack_size: Option<i32>,
 }

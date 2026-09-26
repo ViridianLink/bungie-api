@@ -1,0 +1,1682 @@
+{
+ "responseMintedTimestamp": "2024-01-01T00:00:00Z",
+ "secondaryComponentsMintedTimestamp": "2024-01-01T00:00:00Z",
+ "vendorReceipts": {
+  "data": {
+   "receipts": [
+    {
+     "currencyPaid": [
+      {
+       "itemHash": 1,
+       "itemInstanceId": "1",
+       "quantity": 1,
+       "hasConditionalVisibility": true
+      }
+     ],
+     "itemReceived": {
+      "itemHash": 1,
+      "itemInstanceId": "1",
+      "quantity": 1,
+      "hasConditionalVisibility": true
+     },
+     "licenseUnlockHash": 1,
+     "purchasedByCharacterId": "1",
+     "refundPolicy": 2,
+     "sequenceNumber": 1,
+     "timeToExpiration": "1",
+     "expiresOn": "2024-01-01T00:00:00Z"
+    }
+   ]
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "profileInventory": {
+  "data": {
+   "items": [
+    {
+     "dismantlePermission": 1,
+     "itemHash": 1,
+     "itemInstanceId": "1",
+     "quantity": 1,
+     "bindStatus": 3,
+     "location": 4,
+     "bucketHash": 1,
+     "transferStatus": 4,
+     "lockable": true,
+     "state": 32,
+     "overrideStyleItemHash": 1,
+     "expirationDate": "2024-01-01T00:00:00Z",
+     "isWrapper": true,
+     "tooltipNotificationIndexes": [
+      1
+     ],
+     "metricHash": 1,
+     "metricObjective": {
+      "objectiveHash": 1,
+      "destinationHash": 1,
+      "activityHash": 1,
+      "progress": 1,
+      "completionValue": 1,
+      "complete": true,
+      "visible": true
+     },
+     "versionNumber": 1,
+     "itemValueVisibility": [
+      true
+     ]
+    }
+   ]
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "profileCurrencies": {
+  "data": {
+   "items": [
+    {
+     "dismantlePermission": 1,
+     "itemHash": 1,
+     "itemInstanceId": "1",
+     "quantity": 1,
+     "bindStatus": 3,
+     "location": 4,
+     "bucketHash": 1,
+     "transferStatus": 4,
+     "lockable": true,
+     "state": 32,
+     "overrideStyleItemHash": 1,
+     "expirationDate": "2024-01-01T00:00:00Z",
+     "isWrapper": true,
+     "tooltipNotificationIndexes": [
+      1
+     ],
+     "metricHash": 1,
+     "metricObjective": {
+      "objectiveHash": 1,
+      "destinationHash": 1,
+      "activityHash": 1,
+      "progress": 1,
+      "completionValue": 1,
+      "complete": true,
+      "visible": true
+     },
+     "versionNumber": 1,
+     "itemValueVisibility": [
+      true
+     ]
+    }
+   ]
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "profile": {
+  "data": {
+   "userInfo": {
+    "supplementalDisplayName": "text",
+    "iconPath": "text",
+    "crossSaveOverride": -1,
+    "applicableMembershipTypes": [
+     -1
+    ],
+    "isPublic": true,
+    "membershipType": -1,
+    "membershipId": "1",
+    "displayName": "text",
+    "bungieGlobalDisplayName": "text",
+    "bungieGlobalDisplayNameCode": 1
+   },
+   "dateLastPlayed": "2024-01-01T00:00:00Z",
+   "versionsOwned": 4096,
+   "characterIds": [
+    "1"
+   ],
+   "seasonHashes": [
+    1
+   ],
+   "seasonPassHashes": [
+    1
+   ],
+   "eventCardHashesOwned": [
+    1
+   ],
+   "currentSeasonHash": 1,
+   "currentSeasonPassHash": 1,
+   "currentSeasonRewardPowerCap": 1,
+   "activeEventCardHash": 1,
+   "currentGuardianRank": 1,
+   "lifetimeHighestGuardianRank": 1,
+   "renewedGuardianRank": 1
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "platformSilver": {
+  "data": {
+   "platformSilver": {
+    "All": {
+     "dismantlePermission": 1,
+     "itemHash": 1,
+     "itemInstanceId": "1",
+     "quantity": 1,
+     "bindStatus": 3,
+     "location": 4,
+     "bucketHash": 1,
+     "transferStatus": 4,
+     "lockable": true,
+     "state": 32,
+     "overrideStyleItemHash": 1,
+     "expirationDate": "2024-01-01T00:00:00Z",
+     "isWrapper": true,
+     "tooltipNotificationIndexes": [
+      1
+     ],
+     "metricHash": 1,
+     "metricObjective": {
+      "objectiveHash": 1,
+      "destinationHash": 1,
+      "activityHash": 1,
+      "progress": 1,
+      "completionValue": 1,
+      "complete": true,
+      "visible": true
+     },
+     "versionNumber": 1,
+     "itemValueVisibility": [
+      true
+     ]
+    }
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "profileKiosks": {
+  "data": {
+   "kioskItems": {
+    "1": [
+     {
+      "index": 1,
+      "canAcquire": true,
+      "failureIndexes": [
+       1
+      ],
+      "flavorObjective": {
+       "objectiveHash": 1,
+       "destinationHash": 1,
+       "activityHash": 1,
+       "progress": 1,
+       "completionValue": 1,
+       "complete": true,
+       "visible": true
+      }
+     }
+    ]
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "profilePlugSets": {
+  "data": {
+   "plugs": {
+    "1": [
+     {
+      "plugObjectives": [
+       {
+        "objectiveHash": 1,
+        "destinationHash": 1,
+        "activityHash": 1,
+        "progress": 1,
+        "completionValue": 1,
+        "complete": true,
+        "visible": true
+       }
+      ],
+      "plugItemHash": 1,
+      "canInsert": true,
+      "enabled": true,
+      "insertFailIndexes": [
+       1
+      ],
+      "enableFailIndexes": [
+       1
+      ],
+      "stackSize": 1,
+      "maxStackSize": 1
+     }
+    ]
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "profileProgression": {
+  "data": {
+   "checklists": {
+    "1": {
+     "1": true
+    }
+   },
+   "seasonalArtifact": {
+    "artifactHash": 1,
+    "pointProgression": {
+     "progressionHash": 1,
+     "dailyProgress": 1,
+     "dailyLimit": 1,
+     "weeklyProgress": 1,
+     "weeklyLimit": 1,
+     "currentProgress": 1,
+     "level": 1,
+     "levelCap": 1,
+     "stepIndex": 1,
+     "progressToNextLevel": 1,
+     "nextLevelAt": 1,
+     "currentResetCount": 1,
+     "seasonResets": [
+      {
+       "season": 1,
+       "resets": 1
+      }
+     ],
+     "rewardItemStates": [
+      8
+     ],
+     "rewardItemSocketOverrideStates": {
+      "1": {
+       "rewardItemStats": {
+        "1": {
+         "statHash": 1,
+         "value": 1
+        }
+       },
+       "itemState": 32
+      }
+     }
+    },
+    "pointsAcquired": 1,
+    "powerBonusProgression": {
+     "progressionHash": 1,
+     "dailyProgress": 1,
+     "dailyLimit": 1,
+     "weeklyProgress": 1,
+     "weeklyLimit": 1,
+     "currentProgress": 1,
+     "level": 1,
+     "levelCap": 1,
+     "stepIndex": 1,
+     "progressToNextLevel": 1,
+     "nextLevelAt": 1,
+     "currentResetCount": 1,
+     "seasonResets": [
+      {
+       "season": 1,
+       "resets": 1
+      }
+     ],
+     "rewardItemStates": [
+      8
+     ],
+     "rewardItemSocketOverrideStates": {
+      "1": {
+       "rewardItemStats": {
+        "1": {
+         "statHash": 1,
+         "value": 1
+        }
+       },
+       "itemState": 32
+      }
+     }
+    },
+    "powerBonus": 1
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "profilePresentationNodes": {
+  "data": {
+   "nodes": {
+    "1": {
+     "state": 2,
+     "objective": {
+      "objectiveHash": 1,
+      "destinationHash": 1,
+      "activityHash": 1,
+      "progress": 1,
+      "completionValue": 1,
+      "complete": true,
+      "visible": true
+     },
+     "progressValue": 1,
+     "completionValue": 1,
+     "recordCategoryScore": 1
+    }
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "profileRecords": {
+  "data": {
+   "score": 1,
+   "activeScore": 1,
+   "legacyScore": 1,
+   "lifetimeScore": 1,
+   "trackedRecordHash": 1,
+   "records": {
+    "1": {
+     "state": 64,
+     "objectives": [
+      {
+       "objectiveHash": 1,
+       "destinationHash": 1,
+       "activityHash": 1,
+       "progress": 1,
+       "completionValue": 1,
+       "complete": true,
+       "visible": true
+      }
+     ],
+     "intervalObjectives": [
+      {
+       "objectiveHash": 1,
+       "destinationHash": 1,
+       "activityHash": 1,
+       "progress": 1,
+       "completionValue": 1,
+       "complete": true,
+       "visible": true
+      }
+     ],
+     "intervalsRedeemedCount": 1,
+     "completedCount": 1,
+     "rewardVisibilty": [
+      true
+     ]
+    }
+   },
+   "recordCategoriesRootNodeHash": 1,
+   "recordSealsRootNodeHash": 1
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "profileCollectibles": {
+  "data": {
+   "recentCollectibleHashes": [
+    1
+   ],
+   "newnessFlaggedCollectibleHashes": [
+    1
+   ],
+   "collectibles": {
+    "1": {
+     "state": 64
+    }
+   },
+   "collectionCategoriesRootNodeHash": 1,
+   "collectionBadgesRootNodeHash": 1
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "profileTransitoryData": {
+  "data": {
+   "partyMembers": [
+    {
+     "membershipId": "1",
+     "emblemHash": 1,
+     "displayName": "text",
+     "status": 8
+    }
+   ],
+   "currentActivity": {
+    "startTime": "2024-01-01T00:00:00Z",
+    "endTime": "2024-01-01T00:00:00Z",
+    "score": 1.5,
+    "highestOpposingFactionScore": 1.5,
+    "numberOfOpponents": 1,
+    "numberOfPlayers": 1
+   },
+   "joinability": {
+    "openSlots": 1,
+    "privacySetting": 4,
+    "closedReasons": 32768
+   },
+   "tracking": [
+    {
+     "locationHash": 1,
+     "itemHash": 1,
+     "objectiveHash": 1,
+     "activityHash": 1,
+     "questlineItemHash": 1,
+     "trackedDate": "2024-01-01T00:00:00Z"
+    }
+   ],
+   "lastOrbitedDestinationHash": 1
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "metrics": {
+  "data": {
+   "metrics": {
+    "1": {
+     "invisible": true,
+     "objectiveProgress": {
+      "objectiveHash": 1,
+      "destinationHash": 1,
+      "activityHash": 1,
+      "progress": 1,
+      "completionValue": 1,
+      "complete": true,
+      "visible": true
+     }
+    }
+   },
+   "metricsRootNodeHash": 1
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "profileStringVariables": {
+  "data": {
+   "integerValuesByHash": {
+    "1": 1
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "profileCommendations": {
+  "data": {
+   "totalScore": 1,
+   "commendationNodePercentagesByHash": {
+    "1": 1
+   },
+   "scoreDetailValues": [
+    1
+   ],
+   "commendationNodeScoresByHash": {
+    "1": 1
+   },
+   "commendationScoresByHash": {
+    "1": 1
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characters": {
+  "data": {
+   "1": {
+    "membershipId": "1",
+    "membershipType": -1,
+    "characterId": "1",
+    "dateLastPlayed": "2024-01-01T00:00:00Z",
+    "minutesPlayedThisSession": "1",
+    "minutesPlayedTotal": "1",
+    "light": 1,
+    "stats": {
+     "1": 1
+    },
+    "raceHash": 1,
+    "genderHash": 1,
+    "classHash": 1,
+    "raceType": 3,
+    "classType": 3,
+    "genderType": 2,
+    "emblemPath": "text",
+    "emblemBackgroundPath": "text",
+    "emblemHash": 1,
+    "emblemColor": {
+     "red": 1,
+     "green": 1,
+     "blue": 1,
+     "alpha": 1
+    },
+    "levelProgression": {
+     "progressionHash": 1,
+     "dailyProgress": 1,
+     "dailyLimit": 1,
+     "weeklyProgress": 1,
+     "weeklyLimit": 1,
+     "currentProgress": 1,
+     "level": 1,
+     "levelCap": 1,
+     "stepIndex": 1,
+     "progressToNextLevel": 1,
+     "nextLevelAt": 1,
+     "currentResetCount": 1,
+     "seasonResets": [
+      {
+       "season": 1,
+       "resets": 1
+      }
+     ],
+     "rewardItemStates": [
+      8
+     ],
+     "rewardItemSocketOverrideStates": {
+      "1": {
+       "rewardItemStats": {
+        "1": {
+         "statHash": 1,
+         "value": 1
+        }
+       },
+       "itemState": 32
+      }
+     }
+    },
+    "baseCharacterLevel": 1,
+    "percentToNextLevel": 1.5,
+    "titleRecordHash": 1
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characterInventories": {
+  "data": {
+   "1": {
+    "items": [
+     {
+      "dismantlePermission": 1,
+      "itemHash": 1,
+      "itemInstanceId": "1",
+      "quantity": 1,
+      "bindStatus": 3,
+      "location": 4,
+      "bucketHash": 1,
+      "transferStatus": 4,
+      "lockable": true,
+      "state": 32,
+      "overrideStyleItemHash": 1,
+      "expirationDate": "2024-01-01T00:00:00Z",
+      "isWrapper": true,
+      "tooltipNotificationIndexes": [
+       1
+      ],
+      "metricHash": 1,
+      "metricObjective": {
+       "objectiveHash": 1,
+       "destinationHash": 1,
+       "activityHash": 1,
+       "progress": 1,
+       "completionValue": 1,
+       "complete": true,
+       "visible": true
+      },
+      "versionNumber": 1,
+      "itemValueVisibility": [
+       true
+      ]
+     }
+    ]
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characterLoadouts": {
+  "data": {
+   "1": {
+    "loadouts": [
+     {
+      "colorHash": 1,
+      "iconHash": 1,
+      "nameHash": 1,
+      "items": [
+       {
+        "itemInstanceId": "1",
+        "plugItemHashes": [
+         1
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characterProgressions": {
+  "data": {
+   "1": {
+    "progressions": {
+     "1": {
+      "progressionHash": 1,
+      "dailyProgress": 1,
+      "dailyLimit": 1,
+      "weeklyProgress": 1,
+      "weeklyLimit": 1,
+      "currentProgress": 1,
+      "level": 1,
+      "levelCap": 1,
+      "stepIndex": 1,
+      "progressToNextLevel": 1,
+      "nextLevelAt": 1,
+      "currentResetCount": 1,
+      "seasonResets": [
+       {
+        "season": 1,
+        "resets": 1
+       }
+      ],
+      "rewardItemStates": [
+       8
+      ],
+      "rewardItemSocketOverrideStates": {
+       "1": {
+        "rewardItemStats": {
+         "1": {
+          "statHash": 1,
+          "value": 1
+         }
+        },
+        "itemState": 32
+       }
+      }
+     }
+    },
+    "factions": {
+     "1": {
+      "factionHash": 1,
+      "factionVendorIndex": 1,
+      "progressionHash": 1,
+      "dailyProgress": 1,
+      "dailyLimit": 1,
+      "weeklyProgress": 1,
+      "weeklyLimit": 1,
+      "currentProgress": 1,
+      "level": 1,
+      "levelCap": 1,
+      "stepIndex": 1,
+      "progressToNextLevel": 1,
+      "nextLevelAt": 1,
+      "currentResetCount": 1,
+      "seasonResets": [
+       {
+        "season": 1,
+        "resets": 1
+       }
+      ],
+      "rewardItemStates": [
+       8
+      ],
+      "rewardItemSocketOverrideStates": {
+       "1": {
+        "rewardItemStats": {
+         "1": {
+          "statHash": 1,
+          "value": 1
+         }
+        },
+        "itemState": 32
+       }
+      }
+     }
+    },
+    "milestones": {
+     "1": {
+      "milestoneHash": 1,
+      "availableQuests": [
+       {
+        "questItemHash": 1,
+        "status": {
+         "questHash": 1,
+         "stepHash": 1,
+         "stepObjectives": [
+          {
+           "objectiveHash": 1,
+           "destinationHash": 1,
+           "activityHash": 1,
+           "progress": 1,
+           "completionValue": 1,
+           "complete": true,
+           "visible": true
+          }
+         ],
+         "tracked": true,
+         "itemInstanceId": "1",
+         "completed": true,
+         "redeemed": true,
+         "started": true,
+         "vendorHash": 1
+        },
+        "activity": {
+         "activityHash": 1,
+         "activityModeHash": 1,
+         "activityModeType": 93,
+         "modifierHashes": [
+          1
+         ],
+         "variants": [
+          {
+           "activityHash": 1,
+           "completionStatus": {
+            "completed": true,
+            "phases": [
+             {
+              "complete": true,
+              "phaseHash": 1
+             }
+            ]
+           },
+           "activityModeHash": 1,
+           "activityModeType": 93
+          }
+         ]
+        },
+        "challenges": [
+         {
+          "objective": {
+           "objectiveHash": 1,
+           "destinationHash": 1,
+           "activityHash": 1,
+           "progress": 1,
+           "completionValue": 1,
+           "complete": true,
+           "visible": true
+          }
+         }
+        ]
+       }
+      ],
+      "activities": [
+       {
+        "activityHash": 1,
+        "challenges": [
+         {
+          "objective": {
+           "objectiveHash": 1,
+           "destinationHash": 1,
+           "activityHash": 1,
+           "progress": 1,
+           "completionValue": 1,
+           "complete": true,
+           "visible": true
+          }
+         }
+        ],
+        "modifierHashes": [
+         1
+        ],
+        "booleanActivityOptions": {
+         "1": true
+        },
+        "loadoutRequirementIndex": 1,
+        "phases": [
+         {
+          "complete": true,
+          "phaseHash": 1
+         }
+        ]
+       }
+      ],
+      "values": {
+       "key": 1.5
+      },
+      "vendorHashes": [
+       1
+      ],
+      "vendors": [
+       {
+        "vendorHash": 1,
+        "previewItemHash": 1
+       }
+      ],
+      "rewards": [
+       {
+        "rewardCategoryHash": 1,
+        "entries": [
+         {
+          "rewardEntryHash": 1,
+          "earned": true,
+          "redeemed": true
+         }
+        ]
+       }
+      ],
+      "startDate": "2024-01-01T00:00:00Z",
+      "endDate": "2024-01-01T00:00:00Z",
+      "order": 1
+     }
+    },
+    "quests": [
+     {
+      "questHash": 1,
+      "stepHash": 1,
+      "stepObjectives": [
+       {
+        "objectiveHash": 1,
+        "destinationHash": 1,
+        "activityHash": 1,
+        "progress": 1,
+        "completionValue": 1,
+        "complete": true,
+        "visible": true
+       }
+      ],
+      "tracked": true,
+      "itemInstanceId": "1",
+      "completed": true,
+      "redeemed": true,
+      "started": true,
+      "vendorHash": 1
+     }
+    ],
+    "uninstancedItemObjectives": {
+     "1": [
+      {
+       "objectiveHash": 1,
+       "destinationHash": 1,
+       "activityHash": 1,
+       "progress": 1,
+       "completionValue": 1,
+       "complete": true,
+       "visible": true
+      }
+     ]
+    },
+    "uninstancedItemPerks": {
+     "1": {
+      "perks": [
+       {
+        "perkHash": 1,
+        "iconPath": "text",
+        "isActive": true,
+        "visible": true
+       }
+      ]
+     }
+    },
+    "checklists": {
+     "1": {
+      "1": true
+     }
+    },
+    "seasonalArtifact": {
+     "artifactHash": 1,
+     "pointsUsed": 1,
+     "resetCount": 1,
+     "tiers": [
+      {
+       "tierHash": 1,
+       "isUnlocked": true,
+       "pointsToUnlock": 1,
+       "items": [
+        {
+         "itemHash": 1,
+         "isActive": true,
+         "isVisible": true
+        }
+       ]
+      }
+     ]
+    },
+    "unclaimedOrderRewards": {
+     "1": 1
+    }
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characterRenderData": {
+  "data": {
+   "1": {
+    "customDyes": [
+     {
+      "channelHash": 1,
+      "dyeHash": 1
+     }
+    ],
+    "customization": {
+     "personality": 1,
+     "face": 1,
+     "skinColor": 1,
+     "lipColor": 1,
+     "eyeColor": 1,
+     "hairColors": [
+      1
+     ],
+     "featureColors": [
+      1
+     ],
+     "decalColor": 1,
+     "wearHelmet": true,
+     "hairIndex": 1,
+     "featureIndex": 1,
+     "decalIndex": 1
+    },
+    "peerView": {
+     "equipment": [
+      {
+       "itemHash": 1,
+       "dyes": [
+        {
+         "channelHash": 1,
+         "dyeHash": 1
+        }
+       ]
+      }
+     ]
+    }
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characterActivities": {
+  "data": {
+   "1": {
+    "dateActivityStarted": "2024-01-01T00:00:00Z",
+    "availableActivities": [
+     {
+      "activityHash": 1,
+      "isNew": true,
+      "canLead": true,
+      "canJoin": true,
+      "isCompleted": true,
+      "isVisible": true,
+      "displayLevel": 1,
+      "recommendedLight": 1,
+      "difficultyTier": 7,
+      "challenges": [
+       {
+        "objective": {
+         "objectiveHash": 1,
+         "destinationHash": 1,
+         "activityHash": 1,
+         "progress": 1,
+         "completionValue": 1,
+         "complete": true,
+         "visible": true
+        }
+       }
+      ],
+      "modifierHashes": [
+       1
+      ],
+      "booleanActivityOptions": {
+       "1": true
+      },
+      "loadoutRequirementIndex": 1,
+      "visibleRewards": [
+       {
+        "displayBehavior": 2,
+        "rewardItems": [
+         {
+          "visibilityUnlockExpression": {
+           "steps": [
+            {
+             "stepOperator": 1,
+             "unlockHash": 1,
+             "value": 0
+            }
+           ],
+           "scope": 1
+          },
+          "itemQuantity": {
+           "itemHash": 1,
+           "itemInstanceId": "1",
+           "quantity": 1,
+           "hasConditionalVisibility": true
+          },
+          "uiStyle": "text"
+         }
+        ]
+       }
+      ],
+      "isFocusedActivity": true,
+      "leaderRequirementFailureIndices": [
+       1
+      ],
+      "fireteamRequirementFailureIndices": [
+       1
+      ]
+     }
+    ],
+    "availableActivityInteractables": [
+     {
+      "activityInteractableHash": 1,
+      "activityInteractableElementIndex": 1
+     }
+    ],
+    "difficultyTierCollections": {
+     "1": {
+      "difficultyTierCollectionHash": 1,
+      "difficultyTiers": [
+       {
+        "isEnabled": true,
+        "difficultyTierIndex": 1,
+        "fixedActivitySkulls": [
+         {
+          "hash": 1,
+          "skullIdentifierHash": 1,
+          "isEnabled": true
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "selectableSkullCollections": {
+     "1": {
+      "selectableSkullCollectionHash": 1,
+      "selectableSkulls": [
+       {
+        "hash": 1,
+        "skullIdentifierHash": 1,
+        "isEnabled": true
+       }
+      ]
+     }
+    },
+    "currentActivityHash": 1,
+    "currentActivityModeHash": 1,
+    "currentActivityModeType": 93,
+    "currentActivityModeHashes": [
+     1
+    ],
+    "currentActivityModeTypes": [
+     93
+    ],
+    "currentPlaylistActivityHash": 1,
+    "lastCompletedStoryHash": 1
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characterEquipment": {
+  "data": {
+   "1": {
+    "items": [
+     {
+      "dismantlePermission": 1,
+      "itemHash": 1,
+      "itemInstanceId": "1",
+      "quantity": 1,
+      "bindStatus": 3,
+      "location": 4,
+      "bucketHash": 1,
+      "transferStatus": 4,
+      "lockable": true,
+      "state": 32,
+      "overrideStyleItemHash": 1,
+      "expirationDate": "2024-01-01T00:00:00Z",
+      "isWrapper": true,
+      "tooltipNotificationIndexes": [
+       1
+      ],
+      "metricHash": 1,
+      "metricObjective": {
+       "objectiveHash": 1,
+       "destinationHash": 1,
+       "activityHash": 1,
+       "progress": 1,
+       "completionValue": 1,
+       "complete": true,
+       "visible": true
+      },
+      "versionNumber": 1,
+      "itemValueVisibility": [
+       true
+      ]
+     }
+    ]
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characterKiosks": {
+  "data": {
+   "1": {
+    "kioskItems": {
+     "1": [
+      {
+       "index": 1,
+       "canAcquire": true,
+       "failureIndexes": [
+        1
+       ],
+       "flavorObjective": {
+        "objectiveHash": 1,
+        "destinationHash": 1,
+        "activityHash": 1,
+        "progress": 1,
+        "completionValue": 1,
+        "complete": true,
+        "visible": true
+       }
+      }
+     ]
+    }
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characterPlugSets": {
+  "data": {
+   "1": {
+    "plugs": {
+     "1": [
+      {
+       "plugObjectives": [
+        {
+         "objectiveHash": 1,
+         "destinationHash": 1,
+         "activityHash": 1,
+         "progress": 1,
+         "completionValue": 1,
+         "complete": true,
+         "visible": true
+        }
+       ],
+       "plugItemHash": 1,
+       "canInsert": true,
+       "enabled": true,
+       "insertFailIndexes": [
+        1
+       ],
+       "enableFailIndexes": [
+        1
+       ],
+       "stackSize": 1,
+       "maxStackSize": 1
+      }
+     ]
+    }
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characterUninstancedItemComponents": {
+  "1": {
+   "objectives": {
+    "data": {
+     "1": {
+      "objectives": [
+       {
+        "objectiveHash": 1,
+        "destinationHash": 1,
+        "activityHash": 1,
+        "progress": 1,
+        "completionValue": 1,
+        "complete": true,
+        "visible": true
+       }
+      ],
+      "flavorObjective": {
+       "objectiveHash": 1,
+       "destinationHash": 1,
+       "activityHash": 1,
+       "progress": 1,
+       "completionValue": 1,
+       "complete": true,
+       "visible": true
+      },
+      "dateCompleted": "2024-01-01T00:00:00Z"
+     }
+    },
+    "privacy": 2,
+    "disabled": true
+   },
+   "perks": {
+    "data": {
+     "1": {
+      "perks": [
+       {
+        "perkHash": 1,
+        "iconPath": "text",
+        "isActive": true,
+        "visible": true
+       }
+      ]
+     }
+    },
+    "privacy": 2,
+    "disabled": true
+   }
+  }
+ },
+ "characterPresentationNodes": {
+  "data": {
+   "1": {
+    "nodes": {
+     "1": {
+      "state": 2,
+      "objective": {
+       "objectiveHash": 1,
+       "destinationHash": 1,
+       "activityHash": 1,
+       "progress": 1,
+       "completionValue": 1,
+       "complete": true,
+       "visible": true
+      },
+      "progressValue": 1,
+      "completionValue": 1,
+      "recordCategoryScore": 1
+     }
+    }
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characterRecords": {
+  "data": {
+   "1": {
+    "featuredRecordHashes": [
+     1
+    ],
+    "records": {
+     "1": {
+      "state": 64,
+      "objectives": [
+       {
+        "objectiveHash": 1,
+        "destinationHash": 1,
+        "activityHash": 1,
+        "progress": 1,
+        "completionValue": 1,
+        "complete": true,
+        "visible": true
+       }
+      ],
+      "intervalObjectives": [
+       {
+        "objectiveHash": 1,
+        "destinationHash": 1,
+        "activityHash": 1,
+        "progress": 1,
+        "completionValue": 1,
+        "complete": true,
+        "visible": true
+       }
+      ],
+      "intervalsRedeemedCount": 1,
+      "completedCount": 1,
+      "rewardVisibilty": [
+       true
+      ]
+     }
+    },
+    "recordCategoriesRootNodeHash": 1,
+    "recordSealsRootNodeHash": 1
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characterCollectibles": {
+  "data": {
+   "1": {
+    "collectibles": {
+     "1": {
+      "state": 64
+     }
+    },
+    "collectionCategoriesRootNodeHash": 1,
+    "collectionBadgesRootNodeHash": 1
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characterStringVariables": {
+  "data": {
+   "1": {
+    "integerValuesByHash": {
+     "1": 1
+    }
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "characterCraftables": {
+  "data": {
+   "1": {
+    "craftables": {
+     "1": {
+      "visible": true,
+      "failedRequirementIndexes": [
+       1
+      ],
+      "sockets": [
+       {
+        "plugSetHash": 1,
+        "plugs": [
+         {
+          "plugItemHash": 1,
+          "failedRequirementIndexes": [
+           1
+          ]
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "craftingRootNodeHash": 1
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ },
+ "itemComponents": {
+  "instances": {
+   "data": {
+    "1": {
+     "damageType": 7,
+     "damageTypeHash": 1,
+     "primaryStat": {
+      "statHash": 1,
+      "value": 1
+     },
+     "itemLevel": 1,
+     "quality": 1,
+     "isEquipped": true,
+     "canEquip": true,
+     "equipRequiredLevel": 1,
+     "unlockHashesRequiredToEquip": [
+      1
+     ],
+     "cannotEquipReason": 128,
+     "breakerType": 3,
+     "breakerTypeHash": 1,
+     "energy": {
+      "energyTypeHash": 1,
+      "energyType": 6,
+      "energyCapacity": 1,
+      "energyUsed": 1,
+      "energyUnused": 1
+     },
+     "gearTier": 1
+    }
+   },
+   "privacy": 2,
+   "disabled": true
+  },
+  "renderData": {
+   "data": {
+    "1": {
+     "useCustomDyes": true,
+     "artRegions": {
+      "1": 1
+     }
+    }
+   },
+   "privacy": 2,
+   "disabled": true
+  },
+  "stats": {
+   "data": {
+    "1": {
+     "stats": {
+      "1": {
+       "statHash": 1,
+       "value": 1
+      }
+     }
+    }
+   },
+   "privacy": 2,
+   "disabled": true
+  },
+  "sockets": {
+   "data": {
+    "1": {
+     "sockets": [
+      {
+       "plugHash": 1,
+       "isEnabled": true,
+       "isVisible": true,
+       "enableFailIndexes": [
+        1
+       ]
+      }
+     ]
+    }
+   },
+   "privacy": 2,
+   "disabled": true
+  },
+  "reusablePlugs": {
+   "data": {
+    "1": {
+     "plugs": {
+      "1": [
+       {
+        "plugItemHash": 1,
+        "canInsert": true,
+        "enabled": true,
+        "insertFailIndexes": [
+         1
+        ],
+        "enableFailIndexes": [
+         1
+        ],
+        "stackSize": 1,
+        "maxStackSize": 1
+       }
+      ]
+     }
+    }
+   },
+   "privacy": 2,
+   "disabled": true
+  },
+  "plugObjectives": {
+   "data": {
+    "1": {
+     "objectivesPerPlug": {
+      "1": [
+       {
+        "objectiveHash": 1,
+        "destinationHash": 1,
+        "activityHash": 1,
+        "progress": 1,
+        "completionValue": 1,
+        "complete": true,
+        "visible": true
+       }
+      ]
+     }
+    }
+   },
+   "privacy": 2,
+   "disabled": true
+  },
+  "talentGrids": {
+   "data": {
+    "1": {
+     "talentGridHash": 1,
+     "nodes": [
+      {
+       "nodeIndex": 1,
+       "nodeHash": 1,
+       "state": 13,
+       "isActivated": true,
+       "stepIndex": 1,
+       "materialsToUpgrade": [
+        {
+         "itemHash": 1,
+         "deleteOnAction": true,
+         "count": 1,
+         "countIsConstant": true,
+         "omitFromRequirements": true,
+         "hasVirtualStackSize": true
+        }
+       ],
+       "activationGridLevel": 1,
+       "progressPercent": 1.5,
+       "hidden": true,
+       "nodeStatsBlock": {
+        "currentStepStats": [
+         {
+          "statHash": 1,
+          "value": 1
+         }
+        ],
+        "nextStepStats": [
+         {
+          "statHash": 1,
+          "value": 1
+         }
+        ]
+       }
+      }
+     ],
+     "isGridComplete": true,
+     "gridProgression": {
+      "progressionHash": 1,
+      "dailyProgress": 1,
+      "dailyLimit": 1,
+      "weeklyProgress": 1,
+      "weeklyLimit": 1,
+      "currentProgress": 1,
+      "level": 1,
+      "levelCap": 1,
+      "stepIndex": 1,
+      "progressToNextLevel": 1,
+      "nextLevelAt": 1,
+      "currentResetCount": 1,
+      "seasonResets": [
+       {
+        "season": 1,
+        "resets": 1
+       }
+      ],
+      "rewardItemStates": [
+       8
+      ],
+      "rewardItemSocketOverrideStates": {
+       "1": {
+        "rewardItemStats": {
+         "1": {
+          "statHash": 1,
+          "value": 1
+         }
+        },
+        "itemState": 32
+       }
+      }
+     }
+    }
+   },
+   "privacy": 2,
+   "disabled": true
+  },
+  "plugStates": {
+   "data": {
+    "1": {
+     "plugObjectives": [
+      {
+       "objectiveHash": 1,
+       "destinationHash": 1,
+       "activityHash": 1,
+       "progress": 1,
+       "completionValue": 1,
+       "complete": true,
+       "visible": true
+      }
+     ],
+     "plugItemHash": 1,
+     "canInsert": true,
+     "enabled": true,
+     "insertFailIndexes": [
+      1
+     ],
+     "enableFailIndexes": [
+      1
+     ],
+     "stackSize": 1,
+     "maxStackSize": 1
+    }
+   },
+   "privacy": 2,
+   "disabled": true
+  },
+  "objectives": {
+   "data": {
+    "1": {
+     "objectives": [
+      {
+       "objectiveHash": 1,
+       "destinationHash": 1,
+       "activityHash": 1,
+       "progress": 1,
+       "completionValue": 1,
+       "complete": true,
+       "visible": true
+      }
+     ],
+     "flavorObjective": {
+      "objectiveHash": 1,
+      "destinationHash": 1,
+      "activityHash": 1,
+      "progress": 1,
+      "completionValue": 1,
+      "complete": true,
+      "visible": true
+     },
+     "dateCompleted": "2024-01-01T00:00:00Z"
+    }
+   },
+   "privacy": 2,
+   "disabled": true
+  },
+  "perks": {
+   "data": {
+    "1": {
+     "perks": [
+      {
+       "perkHash": 1,
+       "iconPath": "text",
+       "isActive": true,
+       "visible": true
+      }
+     ]
+    }
+   },
+   "privacy": 2,
+   "disabled": true
+  }
+ },
+ "characterCurrencyLookups": {
+  "data": {
+   "1": {
+    "itemQuantities": {
+     "1": 1
+    },
+    "materialRequirementSetStates": {
+     "1": {
+      "materialRequirementSetHash": 1,
+      "materialRequirementStates": [
+       {
+        "itemHash": 1,
+        "count": 1,
+        "stackSize": 1
+       }
+      ]
+     }
+    }
+   }
+  },
+  "privacy": 2,
+  "disabled": true
+ }
+}

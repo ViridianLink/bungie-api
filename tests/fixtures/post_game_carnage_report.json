@@ -1,0 +1,198 @@
+{
+ "period": "2024-01-01T00:00:00Z",
+ "startingPhaseIndex": 1,
+ "activityWasStartedFromBeginning": true,
+ "activityDifficultyTier": 1,
+ "selectedSkullHashes": [
+  1
+ ],
+ "activityDetails": {
+  "referenceId": 1,
+  "directorActivityHash": 1,
+  "instanceId": "1",
+  "mode": 93,
+  "modes": [
+   93
+  ],
+  "isPrivate": true,
+  "membershipType": -1
+ },
+ "entries": [
+  {
+   "standing": 1,
+   "score": {
+    "statId": "text",
+    "basic": {
+     "value": 1.5,
+     "displayValue": "text"
+    },
+    "pga": {
+     "value": 1.5,
+     "displayValue": "text"
+    },
+    "weighted": {
+     "value": 1.5,
+     "displayValue": "text"
+    },
+    "activityId": "1"
+   },
+   "player": {
+    "destinyUserInfo": {
+     "supplementalDisplayName": "text",
+     "iconPath": "text",
+     "crossSaveOverride": -1,
+     "applicableMembershipTypes": [
+      -1
+     ],
+     "isPublic": true,
+     "membershipType": -1,
+     "membershipId": "1",
+     "displayName": "text",
+     "bungieGlobalDisplayName": "text",
+     "bungieGlobalDisplayNameCode": 1
+    },
+    "characterClass": "text",
+    "classHash": 1,
+    "raceHash": 1,
+    "genderHash": 1,
+    "characterLevel": 1,
+    "lightLevel": 1,
+    "bungieNetUserInfo": {
+     "supplementalDisplayName": "text",
+     "iconPath": "text",
+     "crossSaveOverride": -1,
+     "applicableMembershipTypes": [
+      -1
+     ],
+     "isPublic": true,
+     "membershipType": -1,
+     "membershipId": "1",
+     "displayName": "text",
+     "bungieGlobalDisplayName": "text",
+     "bungieGlobalDisplayNameCode": 1
+    },
+    "clanName": "text",
+    "clanTag": "text",
+    "emblemHash": 1
+   },
+   "characterId": "1",
+   "values": {
+    "key": {
+     "statId": "text",
+     "basic": {
+      "value": 1.5,
+      "displayValue": "text"
+     },
+     "pga": {
+      "value": 1.5,
+      "displayValue": "text"
+     },
+     "weighted": {
+      "value": 1.5,
+      "displayValue": "text"
+     },
+     "activityId": "1"
+    }
+   },
+   "extended": {
+    "weapons": [
+     {
+      "referenceId": 1,
+      "values": {
+       "key": {
+        "statId": "text",
+        "basic": {
+         "value": 1.5,
+         "displayValue": "text"
+        },
+        "pga": {
+         "value": 1.5,
+         "displayValue": "text"
+        },
+        "weighted": {
+         "value": 1.5,
+         "displayValue": "text"
+        },
+        "activityId": "1"
+       }
+      }
+     }
+    ],
+    "values": {
+     "key": {
+      "statId": "text",
+      "basic": {
+       "value": 1.5,
+       "displayValue": "text"
+      },
+      "pga": {
+       "value": 1.5,
+       "displayValue": "text"
+      },
+      "weighted": {
+       "value": 1.5,
+       "displayValue": "text"
+      },
+      "activityId": "1"
+     }
+    },
+    "scoreboardValues": {
+     "key": {
+      "statId": "text",
+      "basic": {
+       "value": 1.5,
+       "displayValue": "text"
+      },
+      "pga": {
+       "value": 1.5,
+       "displayValue": "text"
+      },
+      "weighted": {
+       "value": 1.5,
+       "displayValue": "text"
+      },
+      "activityId": "1"
+     }
+    }
+   }
+  }
+ ],
+ "teams": [
+  {
+   "teamId": 1,
+   "standing": {
+    "statId": "text",
+    "basic": {
+     "value": 1.5,
+     "displayValue": "text"
+    },
+    "pga": {
+     "value": 1.5,
+     "displayValue": "text"
+    },
+    "weighted": {
+     "value": 1.5,
+     "displayValue": "text"
+    },
+    "activityId": "1"
+   },
+   "score": {
+    "statId": "text",
+    "basic": {
+     "value": 1.5,
+     "displayValue": "text"
+    },
+    "pga": {
+     "value": 1.5,
+     "displayValue": "text"
+    },
+    "weighted": {
+     "value": 1.5,
+     "displayValue": "text"
+    },
+    "activityId": "1"
+   },
+   "teamName": "text"
+  }
+ ]
+}

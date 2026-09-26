@@ -1,6 +1,7 @@
 mod manifest;
 
-use url::Url;
+pub use manifest::DestinyDefinition;
+use serde::Serialize;
 
 use crate::types::BungieMembershipType;
 use crate::types::destiny::DestinyComponentType;
@@ -11,7 +12,14 @@ use crate::types::destiny::historical_stats::{
 };
 use crate::types::destiny::responses::DestinyProfileResponse;
 use crate::types::user::UserInfoCard;
-use crate::{BungieApiError, BungieClient, Result};
+use crate::{BungieClient, Result};
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct ExactSearchRequest<'a> {
+    display_name: &'a str,
+    display_name_code: u16,
+}
 
 impl BungieClient {
     pub async fn search_destiny_player(
@@ -19,15 +27,18 @@ impl BungieClient {
         username: &str,
         discriminator: u16,
     ) -> Result<Vec<UserInfoCard>> {
-        let mut url = Url::parse(
-            "https://www.bungie.net/Platform/Destiny2/SearchDestinyPlayer/-1/",
-        )?;
+        let url = self.platform_url([
+            "Destiny2",
+            "SearchDestinyPlayerByBungieName",
+            &membership_type_segment(BungieMembershipType::All),
+        ])?;
 
-        url.path_segments_mut()
-            .map_err(|()| BungieApiError::InvalidUrl)?
-            .push(format!("{username}#{discriminator}").as_str());
+        let body = ExactSearchRequest {
+            display_name: username,
+            display_name_code: discriminator,
+        };
 
-        self.get_bungie_response::<Vec<UserInfoCard>>(url).await
+        self.post_bungie_response(url, &body).await
     }
 
     pub async fn profile(
@@ -36,24 +47,22 @@ impl BungieClient {
         membership_id: u64,
         components: &[DestinyComponentType],
     ) -> Result<DestinyProfileResponse> {
-        let mut url = Url::parse("https://www.bungie.net/Platform/Destiny2/")?;
-
-        url.path_segments_mut()
-            .map_err(|()| BungieApiError::InvalidUrl)?
-            .push(&(membership_type as i16).to_string())
-            .push("Profile")
-            .push(&membership_id.to_string());
+        let mut url = self.platform_url([
+            "Destiny2",
+            &membership_type_segment(membership_type),
+            "Profile",
+            &membership_id.to_string(),
+        ])?;
 
         let components = components
             .iter()
-            .copied()
-            .map(|c| (c as u16).to_string())
+            .map(|&c| (c as u16).to_string())
             .collect::<Vec<_>>()
             .join(",");
 
         url.query_pairs_mut().append_pair("components", &components);
 
-        self.get_bungie_response::<DestinyProfileResponse>(url).await
+        self.get_bungie_response(url).await
     }
 
     pub async fn activity_history(
@@ -65,17 +74,16 @@ impl BungieClient {
         mode: Option<DestinyActivityModeType>,
         page: u32,
     ) -> Result<DestinyActivityHistoryResults> {
-        let mut url = Url::parse("https://www.bungie.net/Platform/Destiny2/")?;
-
-        url.path_segments_mut()
-            .map_err(|()| BungieApiError::InvalidUrl)?
-            .push(&(membership_type as i16).to_string())
-            .push("Account")
-            .push(&membership_id.to_string())
-            .push("Character")
-            .push(&character_id.to_string())
-            .push("Stats")
-            .push("Activities");
+        let mut url = self.platform_url([
+            "Destiny2",
+            &membership_type_segment(membership_type),
+            "Account",
+            &membership_id.to_string(),
+            "Character",
+            &character_id.to_string(),
+            "Stats",
+            "Activities",
+        ])?;
 
         {
             let mut query_pairs = url.query_pairs_mut();
@@ -83,22 +91,29 @@ impl BungieClient {
                 query_pairs.append_pair("count", &count.to_string());
             }
             if let Some(mode) = mode {
-                query_pairs.append_pair("mode", &(mode as i32).to_string());
+                query_pairs.append_pair("mode", &(mode as u8).to_string());
             }
             query_pairs.append_pair("page", &page.to_string());
         }
 
-        self.get_bungie_response::<DestinyActivityHistoryResults>(url).await
+        self.get_bungie_response(url).await
     }
 
     pub async fn post_game_carnage_report(
         &self,
         activity_id: u64,
     ) -> Result<DestinyPostGameCarnageReportData> {
-        let url = Url::parse(&format!(
-            "https://www.bungie.net/Platform/Destiny2/Stats/PostGameCarnageReport/{activity_id}/"
-        ))?;
+        let url = self.platform_url([
+            "Destiny2",
+            "Stats",
+            "PostGameCarnageReport",
+            &activity_id.to_string(),
+        ])?;
 
-        self.get_bungie_response::<DestinyPostGameCarnageReportData>(url).await
+        self.get_bungie_response(url).await
     }
+}
+
+fn membership_type_segment(membership_type: BungieMembershipType) -> String {
+    (membership_type as i16).to_string()
 }

@@ -1,11 +1,10 @@
 use serde::{Deserialize, Serialize};
 
 use super::BungieMembershipType;
-use crate::serde_as::string_to_u64;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct UserInfoCard {
     pub supplemental_display_name: Option<String>,
     pub icon_path: Option<String>,
@@ -14,7 +13,7 @@ pub struct UserInfoCard {
     pub applicable_membership_types: Vec<BungieMembershipType>,
     pub is_public: bool,
     pub membership_type: BungieMembershipType,
-    #[serde(deserialize_with = "string_to_u64")]
+    #[serde(with = "crate::serde_as::int64")]
     pub membership_id: u64,
     pub display_name: Option<String>,
     pub bungie_global_display_name: Option<String>,

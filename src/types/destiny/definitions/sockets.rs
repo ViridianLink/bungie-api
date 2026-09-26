@@ -10,10 +10,10 @@ use crate::types::destiny::{
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinySocketTypeDefinition {
     pub display_properties: DestinyDisplayPropertiesDefinition,
-    pub insert_action: Option<DestinyInsertPlugActionDefinition>,
+    pub insert_action: DestinyInsertPlugActionDefinition,
     #[serde(default)]
     pub plug_whitelist: Vec<DestinyPlugWhitelistEntryDefinition>,
     pub socket_category_hash: u32,
@@ -33,7 +33,7 @@ pub struct DestinySocketTypeDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyInsertPlugActionDefinition {
     pub action_execute_seconds: i32,
     pub action_sound_hash: u32,
@@ -43,7 +43,7 @@ pub struct DestinyInsertPlugActionDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPlugWhitelistEntryDefinition {
     pub category_hash: u32,
     pub category_identifier: String,
@@ -53,7 +53,7 @@ pub struct DestinyPlugWhitelistEntryDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinySocketTypeScalarMaterialRequirementEntry {
     pub currency_item_hash: u32,
     pub scalar_value: i32,
@@ -61,7 +61,7 @@ pub struct DestinySocketTypeScalarMaterialRequirementEntry {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinySocketCategoryDefinition {
     pub display_properties: DestinyDisplayPropertiesDefinition,
     pub ui_category_style: u32,
@@ -74,7 +74,7 @@ pub struct DestinySocketCategoryDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPlugSetDefinition {
     pub display_properties: Option<DestinyDisplayPropertiesDefinition>,
     #[serde(default)]

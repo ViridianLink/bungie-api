@@ -1,34 +1,36 @@
 use std::collections::HashMap;
 
-use chrono::{DateTime, Utc};
 use definitions::DestinyActivityModeType;
+use jiff::Timestamp;
 use serde::{Deserialize, Serialize};
 
-use crate::serde_as::string_to_u64;
 use crate::types::BungieMembershipType;
 use crate::types::user::UserInfoCard;
 
 pub mod definitions;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPostGameCarnageReportData {
-    pub period: DateTime<Utc>,
+    pub period: Timestamp,
     pub starting_phase_index: i32,
     pub activity_was_started_from_beginning: bool,
     pub activity_details: DestinyHistoricalStatsActivity,
     pub entries: Vec<DestinyPostGameCarnageReportEntry>,
     pub teams: Vec<DestinyPostGameCarnageReportTeamEntry>,
+    pub activity_difficulty_tier: Option<i32>,
+    #[serde(default)]
+    pub selected_skull_hashes: Vec<u32>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyHistoricalStatsActivity {
     pub reference_id: u32,
     pub director_activity_hash: u32,
-    #[serde(deserialize_with = "string_to_u64")]
+    #[serde(with = "crate::serde_as::int64")]
     pub instance_id: u64,
     pub mode: DestinyActivityModeType,
     pub modes: Vec<DestinyActivityModeType>,
@@ -36,9 +38,9 @@ pub struct DestinyHistoricalStatsActivity {
     pub membership_type: BungieMembershipType,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPostGameCarnageReportEntry {
     pub standing: i32,
     pub score: DestinyHistoricalStatsValue,
@@ -48,28 +50,29 @@ pub struct DestinyPostGameCarnageReportEntry {
     pub extended: Option<DestinyPostGameCarnageReportExtendedData>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyHistoricalStatsValue {
-    pub stat_id: Option<String>,
+    pub stat_id: String,
     pub basic: DestinyHistoricalStatsValuePair,
     pub pga: Option<DestinyHistoricalStatsValuePair>,
     pub weighted: Option<DestinyHistoricalStatsValuePair>,
+    #[serde(with = "crate::serde_as::int64_option", default)]
     pub activity_id: Option<i64>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyHistoricalStatsValuePair {
     pub value: f64,
     pub display_value: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPlayer {
     pub destiny_user_info: UserInfoCard,
     pub character_class: Option<String>,
@@ -84,24 +87,28 @@ pub struct DestinyPlayer {
     pub emblem_hash: u32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPostGameCarnageReportExtendedData {
     #[serde(default)]
     pub weapons: Vec<DestinyHistoricalWeaponStats>,
     pub values: HashMap<String, DestinyHistoricalStatsValue>,
+    #[serde(default)]
+    pub scoreboard_values: HashMap<String, DestinyHistoricalStatsValue>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyHistoricalWeaponStats {
     pub reference_id: u32,
     pub values: HashMap<String, DestinyHistoricalStatsValue>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyPostGameCarnageReportTeamEntry {
     pub team_id: i32,
     pub standing: DestinyHistoricalStatsValue,
@@ -109,16 +116,18 @@ pub struct DestinyPostGameCarnageReportTeamEntry {
     pub team_name: String,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyHistoricalStatsPeriodGroup {
-    pub period: DateTime<Utc>,
+    pub period: Timestamp,
     pub activity_details: DestinyHistoricalStatsActivity,
     pub values: HashMap<String, DestinyHistoricalStatsValue>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyActivityHistoryResults {
     pub activities: Vec<DestinyHistoricalStatsPeriodGroup>,
 }

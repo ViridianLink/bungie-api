@@ -1,10 +1,29 @@
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug)]
-#[repr(u32)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[non_exhaustive]
 pub enum PlatformErrorCodes {
-    Success = 1,
+    Success,
     Unknown(u32),
+}
+
+impl PlatformErrorCodes {
+    #[must_use]
+    pub const fn code(self) -> u32 {
+        match self {
+            Self::Success => 1,
+            Self::Unknown(value) => value,
+        }
+    }
+}
+
+impl From<u32> for PlatformErrorCodes {
+    fn from(value: u32) -> Self {
+        match value {
+            1 => Self::Success,
+            _ => Self::Unknown(value),
+        }
+    }
 }
 
 impl<'de> Deserialize<'de> for PlatformErrorCodes {
@@ -12,11 +31,7 @@ impl<'de> Deserialize<'de> for PlatformErrorCodes {
     where
         D: serde::Deserializer<'de>,
     {
-        let value = u32::deserialize(deserializer)?;
-        Ok(match value {
-            1 => Self::Success,
-            _ => Self::Unknown(value),
-        })
+        u32::deserialize(deserializer).map(Self::from)
     }
 }
 
@@ -25,9 +40,6 @@ impl Serialize for PlatformErrorCodes {
     where
         S: serde::Serializer,
     {
-        match self {
-            Self::Success => 1u32.serialize(serializer),
-            Self::Unknown(value) => value.serialize(serializer),
-        }
+        self.code().serialize(serializer)
     }
 }

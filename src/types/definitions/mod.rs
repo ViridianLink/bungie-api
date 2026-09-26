@@ -9,6 +9,7 @@ use items::{DestinyDerivedItemCategoryDefinition, DestinyItemPlugDefinition};
 use serde::{Deserialize, Serialize};
 use sources::DestinyItemSourceDefinition;
 
+use super::BungieMembershipType;
 use super::common::DestinyDisplayPropertiesDefinition;
 use super::destiny::{
     DamageType,
@@ -23,14 +24,14 @@ use super::destiny::{
     ItemPerkVisibility,
     SocketPlugSources,
     SpecialItemType,
+    TierType,
 };
 use super::links::HyperlinkReference;
 use super::misc::DestinyColor;
-use super::{BungieMembershipType, TierType};
 
 #[derive(Debug, Default, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyInventoryItemDefinition {
     pub display_properties: DestinyDisplayPropertiesDefinition,
     #[serde(default)]
@@ -117,7 +118,7 @@ pub struct DestinyInventoryItemDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemTooltipNotification {
     pub display_string: String,
     pub display_style: String,
@@ -125,7 +126,7 @@ pub struct DestinyItemTooltipNotification {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemActionBlockDefinition {
     pub verb_name: String,
     pub verb_description: String,
@@ -149,7 +150,7 @@ pub struct DestinyItemActionBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemActionRequiredItemDefinition {
     pub count: i32,
     pub item_hash: u32,
@@ -158,7 +159,7 @@ pub struct DestinyItemActionRequiredItemDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyProgressionRewardDefinition {
     pub progression_mapping_hash: u32,
     pub amount: i32,
@@ -167,7 +168,7 @@ pub struct DestinyProgressionRewardDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemCraftingBlockDefinition {
     pub output_item_hash: u32,
     pub required_socket_type_hashes: Vec<u32>,
@@ -178,7 +179,7 @@ pub struct DestinyItemCraftingBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemCraftingBlockBonusPlugDefinition {
     pub socket_type_hash: u32,
     pub plug_item_hash: u32,
@@ -186,7 +187,7 @@ pub struct DestinyItemCraftingBlockBonusPlugDefinition {
 
 #[derive(Debug, Default, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemInventoryBlockDefinition {
     pub stack_unique_label: Option<String>,
     pub max_stack_size: i32,
@@ -206,7 +207,7 @@ pub struct DestinyItemInventoryBlockDefinition {
 
 #[derive(Debug, Default, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemSetBlockDefinition {
     pub item_list: Vec<DestinyItemSetBlockEntryDefinition>,
     pub tracking_unlock_value_hash: u32,
@@ -221,7 +222,7 @@ pub struct DestinyItemSetBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemSetBlockEntryDefinition {
     pub tracking_value: i32,
     pub item_hash: u32,
@@ -229,7 +230,7 @@ pub struct DestinyItemSetBlockEntryDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemStatBlockDefinition {
     pub disable_primary_stat_display: bool,
     pub stat_group_hash: Option<u32>,
@@ -240,7 +241,7 @@ pub struct DestinyItemStatBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyInventoryItemStatDefinition {
     pub stat_hash: u32,
     pub value: i32,
@@ -251,7 +252,7 @@ pub struct DestinyInventoryItemStatDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyEquippingBlockDefinition {
     pub gearset_item_hash: Option<u32>,
     pub unique_label: Option<String>,
@@ -267,7 +268,7 @@ pub struct DestinyEquippingBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemTranslationBlockDefinition {
     pub weapon_pattern_identifier: Option<String>,
     pub weapon_pattern_hash: u32,
@@ -280,7 +281,7 @@ pub struct DestinyItemTranslationBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyGearArtArrangementReference {
     pub class_hash: u32,
     pub art_arrangement_hash: u32,
@@ -288,7 +289,7 @@ pub struct DestinyGearArtArrangementReference {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemPreviewBlockDefinition {
     pub screen_style: String,
     pub preview_vendor_hash: u32,
@@ -300,7 +301,7 @@ pub struct DestinyItemPreviewBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemQualityBlockDefinition {
     pub item_levels: Vec<i32>,
     pub quality_level: i32,
@@ -315,14 +316,14 @@ pub struct DestinyItemQualityBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemVersionDefinition {
     pub power_cap_hash: u32,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemValueBlockDefinition {
     pub item_value: Vec<DestinyItemQuantity>,
     pub value_description: String,
@@ -330,7 +331,7 @@ pub struct DestinyItemValueBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemSourceBlockDefinition {
     pub source_hashes: Vec<u32>,
     pub sources: Vec<DestinyItemSourceDefinition>,
@@ -340,7 +341,7 @@ pub struct DestinyItemSourceBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemVendorSourceReference {
     pub vendor_hash: u32,
     pub vendor_item_indexes: Vec<i32>,
@@ -348,7 +349,7 @@ pub struct DestinyItemVendorSourceReference {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemObjectiveBlockDefinition {
     pub objective_hashes: Vec<u32>,
     pub display_activity_hashes: Vec<u32>,
@@ -370,7 +371,7 @@ pub struct DestinyItemObjectiveBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyObjectiveDisplayProperties {
     pub activity_hash: Option<u32>,
     pub display_on_item_preview_screen: bool,
@@ -378,14 +379,14 @@ pub struct DestinyObjectiveDisplayProperties {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemMetricBlockDefinition {
     pub available_metric_category_node_hashes: Vec<u32>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemGearsetBlockDefinition {
     pub tracking_value_max: i32,
     pub item_list: Vec<u32>,
@@ -393,7 +394,7 @@ pub struct DestinyItemGearsetBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemSackBlockDefinition {
     pub detail_action: String,
     pub open_action: String,
@@ -409,7 +410,7 @@ pub struct DestinyItemSackBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemSocketBlockDefinition {
     pub detail: String,
     pub socket_entries: Vec<DestinyItemSocketEntryDefinition>,
@@ -419,7 +420,7 @@ pub struct DestinyItemSocketBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemSocketEntryDefinition {
     pub socket_type_hash: u32,
     pub single_initial_item_hash: u32,
@@ -436,14 +437,14 @@ pub struct DestinyItemSocketEntryDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemSocketEntryPlugItemDefinition {
     pub plug_item_hash: u32,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemIntrinsicSocketEntryDefinition {
     pub plug_item_hash: u32,
     pub socket_type_hash: u32,
@@ -452,7 +453,7 @@ pub struct DestinyItemIntrinsicSocketEntryDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemSocketCategoryDefinition {
     pub socket_category_hash: u32,
     pub socket_indexes: Vec<i32>,
@@ -460,14 +461,14 @@ pub struct DestinyItemSocketCategoryDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemSummaryBlockDefinition {
     pub sort_priority: i32,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemTalentGridBlockDefinition {
     pub talent_grid_hash: u32,
     pub item_detail_string: Option<String>,
@@ -478,7 +479,7 @@ pub struct DestinyItemTalentGridBlockDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemInvestmentStatDefinition {
     pub stat_type_hash: u32,
     pub value: i32,
@@ -487,7 +488,7 @@ pub struct DestinyItemInvestmentStatDefinition {
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemPerkEntryDefinition {
     pub requirement_display_string: String,
     pub perk_hash: u32,

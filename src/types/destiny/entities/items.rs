@@ -1,9 +1,8 @@
 use std::collections::HashMap;
 
-use chrono::{DateTime, Utc};
+use jiff::Timestamp;
 use serde::{Deserialize, Serialize};
 
-use crate::types::ItemLocation;
 use crate::types::destiny::perks::DestinyPerkReference;
 use crate::types::destiny::quests::DestinyObjectiveProgress;
 use crate::types::destiny::{
@@ -14,15 +13,17 @@ use crate::types::destiny::{
     DestinyTalentNode,
     EquipFailureReason,
     ItemBindStatus,
+    ItemLocation,
     ItemState,
     TransferStatuses,
 };
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemComponent {
     pub item_hash: u32,
+    #[serde(with = "crate::serde_as::int64")]
     pub item_instance_id: i64,
     pub quantity: i32,
     pub bind_status: ItemBindStatus,
@@ -31,37 +32,41 @@ pub struct DestinyItemComponent {
     pub transfer_status: TransferStatuses,
     pub lockable: bool,
     pub state: ItemState,
-    pub override_style_item_hash: u32,
-    pub expiration_date: DateTime<Utc>,
+    pub override_style_item_hash: Option<u32>,
+    pub expiration_date: Option<Timestamp>,
     pub is_wrapper: bool,
     pub tooltip_notification_indexes: Vec<i32>,
-    pub metric_hash: u32,
-    pub metric_objective: DestinyObjectiveProgress,
-    pub version_number: i32,
+    pub metric_hash: Option<u32>,
+    pub metric_objective: Option<DestinyObjectiveProgress>,
+    pub version_number: Option<i32>,
+    #[serde(default)]
     pub item_value_visibility: Vec<bool>,
+    pub dismantle_permission: i32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemPerksComponent {
     pub perks: Option<Vec<DestinyPerkReference>>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemObjectivesComponent {
     pub objectives: Vec<DestinyObjectiveProgress>,
-    pub flavor_objective: DestinyObjectiveProgress,
-    pub date_completed: DateTime<Utc>,
+    pub flavor_objective: Option<DestinyObjectiveProgress>,
+    pub date_completed: Option<Timestamp>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemInstanceComponent {
     pub damage_type: DamageType,
-    pub damage_type_hash: u32,
-    pub primary_stat: DestinyStat,
+    pub damage_type_hash: Option<u32>,
+    pub primary_stat: Option<DestinyStat>,
     pub item_level: i32,
     pub quality: i32,
     pub is_equipped: bool,
@@ -69,14 +74,15 @@ pub struct DestinyItemInstanceComponent {
     pub equip_required_level: i32,
     pub unlock_hashes_required_to_equip: Vec<u32>,
     pub cannot_equip_reason: EquipFailureReason,
-    pub breaker_type: i32,
-    pub breaker_type_hash: u32,
-    pub energy: DestinyItemInstanceEnergy,
+    pub breaker_type: Option<i32>,
+    pub breaker_type_hash: Option<u32>,
+    pub energy: Option<DestinyItemInstanceEnergy>,
+    pub gear_tier: Option<i32>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemInstanceEnergy {
     pub energy_type_hash: u32,
     pub energy_type: DestinyEnergyType,
@@ -85,37 +91,42 @@ pub struct DestinyItemInstanceEnergy {
     pub energy_unused: i32,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemRenderComponent {
     pub use_custom_dyes: bool,
     pub art_regions: HashMap<i32, i32>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemStatsComponent {
     pub stats: HashMap<u32, DestinyStat>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemSocketsComponent {
     pub sockets: Vec<DestinyItemSocketState>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemSocketState {
-    pub plug_hash: u32,
+    pub plug_hash: Option<u32>,
     pub is_enabled: bool,
     pub is_visible: bool,
+    #[serde(default)]
     pub enable_fail_indexes: Vec<i32>,
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
-#[serde(deny_unknown_fields)]
+#[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
 pub struct DestinyItemTalentGridComponent {
     pub talent_grid_hash: u32,
     pub nodes: Vec<DestinyTalentNode>,

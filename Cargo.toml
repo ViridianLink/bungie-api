@@ -1,7 +1,12 @@
 [package]
 name = "bungie-api"
-version = "1.0.0"
+version = "2.0.0"
 edition = "2024"
+description = "Typed async client for the Bungie.net Destiny 2 API"
+repository = "https://github.com/ViridianLink/bungie-api"
+readme = "README.md"
+keywords = ["bungie", "destiny", "destiny2", "api", "client"]
+categories = ["api-bindings", "games"]
 
 [lints.rust]
 unsafe_code = "deny"
@@ -120,21 +125,30 @@ too_many_lines = "allow"
 
 similar_names = "allow"
 
+redundant_pub_crate = "allow"
+
 # Often counterproductive in real systems
 implicit_return = "allow"
 single_call_fn = "allow"
 single_match_else = "allow"
 
+[features]
+default = ["strict"]
+strict = []
+
 [dependencies]
-bitflags = { version = "*", default-features = false }
-reqwest = { version = "*", default-features = false, features = [
+bitflags = { version = "2.13", default-features = false }
+jiff = { version = "0.2.37", default-features = false, features = [
+  "serde",
+  "std",
+] }
+reqwest = { version = "0.13", default-features = false, features = [
   "rustls",
   "json",
 ] }
-serde = { version = "*", default-features = false, features = ["derive"] }
-url = { version = "*", default-features = false }
-chrono = { version = "*", default-features = false, features = ["serde"] }
-serde_json = { version = "*", default-features = false }
+serde = { version = "1.0.228", default-features = false, features = ["derive"] }
+serde_json = { version = "1.0.151", default-features = false }
+url = { version = "2.5.8", default-features = false }
 
 [dev-dependencies]
-tokio = { version = "*", features = ["full"] }
+tokio = { version = "1.53", features = ["macros", "rt-multi-thread"] }
