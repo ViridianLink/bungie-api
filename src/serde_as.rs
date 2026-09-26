@@ -112,19 +112,6 @@ macro_rules! impl_bitflags_serde {
 
 pub(crate) use impl_bitflags_serde;
 
-/// Declares a fieldless enum with an explicit `repr` and implements `Serialize`
-/// and `Deserialize` using its numeric value, which is how Bungie encodes
-/// enums.
-///
-/// ```text
-/// serde_repr_enum! {
-///     #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-///     pub enum DestinyClass: u8 {
-///         Titan = 0,
-///         Hunter = 1,
-///     }
-/// }
-/// ```
 macro_rules! serde_repr_enum {
     (
         $(#[$attr:meta])*

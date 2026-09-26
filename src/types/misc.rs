@@ -8,7 +8,6 @@ pub struct DestinyColor {
     pub green: u8,
     pub blue: u8,
     pub alpha: u8,
-    /// Present on manifest definitions.
     #[serde(default)]
     pub color_hash: u32,
 }

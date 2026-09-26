@@ -1,7 +1,3 @@
-//! Looks up a player by Bungie Name and prints their characters.
-//!
-//! `BUNGIE_API_KEY=... cargo run --example profile -- Name 1234`
-
 use bungie_api::BungieClientBuilder;
 use bungie_api::types::destiny::DestinyComponentType;
 
