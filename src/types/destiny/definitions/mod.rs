@@ -69,7 +69,7 @@ pub struct DestinyActivityInteractableReference {
     pub activity_interactable_element_index: i32,
 }
 
-/// Not documented in the API spec; shape taken from live responses.
+/// Not documented in the API spec
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
@@ -78,8 +78,7 @@ pub struct DestinyUnlockExpressionDefinition {
     pub scope: i32,
 }
 
-/// Not documented in the API spec; shape taken from live responses. Which
-/// hash is set depends on the step's operator.
+/// Not documented in the API spec
 #[derive(Debug, Clone, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 #[cfg_attr(feature = "strict", serde(deny_unknown_fields))]
